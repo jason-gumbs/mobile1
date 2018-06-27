@@ -1,42 +1,43 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
-import { StackNavigator } from 'react-navigation'; // Version can be specified in package.json
+import { StackNavigator } from 'react-navigation';
+import{home, button} from './src/pages' // Version can be specified in package.json
 
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details "
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-      </View>
-    );
-  }
-}
-
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
+// class HomeScreen extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//         <Text>Home Screen</Text>
+//         <Button
+//           title="Go to Details sir "
+//           onPress={() => this.props.navigation.navigate('Details')}
+//         />
+//       </View>
+//     );
+//   }
+// }
+//
+// class DetailsScreen extends React.Component {
+//   render() {
+//     return (
+//       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//         <Text>Details Screen</Text>
+//         <Button
+//           title="Go to Details... again"
+//           onPress={() => this.props.navigation.push('Details')}
+//         />
+//         <Button
+//           title="Go to Home"
+//           onPress={() => this.props.navigation.navigate('Home')}
+//         />
+//         <Button
+//           title="Go back"
+//           onPress={() => this.props.navigation.goBack()}
+//         />
+//       </View>
+//     );
+//   }
+// }
 
 const RootStack = StackNavigator(
   {
