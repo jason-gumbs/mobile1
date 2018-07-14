@@ -1,7 +1,11 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import{home, button} from './src/pages' // Version can be specified in package.json
+import button from './src/pages/button' 
+import home from './src/pages/home' 
+
+
+// Version can be specified in package.json
 
 // class HomeScreen extends React.Component {
 //   render() {
@@ -42,10 +46,10 @@ import{home, button} from './src/pages' // Version can be specified in package.j
 const RootStack = StackNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: home,
     },
     Details: {
-      screen: DetailsScreen,
+      screen: button,
     },
   },
   {
