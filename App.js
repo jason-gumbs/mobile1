@@ -1,19 +1,21 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
-import button from './src/pages/button' 
-import home from './src/pages/home' 
+import Amplify, { API }  from 'aws-amplify';
+import awsmobile from './src/aws-exports';
+import resource from './src/pages/resource'; 
+import home from './src/pages/home'; 
 
 
 // Version can be specified in package.json
-
+Amplify.configure(awsmobile);
 
 const RootStack = StackNavigator(
   {
     Home: {
       screen: home,
     },
-    Details: {
-      screen: button,
+    Resource: {
+      screen: resource,
     },
   },
   {

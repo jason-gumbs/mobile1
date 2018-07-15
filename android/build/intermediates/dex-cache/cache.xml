@@ -3,6 +3,15 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-vector-icons\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="279750fed3c920d06351dbf32889c1b48203c7ad">
+        <dex dex="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\pre-dexed\debug\freliefagain-react-native-vector-icons-unspecified_8cfd92a66f52d903917bdef107f2acfe3e516399.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -54,6 +63,15 @@
         revision="23.0.1"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
         <dex dex="C:\Users\BEAZE\Desktop\freliefagain\android\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1_6678051be48fdb3e19b9fdcbecd5d1565d4d2f77.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\amazon-cognito-identity-js\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="83de42a2370ffe8440cba35e0ffdd9f4d200c8da">
+        <dex dex="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\pre-dexed\debug\freliefagain-amazon-cognito-identity-js-unspecified_31df8cf14ec86a3680be667ab426a64fc79b56d0.jar" />
     </item>
     <item
         is-multidex="false"
