@@ -1,0 +1,73 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    attributes:
+      no-lock: true
+    components:
+      Resource: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          disable-aws-auth: false
+          name: Resource
+          requires-signin: false
+          sdk-generation-stage-name: Development
+        paths:
+          /resource: !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/itemsHandler-20180721113500.zip
+            description: 'Handler for calls to resource path : /resource/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: 3IYY4xwNs+NnOLv/PktoBkGf3KEyo/LY4SGgGDJLGUk=
+            memorySize: '128'
+            modified: '2018-07-21T15:41:04.003+0000'
+            name: itemsHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: PFJYo7zcDOuQ.sqBhmv33lilBkZVZGEw
+          '/resource/{proxy+}': !com.amazonaws.mobilehub.v0.Function 
+            codeFilename: uploads/itemsHandler-20180721113500.zip
+            description: 'Handler for calls to resource path : /resource/{proxy+}'
+            environment: {}
+            handler: index.handler
+            hashcode: 3IYY4xwNs+NnOLv/PktoBkGf3KEyo/LY4SGgGDJLGUk=
+            memorySize: '128'
+            modified: '2018-07-21T15:41:04.003+0000'
+            name: itemsHandler
+            runtime: nodejs6.10
+            timeout: '3'
+            version: BTLbb7WPmEAXDgVH6aPW1pQiczdKgCO2
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  database: !com.amazonaws.mobilehub.v0.Database 
+    components:
+      database-nosql: !com.amazonaws.mobilehub.v0.NoSQLDatabase 
+        tables:
+          - !com.amazonaws.mobilehub.v0.NoSQLTable 
+            attributes:
+              resourceId: S
+              userId: S
+            hashKeyName: userId
+            hashKeyType: S
+            rangeKeyName: resourceId
+            rangeKeyType: S
+            tableName: ___DYNAMIC_PREFIX___-resources
+            tablePrivacy: protected
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint 
+    components:
+      analytics: !com.amazonaws.mobilehub.v0.PinpointAnalytics {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: true
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          user-pool-id: us-east-1_SmFWXYorl
+  user-files: !com.amazonaws.mobilehub.v0.UserFiles 
+    attributes:
+      enabled: true
+name: FreliefMobileAPP-2018-06-03-00-14-32
+region: us-east-1

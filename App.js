@@ -1,3 +1,4 @@
+global.Buffer = global.Buffer || require('buffer').Buffer;
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import Amplify, { API }  from 'aws-amplify';

@@ -12,6 +12,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-fetch-blob\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="de31e43a8bbd6962302f47420d45c9778d1ae626">
+        <dex dex="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\pre-dexed\debug\freliefagain-react-native-fetch-blob-unspecified_d6f98979e5fc946874172a707ae482d361a7ceb7.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\jars\classes.jar"
         jumboMode="false"
         optimize="true"
