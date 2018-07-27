@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 import Amplify, { API }  from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import resource from './src/pages/resource'; 
+import search from './src/pages/search';
 import home from './src/pages/home'; 
 
 
@@ -17,6 +18,9 @@ const RootStack = StackNavigator(
     },
     Resource: {
       screen: resource,
+    },
+    Search: {
+      screen: search,
     },
   },
   {

@@ -5,7 +5,7 @@ import { FormLabel,
    FormValidationMessage,Icon,
    Divider } from 'react-native-elements'
    import { API } from 'aws-amplify';
-   import awsmobile from '../../../aws-exports';
+   import awsmobile from '../../aws-exports';
     //  import{ files} from '../Utils/files';
    import { colors } from 'theme';
    import RNFetchBlob from 'react-native-fetch-blob';
@@ -71,7 +71,7 @@ import mime from 'mime-types';
      console.log(response);
   }).catch(error => {
       console.log(error.response)
-  });;
+  });
   }
 
   
@@ -246,7 +246,7 @@ import mime from 'mime-types';
           //inputStyle is used to style input box
           ref="number"
           textInputRef="numberInput"
-          value={this.state.input.offering}
+          value={this.state.input.number}
           inputStyle={{fontSize:26, color: "pink" }}
           />
           <Button
