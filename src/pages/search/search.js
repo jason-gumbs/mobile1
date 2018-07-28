@@ -77,23 +77,18 @@ class search extends React.Component {
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
-      {/* <List>
-  {
-    this.state.Resource.map((item, i) => (
-      <ListItem
-        key={i}
-        title={item.name}
-        // leftIcon={{name: item.icon}}
-      />
-    )?/''
 
-
-  }
-</List> */}
 
 <FlatList
-  data={[{key: 'a'}, {key: 'b'}]}
-  renderItem={({item}) => <Text>{item.key}</Text>}
+
+  data={this.state.Resources}
+  keyExtractor={(item, index) => item.resourceId}
+  renderItem={({item}) => <TouchableHighlight>
+   <View style={{backgroundColor: 'white', marginBottom: 10}}>
+   <Text>{item.name}</Text>
+   </View>
+ 
+   </TouchableHighlight>}
 />
 
          
