@@ -91,6 +91,11 @@ class search extends React.Component {
   }
 </List> */}
 
+<FlatList
+  data={[{key: 'a'}, {key: 'b'}]}
+  renderItem={({item}) => <Text>{item.key}</Text>}
+/>
+
          
      </ScrollView>
       </View>
