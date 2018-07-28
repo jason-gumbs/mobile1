@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, View, Text,TouchableWithoutFeedback, ScrollView, Picker,Image,CameraRoll, StyleSheet } from 'react-native';
+import { Button, View, Text, TouchableHighlight, ScrollView, Picker,Image,CameraRoll, StyleSheet } from 'react-native';
 import { FormLabel,
    FormInput,
    FormValidationMessage,Icon,
@@ -151,6 +151,25 @@ import mime from 'mime-types';
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
+       <Text  style={styles.title}>Add New Pet</Text>
+          <TouchableHighlight
+            onPress={this.getPhotos}
+          >
+            {
+              selectedImageIndex === null ? (
+                <View style={styles.addImageContainer}>
+                  <Icon size={34} name='camera-roll' color={colors.grayIcon} />
+                  <Text style={styles.addImageTitle}>Upload Photo</Text>
+                </View>
+              ) : (
+                  <Image
+                    style={styles.addImageContainer}
+                    source={{ uri: selectedImage.node.image.uri }}
+                  />
+                )
+            }
+
+          </TouchableHighlight>
       
           <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}

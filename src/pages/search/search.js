@@ -80,8 +80,7 @@ class search extends React.Component {
 
 
 <FlatList
-
-  data={this.state.Resources}
+ data={this.state.Resources}
   keyExtractor={(item, index) => item.resourceId}
   renderItem={({item}) => <TouchableHighlight>
    <View style={{backgroundColor: 'white', marginBottom: 10}}>
