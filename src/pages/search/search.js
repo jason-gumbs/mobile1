@@ -11,7 +11,7 @@ import {
   TouchableHighlight,
   Modal,
 } from 'react-native';
-import { Button, Icon, List, ListItem  } from 'react-native-elements';
+import { ListItem  } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 import { API, Storage } from 'aws-amplify';
 // import AddPet from './AddPet';
@@ -64,6 +64,18 @@ class search extends React.Component {
       .catch(err => console.log(err));
   };
 
+keyExtractor = (item, index) => item.resourceId
+
+renderItem = ({ item }) => (
+  <ListItem
+    title={item.name}
+    subtitle={item.product}
+    leftIcon={{ name: 'flight-takeoff' }}
+  />
+)
+
+
+
     updateInput = (key, value) => {
     this.setState((state) => ({
       input: {
@@ -78,17 +90,11 @@ class search extends React.Component {
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
 
-
-<FlatList
- data={this.state.Resources}
-  keyExtractor={(item, index) => item.resourceId}
-  renderItem={({item}) => <TouchableHighlight>
-   <View style={{backgroundColor: 'white', marginBottom: 10}}>
-   <Text>{item.name}</Text>
-   </View>
- 
-   </TouchableHighlight>}
-/>
+    <FlatList
+      keyExtractor={this.keyExtractor}
+      data={this.state.Resources}
+      renderItem={this.renderItem}
+    />
 
          
      </ScrollView>
@@ -137,6 +143,19 @@ styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+  },
+  subtitleView: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 5
+  },
+  ratingImage: {
+    height: 19.21,
+    width: 100
+  },
+  ratingText: {
+    paddingLeft: 10,
+    color: 'grey'
   },
 });
 

@@ -1,16 +1,19 @@
 import React from 'react';
-import { Button, View, Text, TouchableHighlight, ScrollView, Picker,Image,CameraRoll, StyleSheet } from 'react-native';
+import { Button, View, Text, TouchableWithoutFeedback, ScrollView, Picker,Image,CameraRoll, Dimensions, StyleSheet } from 'react-native';
 import { FormLabel,
    FormInput,
    FormValidationMessage,Icon,
    Divider } from 'react-native-elements'
-   import { API } from 'aws-amplify';
+   import { API, Storage } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
-    //  import{ files} from '../Utils/files';
+   import{ files} from '../../Utils/files';
    import { colors } from 'theme';
    import RNFetchBlob from 'react-native-fetch-blob';
    import uuid from 'react-native-uuid';
-import mime from 'mime-types';
+   import mime from 'mime-types';
+   const { width, height } = Dimensions.get('window');
+
+   let styles = {};
 
 
  class resource extends React.Component {
@@ -91,7 +94,16 @@ import mime from 'mime-types';
     }
   }
 
+  updateInput = (key, value) => {
+    this.setState((state) => ({
+      input: {
+        ...state.input,
+        [key]: value,
+      }
+    }))
+  }
   getPhotos = () => {
+    console.log("get photos")
     CameraRoll
       .getPhotos({
         first: 20,
@@ -147,19 +159,31 @@ import mime from 'mime-types';
     }))
   }
   render() {
+     const { selectedImageIndex, selectedImage, selectedGenderIndex } = this.state;
   
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
-       <Text  style={styles.title}>Add New Pet</Text>
-          <TouchableHighlight
+      <View style={{marginLeft: "auto", marginRight: "auto", marginTop: 15}}>
+      <Text style ={{color: "black"}}>Add Image</Text>
+      <Icon
             onPress={this.getPhotos}
-          >
-            {
+            raised
+            reverse
+            name='add'
+            size={50}
+            containerStyle={{ width: 75, height: 75 }}
+            color={colors.primary}
+          />
+      </View>
+
+
+
+           {
               selectedImageIndex === null ? (
                 <View style={styles.addImageContainer}>
-                  <Icon size={34} name='camera-roll' color={colors.grayIcon} />
-                  <Text style={styles.addImageTitle}>Upload Photo</Text>
+                  {/* <Icon size={34} name='camera-roll' color={colors.grayIcon} />
+                  <Text style={styles.addImageTitle}>Upload Photo</Text> */}
                 </View>
               ) : (
                   <Image
@@ -168,8 +192,6 @@ import mime from 'mime-types';
                   />
                 )
             }
-
-          </TouchableHighlight>
       
           <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}
@@ -204,7 +226,7 @@ import mime from 'mime-types';
           <Picker
           selectedValue={this.state.input.category}
           style={{ height: 50, width: 200 }}
-          onValueChange={(itemValue, itemIndex) => this.setState({category: itemValue})}>
+          onValueChange={(itemValue, itemIndex) => this.updateInput('category', itemValue)}>
           <Picker.Item label="Food & Water" value="Food & Water" />
           <Picker.Item label="Clothing" value="Clothing" />
           <Picker.Item label="Shelter" value="Shelter"/>
@@ -264,6 +286,7 @@ import mime from 'mime-types';
           <FormInput onChangeText={(number) => this.updateInput('number', number)}
           //inputStyle is used to style input box
           ref="number"
+          textContentType= "telephoneNumber"
           textInputRef="numberInput"
           value={this.state.input.number}
           inputStyle={{fontSize:26, color: "pink" }}

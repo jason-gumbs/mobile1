@@ -30,13 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
             new RNAWSCognitoPackage(),
             new VectorIconsPackage()
       );
-    }
-
-    @Override
+    }    @Override
     protected String getJSMainModuleName() {
       return "index";
     }
   };
+
+ 
 
   @Override
   public ReactNativeHost getReactNativeHost() {

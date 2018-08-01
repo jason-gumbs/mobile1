@@ -138,6 +138,7 @@ android {
 
 dependencies {
     compile project(':react-native-fetch-blob')
+    compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')
     compile project(':amazon-cognito-identity-js')
     compile fileTree(dir: "libs", include: ["*.jar"])
