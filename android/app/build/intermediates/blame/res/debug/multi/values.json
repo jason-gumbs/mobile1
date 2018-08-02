@@ -16723,9 +16723,30 @@
                     "startLine": 1220,
                     "startColumn": 4,
                     "startOffset": 93994,
-                    "endLine": 1223,
+                    "endLine": 1227,
+                    "endColumn": 12,
+                    "endOffset": 94400
+                },
+                "from": {
+                    "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\freliefagain\\react-native-image-picker\\unspecified\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 9,
+                        "endColumn": 12,
+                        "endOffset": 461
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 1228,
+                    "startColumn": 4,
+                    "startOffset": 94405,
+                    "endLine": 1231,
                     "endColumn": 10,
-                    "endOffset": 94191
+                    "endOffset": 94602
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -16741,12 +16762,12 @@
             },
             {
                 "to": {
-                    "startLine": 1224,
+                    "startLine": 1232,
                     "startColumn": 4,
-                    "startOffset": 94196,
-                    "endLine": 1227,
+                    "startOffset": 94607,
+                    "endLine": 1235,
                     "endColumn": 10,
-                    "endOffset": 94397
+                    "endOffset": 94808
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -16762,12 +16783,12 @@
             },
             {
                 "to": {
-                    "startLine": 1228,
+                    "startLine": 1236,
                     "startColumn": 4,
-                    "startOffset": 94402,
-                    "endLine": 1265,
+                    "startOffset": 94813,
+                    "endLine": 1273,
                     "endColumn": 12,
-                    "endOffset": 97259
+                    "endOffset": 97670
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16783,12 +16804,12 @@
             },
             {
                 "to": {
-                    "startLine": 1266,
+                    "startLine": 1274,
                     "startColumn": 4,
-                    "startOffset": 97264,
-                    "endLine": 1304,
+                    "startOffset": 97675,
+                    "endLine": 1312,
                     "endColumn": 12,
-                    "endOffset": 100261
+                    "endOffset": 100672
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16804,11 +16825,11 @@
             },
             {
                 "to": {
-                    "startLine": 1305,
+                    "startLine": 1313,
                     "startColumn": 4,
-                    "startOffset": 100266,
+                    "startOffset": 100677,
                     "endColumn": 61,
-                    "endOffset": 100323
+                    "endOffset": 100734
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16823,12 +16844,12 @@
             },
             {
                 "to": {
-                    "startLine": 1306,
+                    "startLine": 1314,
                     "startColumn": 4,
-                    "startOffset": 100328,
-                    "endLine": 1315,
+                    "startOffset": 100739,
+                    "endLine": 1323,
                     "endColumn": 12,
-                    "endOffset": 100953
+                    "endOffset": 101364
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16844,12 +16865,12 @@
             },
             {
                 "to": {
-                    "startLine": 1316,
+                    "startLine": 1324,
                     "startColumn": 4,
-                    "startOffset": 100958,
-                    "endLine": 1324,
+                    "startOffset": 101369,
+                    "endLine": 1332,
                     "endColumn": 12,
-                    "endOffset": 101567
+                    "endOffset": 101978
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16865,11 +16886,11 @@
             },
             {
                 "to": {
-                    "startLine": 1325,
+                    "startLine": 1333,
                     "startColumn": 4,
-                    "startOffset": 101572,
+                    "startOffset": 101983,
                     "endColumn": 85,
-                    "endOffset": 101653
+                    "endOffset": 102064
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16884,12 +16905,12 @@
             },
             {
                 "to": {
-                    "startLine": 1326,
+                    "startLine": 1334,
                     "startColumn": 4,
-                    "startOffset": 101658,
-                    "endLine": 1327,
+                    "startOffset": 102069,
+                    "endLine": 1335,
                     "endColumn": 12,
-                    "endOffset": 101766
+                    "endOffset": 102177
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16905,12 +16926,12 @@
             },
             {
                 "to": {
-                    "startLine": 1328,
+                    "startLine": 1336,
                     "startColumn": 4,
-                    "startOffset": 101771,
-                    "endLine": 1331,
+                    "startOffset": 102182,
+                    "endLine": 1339,
                     "endColumn": 12,
-                    "endOffset": 101995
+                    "endOffset": 102406
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16926,12 +16947,12 @@
             },
             {
                 "to": {
-                    "startLine": 1332,
+                    "startLine": 1340,
                     "startColumn": 4,
-                    "startOffset": 102000,
-                    "endLine": 1335,
+                    "startOffset": 102411,
+                    "endLine": 1343,
                     "endColumn": 12,
-                    "endOffset": 102333
+                    "endOffset": 102744
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16947,12 +16968,12 @@
             },
             {
                 "to": {
-                    "startLine": 1336,
+                    "startLine": 1344,
                     "startColumn": 4,
-                    "startOffset": 102338,
-                    "endLine": 1338,
+                    "startOffset": 102749,
+                    "endLine": 1346,
                     "endColumn": 12,
-                    "endOffset": 102493
+                    "endOffset": 102904
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16968,12 +16989,12 @@
             },
             {
                 "to": {
-                    "startLine": 1339,
+                    "startLine": 1347,
                     "startColumn": 4,
-                    "startOffset": 102498,
-                    "endLine": 1341,
+                    "startOffset": 102909,
+                    "endLine": 1349,
                     "endColumn": 12,
-                    "endOffset": 102645
+                    "endOffset": 103056
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -16989,12 +17010,12 @@
             },
             {
                 "to": {
-                    "startLine": 1342,
+                    "startLine": 1350,
                     "startColumn": 4,
-                    "startOffset": 102650,
-                    "endLine": 1344,
+                    "startOffset": 103061,
+                    "endLine": 1352,
                     "endColumn": 12,
-                    "endOffset": 102816
+                    "endOffset": 103227
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17010,12 +17031,12 @@
             },
             {
                 "to": {
-                    "startLine": 1345,
+                    "startLine": 1353,
                     "startColumn": 4,
-                    "startOffset": 102821,
-                    "endLine": 1347,
+                    "startOffset": 103232,
+                    "endLine": 1355,
                     "endColumn": 12,
-                    "endOffset": 102983
+                    "endOffset": 103394
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17031,12 +17052,12 @@
             },
             {
                 "to": {
-                    "startLine": 1348,
+                    "startLine": 1356,
                     "startColumn": 4,
-                    "startOffset": 102988,
-                    "endLine": 1351,
+                    "startOffset": 103399,
+                    "endLine": 1359,
                     "endColumn": 12,
-                    "endOffset": 103226
+                    "endOffset": 103637
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17052,12 +17073,12 @@
             },
             {
                 "to": {
-                    "startLine": 1352,
+                    "startLine": 1360,
                     "startColumn": 4,
-                    "startOffset": 103231,
-                    "endLine": 1354,
+                    "startOffset": 103642,
+                    "endLine": 1362,
                     "endColumn": 12,
-                    "endOffset": 103396
+                    "endOffset": 103807
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17073,12 +17094,12 @@
             },
             {
                 "to": {
-                    "startLine": 1355,
+                    "startLine": 1363,
                     "startColumn": 4,
-                    "startOffset": 103401,
-                    "endLine": 1357,
+                    "startOffset": 103812,
+                    "endLine": 1365,
                     "endColumn": 12,
-                    "endOffset": 103569
+                    "endOffset": 103980
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17094,12 +17115,12 @@
             },
             {
                 "to": {
-                    "startLine": 1358,
+                    "startLine": 1366,
                     "startColumn": 4,
-                    "startOffset": 103574,
-                    "endLine": 1360,
+                    "startOffset": 103985,
+                    "endLine": 1368,
                     "endColumn": 12,
-                    "endOffset": 103740
+                    "endOffset": 104151
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17115,12 +17136,12 @@
             },
             {
                 "to": {
-                    "startLine": 1361,
+                    "startLine": 1369,
                     "startColumn": 4,
-                    "startOffset": 103745,
-                    "endLine": 1364,
+                    "startOffset": 104156,
+                    "endLine": 1372,
                     "endColumn": 12,
-                    "endOffset": 104014
+                    "endOffset": 104425
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17136,12 +17157,12 @@
             },
             {
                 "to": {
-                    "startLine": 1365,
+                    "startLine": 1373,
                     "startColumn": 4,
-                    "startOffset": 104019,
-                    "endLine": 1367,
+                    "startOffset": 104430,
+                    "endLine": 1375,
                     "endColumn": 12,
-                    "endOffset": 104213
+                    "endOffset": 104624
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17157,12 +17178,12 @@
             },
             {
                 "to": {
-                    "startLine": 1368,
+                    "startLine": 1376,
                     "startColumn": 4,
-                    "startOffset": 104218,
-                    "endLine": 1370,
+                    "startOffset": 104629,
+                    "endLine": 1378,
                     "endColumn": 12,
-                    "endOffset": 104414
+                    "endOffset": 104825
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -17178,12 +17199,12 @@
             },
             {
                 "to": {
-                    "startLine": 1371,
+                    "startLine": 1379,
                     "startColumn": 4,
-                    "startOffset": 104419,
-                    "endLine": 1373,
+                    "startOffset": 104830,
+                    "endLine": 1381,
                     "endColumn": 12,
-                    "endOffset": 104603
+                    "endOffset": 105014
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -17199,12 +17220,12 @@
             },
             {
                 "to": {
-                    "startLine": 1374,
+                    "startLine": 1382,
                     "startColumn": 4,
-                    "startOffset": 104608,
-                    "endLine": 1376,
+                    "startOffset": 105019,
+                    "endLine": 1384,
                     "endColumn": 12,
-                    "endOffset": 104802
+                    "endOffset": 105213
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -17220,12 +17241,12 @@
             },
             {
                 "to": {
-                    "startLine": 1377,
+                    "startLine": 1385,
                     "startColumn": 4,
-                    "startOffset": 104807,
-                    "endLine": 1379,
+                    "startOffset": 105218,
+                    "endLine": 1387,
                     "endColumn": 12,
-                    "endOffset": 104989
+                    "endOffset": 105400
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -17241,11 +17262,11 @@
             },
             {
                 "to": {
-                    "startLine": 1380,
+                    "startLine": 1388,
                     "startColumn": 4,
-                    "startOffset": 104994,
+                    "startOffset": 105405,
                     "endColumn": 83,
-                    "endOffset": 105073
+                    "endOffset": 105484
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17260,11 +17281,11 @@
             },
             {
                 "to": {
-                    "startLine": 1381,
+                    "startLine": 1389,
                     "startColumn": 4,
-                    "startOffset": 105078,
+                    "startOffset": 105489,
                     "endColumn": 95,
-                    "endOffset": 105169
+                    "endOffset": 105580
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17279,11 +17300,11 @@
             },
             {
                 "to": {
-                    "startLine": 1382,
+                    "startLine": 1390,
                     "startColumn": 4,
-                    "startOffset": 105174,
+                    "startOffset": 105585,
                     "endColumn": 95,
-                    "endOffset": 105265
+                    "endOffset": 105676
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17298,11 +17319,11 @@
             },
             {
                 "to": {
-                    "startLine": 1383,
+                    "startLine": 1391,
                     "startColumn": 4,
-                    "startOffset": 105270,
+                    "startOffset": 105681,
                     "endColumn": 97,
-                    "endOffset": 105363
+                    "endOffset": 105774
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17317,11 +17338,11 @@
             },
             {
                 "to": {
-                    "startLine": 1384,
+                    "startLine": 1392,
                     "startColumn": 4,
-                    "startOffset": 105368,
+                    "startOffset": 105779,
                     "endColumn": 99,
-                    "endOffset": 105463
+                    "endOffset": 105874
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17336,11 +17357,11 @@
             },
             {
                 "to": {
-                    "startLine": 1385,
+                    "startLine": 1393,
                     "startColumn": 4,
-                    "startOffset": 105468,
+                    "startOffset": 105879,
                     "endColumn": 101,
-                    "endOffset": 105565
+                    "endOffset": 105976
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17355,11 +17376,11 @@
             },
             {
                 "to": {
-                    "startLine": 1386,
+                    "startLine": 1394,
                     "startColumn": 4,
-                    "startOffset": 105570,
+                    "startOffset": 105981,
                     "endColumn": 101,
-                    "endOffset": 105667
+                    "endOffset": 106078
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17374,11 +17395,11 @@
             },
             {
                 "to": {
-                    "startLine": 1387,
+                    "startLine": 1395,
                     "startColumn": 4,
-                    "startOffset": 105672,
+                    "startOffset": 106083,
                     "endColumn": 101,
-                    "endOffset": 105769
+                    "endOffset": 106180
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17393,11 +17414,11 @@
             },
             {
                 "to": {
-                    "startLine": 1388,
+                    "startLine": 1396,
                     "startColumn": 4,
-                    "startOffset": 105774,
+                    "startOffset": 106185,
                     "endColumn": 101,
-                    "endOffset": 105871
+                    "endOffset": 106282
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17412,11 +17433,11 @@
             },
             {
                 "to": {
-                    "startLine": 1389,
+                    "startLine": 1397,
                     "startColumn": 4,
-                    "startOffset": 105876,
+                    "startOffset": 106287,
                     "endColumn": 101,
-                    "endOffset": 105973
+                    "endOffset": 106384
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17431,11 +17452,11 @@
             },
             {
                 "to": {
-                    "startLine": 1390,
+                    "startLine": 1398,
                     "startColumn": 4,
-                    "startOffset": 105978,
+                    "startOffset": 106389,
                     "endColumn": 99,
-                    "endOffset": 106073
+                    "endOffset": 106484
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17450,11 +17471,11 @@
             },
             {
                 "to": {
-                    "startLine": 1391,
+                    "startLine": 1399,
                     "startColumn": 4,
-                    "startOffset": 106078,
+                    "startOffset": 106489,
                     "endColumn": 95,
-                    "endOffset": 106169
+                    "endOffset": 106580
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17469,11 +17490,11 @@
             },
             {
                 "to": {
-                    "startLine": 1392,
+                    "startLine": 1400,
                     "startColumn": 4,
-                    "startOffset": 106174,
+                    "startOffset": 106585,
                     "endColumn": 111,
-                    "endOffset": 106281
+                    "endOffset": 106692
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17488,11 +17509,11 @@
             },
             {
                 "to": {
-                    "startLine": 1393,
+                    "startLine": 1401,
                     "startColumn": 4,
-                    "startOffset": 106286,
+                    "startOffset": 106697,
                     "endColumn": 128,
-                    "endOffset": 106410
+                    "endOffset": 106821
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17507,11 +17528,11 @@
             },
             {
                 "to": {
-                    "startLine": 1394,
+                    "startLine": 1402,
                     "startColumn": 4,
-                    "startOffset": 106415,
+                    "startOffset": 106826,
                     "endColumn": 122,
-                    "endOffset": 106533
+                    "endOffset": 106944
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17526,12 +17547,12 @@
             },
             {
                 "to": {
-                    "startLine": 1395,
+                    "startLine": 1403,
                     "startColumn": 4,
-                    "startOffset": 106538,
-                    "endLine": 1396,
+                    "startOffset": 106949,
+                    "endLine": 1404,
                     "endColumn": 12,
-                    "endOffset": 106687
+                    "endOffset": 107098
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17547,12 +17568,12 @@
             },
             {
                 "to": {
-                    "startLine": 1397,
+                    "startLine": 1405,
                     "startColumn": 4,
-                    "startOffset": 106692,
-                    "endLine": 1398,
+                    "startOffset": 107103,
+                    "endLine": 1406,
                     "endColumn": 12,
-                    "endOffset": 106841
+                    "endOffset": 107252
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17568,11 +17589,11 @@
             },
             {
                 "to": {
-                    "startLine": 1399,
+                    "startLine": 1407,
                     "startColumn": 4,
-                    "startOffset": 106846,
+                    "startOffset": 107257,
                     "endColumn": 97,
-                    "endOffset": 106939
+                    "endOffset": 107350
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17587,11 +17608,11 @@
             },
             {
                 "to": {
-                    "startLine": 1400,
+                    "startLine": 1408,
                     "startColumn": 4,
-                    "startOffset": 106944,
+                    "startOffset": 107355,
                     "endColumn": 113,
-                    "endOffset": 107053
+                    "endOffset": 107464
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17606,11 +17627,11 @@
             },
             {
                 "to": {
-                    "startLine": 1401,
+                    "startLine": 1409,
                     "startColumn": 4,
-                    "startOffset": 107058,
+                    "startOffset": 107469,
                     "endColumn": 93,
-                    "endOffset": 107147
+                    "endOffset": 107558
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17625,12 +17646,12 @@
             },
             {
                 "to": {
-                    "startLine": 1402,
+                    "startLine": 1410,
                     "startColumn": 4,
-                    "startOffset": 107152,
-                    "endLine": 1403,
+                    "startOffset": 107563,
+                    "endLine": 1411,
                     "endColumn": 12,
-                    "endOffset": 107287
+                    "endOffset": 107698
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17646,12 +17667,12 @@
             },
             {
                 "to": {
-                    "startLine": 1404,
+                    "startLine": 1412,
                     "startColumn": 4,
-                    "startOffset": 107292,
-                    "endLine": 1405,
+                    "startOffset": 107703,
+                    "endLine": 1413,
                     "endColumn": 12,
-                    "endOffset": 107421
+                    "endOffset": 107832
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17667,11 +17688,11 @@
             },
             {
                 "to": {
-                    "startLine": 1406,
+                    "startLine": 1414,
                     "startColumn": 4,
-                    "startOffset": 107426,
+                    "startOffset": 107837,
                     "endColumn": 95,
-                    "endOffset": 107517
+                    "endOffset": 107928
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17686,11 +17707,11 @@
             },
             {
                 "to": {
-                    "startLine": 1407,
+                    "startLine": 1415,
                     "startColumn": 4,
-                    "startOffset": 107522,
+                    "startOffset": 107933,
                     "endColumn": 111,
-                    "endOffset": 107629
+                    "endOffset": 108040
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17705,11 +17726,11 @@
             },
             {
                 "to": {
-                    "startLine": 1408,
+                    "startLine": 1416,
                     "startColumn": 4,
-                    "startOffset": 107634,
+                    "startOffset": 108045,
                     "endColumn": 99,
-                    "endOffset": 107729
+                    "endOffset": 108140
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17724,11 +17745,11 @@
             },
             {
                 "to": {
-                    "startLine": 1409,
+                    "startLine": 1417,
                     "startColumn": 4,
-                    "startOffset": 107734,
+                    "startOffset": 108145,
                     "endColumn": 115,
-                    "endOffset": 107845
+                    "endOffset": 108256
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17743,11 +17764,11 @@
             },
             {
                 "to": {
-                    "startLine": 1410,
+                    "startLine": 1418,
                     "startColumn": 4,
-                    "startOffset": 107850,
+                    "startOffset": 108261,
                     "endColumn": 95,
-                    "endOffset": 107941
+                    "endOffset": 108352
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17762,11 +17783,11 @@
             },
             {
                 "to": {
-                    "startLine": 1411,
+                    "startLine": 1419,
                     "startColumn": 4,
-                    "startOffset": 107946,
+                    "startOffset": 108357,
                     "endColumn": 111,
-                    "endOffset": 108053
+                    "endOffset": 108464
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17781,12 +17802,12 @@
             },
             {
                 "to": {
-                    "startLine": 1412,
+                    "startLine": 1420,
                     "startColumn": 4,
-                    "startOffset": 108058,
-                    "endLine": 1413,
+                    "startOffset": 108469,
+                    "endLine": 1421,
                     "endColumn": 12,
-                    "endOffset": 108193
+                    "endOffset": 108604
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17802,11 +17823,11 @@
             },
             {
                 "to": {
-                    "startLine": 1414,
+                    "startLine": 1422,
                     "startColumn": 4,
-                    "startOffset": 108198,
+                    "startOffset": 108609,
                     "endColumn": 135,
-                    "endOffset": 108329
+                    "endOffset": 108740
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17821,12 +17842,12 @@
             },
             {
                 "to": {
-                    "startLine": 1415,
+                    "startLine": 1423,
                     "startColumn": 4,
-                    "startOffset": 108334,
-                    "endLine": 1416,
+                    "startOffset": 108745,
+                    "endLine": 1424,
                     "endColumn": 12,
-                    "endOffset": 108493
+                    "endOffset": 108904
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17842,11 +17863,11 @@
             },
             {
                 "to": {
-                    "startLine": 1417,
+                    "startLine": 1425,
                     "startColumn": 4,
-                    "startOffset": 108498,
+                    "startOffset": 108909,
                     "endColumn": 129,
-                    "endOffset": 108623
+                    "endOffset": 109034
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17861,12 +17882,12 @@
             },
             {
                 "to": {
-                    "startLine": 1418,
+                    "startLine": 1426,
                     "startColumn": 4,
-                    "startOffset": 108628,
-                    "endLine": 1419,
+                    "startOffset": 109039,
+                    "endLine": 1427,
                     "endColumn": 12,
-                    "endOffset": 108781
+                    "endOffset": 109192
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17882,12 +17903,12 @@
             },
             {
                 "to": {
-                    "startLine": 1420,
+                    "startLine": 1428,
                     "startColumn": 4,
-                    "startOffset": 108786,
-                    "endLine": 1421,
+                    "startOffset": 109197,
+                    "endLine": 1429,
                     "endColumn": 12,
-                    "endOffset": 108931
+                    "endOffset": 109342
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17903,11 +17924,11 @@
             },
             {
                 "to": {
-                    "startLine": 1422,
+                    "startLine": 1430,
                     "startColumn": 4,
-                    "startOffset": 108936,
+                    "startOffset": 109347,
                     "endColumn": 140,
-                    "endOffset": 109072
+                    "endOffset": 109483
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17922,12 +17943,12 @@
             },
             {
                 "to": {
-                    "startLine": 1423,
+                    "startLine": 1431,
                     "startColumn": 4,
-                    "startOffset": 109077,
-                    "endLine": 1424,
+                    "startOffset": 109488,
+                    "endLine": 1432,
                     "endColumn": 12,
-                    "endOffset": 109216
+                    "endOffset": 109627
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17943,11 +17964,11 @@
             },
             {
                 "to": {
-                    "startLine": 1425,
+                    "startLine": 1433,
                     "startColumn": 4,
-                    "startOffset": 109221,
+                    "startOffset": 109632,
                     "endColumn": 134,
-                    "endOffset": 109351
+                    "endOffset": 109762
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17962,11 +17983,11 @@
             },
             {
                 "to": {
-                    "startLine": 1426,
+                    "startLine": 1434,
                     "startColumn": 4,
-                    "startOffset": 109356,
+                    "startOffset": 109767,
                     "endColumn": 111,
-                    "endOffset": 109463
+                    "endOffset": 109874
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -17981,11 +18002,11 @@
             },
             {
                 "to": {
-                    "startLine": 1427,
+                    "startLine": 1435,
                     "startColumn": 4,
-                    "startOffset": 109468,
+                    "startOffset": 109879,
                     "endColumn": 127,
-                    "endOffset": 109591
+                    "endOffset": 110002
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18000,12 +18021,12 @@
             },
             {
                 "to": {
-                    "startLine": 1428,
+                    "startLine": 1436,
                     "startColumn": 4,
-                    "startOffset": 109596,
-                    "endLine": 1429,
+                    "startOffset": 110007,
+                    "endLine": 1437,
                     "endColumn": 12,
-                    "endOffset": 109727
+                    "endOffset": 110138
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18021,12 +18042,12 @@
             },
             {
                 "to": {
-                    "startLine": 1430,
+                    "startLine": 1438,
                     "startColumn": 4,
-                    "startOffset": 109732,
-                    "endLine": 1431,
+                    "startOffset": 110143,
+                    "endLine": 1439,
                     "endColumn": 12,
-                    "endOffset": 109869
+                    "endOffset": 110280
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18042,12 +18063,12 @@
             },
             {
                 "to": {
-                    "startLine": 1432,
+                    "startLine": 1440,
                     "startColumn": 4,
-                    "startOffset": 109874,
-                    "endLine": 1433,
+                    "startOffset": 110285,
+                    "endLine": 1441,
                     "endColumn": 12,
-                    "endOffset": 110011
+                    "endOffset": 110422
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18063,11 +18084,11 @@
             },
             {
                 "to": {
-                    "startLine": 1434,
+                    "startLine": 1442,
                     "startColumn": 4,
-                    "startOffset": 110016,
+                    "startOffset": 110427,
                     "endColumn": 111,
-                    "endOffset": 110123
+                    "endOffset": 110534
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18082,11 +18103,11 @@
             },
             {
                 "to": {
-                    "startLine": 1435,
+                    "startLine": 1443,
                     "startColumn": 4,
-                    "startOffset": 110128,
+                    "startOffset": 110539,
                     "endColumn": 139,
-                    "endOffset": 110263
+                    "endOffset": 110674
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18101,11 +18122,11 @@
             },
             {
                 "to": {
-                    "startLine": 1436,
+                    "startLine": 1444,
                     "startColumn": 4,
-                    "startOffset": 110268,
+                    "startOffset": 110679,
                     "endColumn": 67,
-                    "endOffset": 110331
+                    "endOffset": 110742
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18120,11 +18141,11 @@
             },
             {
                 "to": {
-                    "startLine": 1437,
+                    "startLine": 1445,
                     "startColumn": 4,
-                    "startOffset": 110336,
+                    "startOffset": 110747,
                     "endColumn": 72,
-                    "endOffset": 110404
+                    "endOffset": 110815
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18139,11 +18160,11 @@
             },
             {
                 "to": {
-                    "startLine": 1438,
+                    "startLine": 1446,
                     "startColumn": 4,
-                    "startOffset": 110409,
+                    "startOffset": 110820,
                     "endColumn": 73,
-                    "endOffset": 110478
+                    "endOffset": 110889
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18158,11 +18179,11 @@
             },
             {
                 "to": {
-                    "startLine": 1439,
+                    "startLine": 1447,
                     "startColumn": 4,
-                    "startOffset": 110483,
+                    "startOffset": 110894,
                     "endColumn": 72,
-                    "endOffset": 110551
+                    "endOffset": 110962
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18177,11 +18198,11 @@
             },
             {
                 "to": {
-                    "startLine": 1440,
+                    "startLine": 1448,
                     "startColumn": 4,
-                    "startOffset": 110556,
+                    "startOffset": 110967,
                     "endColumn": 73,
-                    "endOffset": 110625
+                    "endOffset": 111036
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18196,12 +18217,12 @@
             },
             {
                 "to": {
-                    "startLine": 1441,
+                    "startLine": 1449,
                     "startColumn": 4,
-                    "startOffset": 110630,
-                    "endLine": 1442,
+                    "startOffset": 111041,
+                    "endLine": 1450,
                     "endColumn": 12,
-                    "endOffset": 110771
+                    "endOffset": 111182
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18217,12 +18238,12 @@
             },
             {
                 "to": {
-                    "startLine": 1443,
+                    "startLine": 1451,
                     "startColumn": 4,
-                    "startOffset": 110776,
-                    "endLine": 1444,
+                    "startOffset": 111187,
+                    "endLine": 1452,
                     "endColumn": 12,
-                    "endOffset": 110915
+                    "endOffset": 111326
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18238,12 +18259,12 @@
             },
             {
                 "to": {
-                    "startLine": 1445,
+                    "startLine": 1453,
                     "startColumn": 4,
-                    "startOffset": 110920,
-                    "endLine": 1446,
+                    "startOffset": 111331,
+                    "endLine": 1454,
                     "endColumn": 12,
-                    "endOffset": 111053
+                    "endOffset": 111464
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18259,11 +18280,11 @@
             },
             {
                 "to": {
-                    "startLine": 1447,
+                    "startLine": 1455,
                     "startColumn": 4,
-                    "startOffset": 111058,
+                    "startOffset": 111469,
                     "endColumn": 25,
-                    "endOffset": 111079
+                    "endOffset": 111490
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18278,11 +18299,11 @@
             },
             {
                 "to": {
-                    "startLine": 1448,
+                    "startLine": 1456,
                     "startColumn": 4,
-                    "startOffset": 111084,
+                    "startOffset": 111495,
                     "endColumn": 65,
-                    "endOffset": 111145
+                    "endOffset": 111556
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18297,11 +18318,11 @@
             },
             {
                 "to": {
-                    "startLine": 1449,
+                    "startLine": 1457,
                     "startColumn": 4,
-                    "startOffset": 111150,
+                    "startOffset": 111561,
                     "endColumn": 89,
-                    "endOffset": 111235
+                    "endOffset": 111646
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18316,11 +18337,11 @@
             },
             {
                 "to": {
-                    "startLine": 1450,
+                    "startLine": 1458,
                     "startColumn": 4,
-                    "startOffset": 111240,
+                    "startOffset": 111651,
                     "endColumn": 79,
-                    "endOffset": 111315
+                    "endOffset": 111726
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18335,11 +18356,11 @@
             },
             {
                 "to": {
-                    "startLine": 1451,
+                    "startLine": 1459,
                     "startColumn": 4,
-                    "startOffset": 111320,
+                    "startOffset": 111731,
                     "endColumn": 91,
-                    "endOffset": 111407
+                    "endOffset": 111818
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18354,11 +18375,11 @@
             },
             {
                 "to": {
-                    "startLine": 1452,
+                    "startLine": 1460,
                     "startColumn": 4,
-                    "startOffset": 111412,
+                    "startOffset": 111823,
                     "endColumn": 97,
-                    "endOffset": 111505
+                    "endOffset": 111916
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18373,12 +18394,12 @@
             },
             {
                 "to": {
-                    "startLine": 1453,
+                    "startLine": 1461,
                     "startColumn": 4,
-                    "startOffset": 111510,
-                    "endLine": 1454,
+                    "startOffset": 111921,
+                    "endLine": 1462,
                     "endColumn": 12,
-                    "endOffset": 111615
+                    "endOffset": 112026
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18394,11 +18415,11 @@
             },
             {
                 "to": {
-                    "startLine": 1455,
+                    "startLine": 1463,
                     "startColumn": 4,
-                    "startOffset": 111620,
+                    "startOffset": 112031,
                     "endColumn": 77,
-                    "endOffset": 111693
+                    "endOffset": 112104
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18413,11 +18434,11 @@
             },
             {
                 "to": {
-                    "startLine": 1456,
+                    "startLine": 1464,
                     "startColumn": 4,
-                    "startOffset": 111698,
+                    "startOffset": 112109,
                     "endColumn": 105,
-                    "endOffset": 111799
+                    "endOffset": 112210
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18432,11 +18453,11 @@
             },
             {
                 "to": {
-                    "startLine": 1457,
+                    "startLine": 1465,
                     "startColumn": 4,
-                    "startOffset": 111804,
+                    "startOffset": 112215,
                     "endColumn": 91,
-                    "endOffset": 111891
+                    "endOffset": 112302
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18451,11 +18472,11 @@
             },
             {
                 "to": {
-                    "startLine": 1458,
+                    "startLine": 1466,
                     "startColumn": 4,
-                    "startOffset": 111896,
+                    "startOffset": 112307,
                     "endColumn": 103,
-                    "endOffset": 111995
+                    "endOffset": 112406
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18470,11 +18491,11 @@
             },
             {
                 "to": {
-                    "startLine": 1459,
+                    "startLine": 1467,
                     "startColumn": 4,
-                    "startOffset": 112000,
+                    "startOffset": 112411,
                     "endColumn": 109,
-                    "endOffset": 112105
+                    "endOffset": 112516
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18489,12 +18510,12 @@
             },
             {
                 "to": {
-                    "startLine": 1460,
+                    "startLine": 1468,
                     "startColumn": 4,
-                    "startOffset": 112110,
-                    "endLine": 1461,
+                    "startOffset": 112521,
+                    "endLine": 1469,
                     "endColumn": 12,
-                    "endOffset": 112227
+                    "endOffset": 112638
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18510,12 +18531,12 @@
             },
             {
                 "to": {
-                    "startLine": 1462,
+                    "startLine": 1470,
                     "startColumn": 4,
-                    "startOffset": 112232,
-                    "endLine": 1465,
+                    "startOffset": 112643,
+                    "endLine": 1473,
                     "endColumn": 12,
-                    "endOffset": 112390
+                    "endOffset": 112801
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18531,12 +18552,12 @@
             },
             {
                 "to": {
-                    "startLine": 1466,
+                    "startLine": 1474,
                     "startColumn": 4,
-                    "startOffset": 112395,
-                    "endLine": 1469,
+                    "startOffset": 112806,
+                    "endLine": 1477,
                     "endColumn": 12,
-                    "endOffset": 112547
+                    "endOffset": 112958
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18552,11 +18573,11 @@
             },
             {
                 "to": {
-                    "startLine": 1470,
+                    "startLine": 1478,
                     "startColumn": 4,
-                    "startOffset": 112552,
+                    "startOffset": 112963,
                     "endColumn": 34,
-                    "endOffset": 112582
+                    "endOffset": 112993
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18571,12 +18592,12 @@
             },
             {
                 "to": {
-                    "startLine": 1471,
+                    "startLine": 1479,
                     "startColumn": 4,
-                    "startOffset": 112587,
-                    "endLine": 1477,
+                    "startOffset": 112998,
+                    "endLine": 1485,
                     "endColumn": 10,
-                    "endOffset": 113000
+                    "endOffset": 113411
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18592,12 +18613,12 @@
             },
             {
                 "to": {
-                    "startLine": 1478,
+                    "startLine": 1486,
                     "startColumn": 4,
-                    "startOffset": 113005,
-                    "endLine": 1484,
+                    "startOffset": 113416,
+                    "endLine": 1492,
                     "endColumn": 10,
-                    "endOffset": 113378
+                    "endOffset": 113789
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18613,12 +18634,12 @@
             },
             {
                 "to": {
-                    "startLine": 1485,
+                    "startLine": 1493,
                     "startColumn": 4,
-                    "startOffset": 113383,
-                    "endLine": 1487,
+                    "startOffset": 113794,
+                    "endLine": 1495,
                     "endColumn": 10,
-                    "endOffset": 113555
+                    "endOffset": 113966
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18634,12 +18655,12 @@
             },
             {
                 "to": {
-                    "startLine": 1488,
+                    "startLine": 1496,
                     "startColumn": 4,
-                    "startOffset": 113560,
-                    "endLine": 1490,
+                    "startOffset": 113971,
+                    "endLine": 1498,
                     "endColumn": 10,
-                    "endOffset": 113734
+                    "endOffset": 114145
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18655,12 +18676,12 @@
             },
             {
                 "to": {
-                    "startLine": 1491,
+                    "startLine": 1499,
                     "startColumn": 4,
-                    "startOffset": 113739,
-                    "endLine": 1493,
+                    "startOffset": 114150,
+                    "endLine": 1501,
                     "endColumn": 12,
-                    "endOffset": 113917
+                    "endOffset": 114328
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18676,12 +18697,12 @@
             },
             {
                 "to": {
-                    "startLine": 1494,
+                    "startLine": 1502,
                     "startColumn": 4,
-                    "startOffset": 113922,
-                    "endLine": 1499,
+                    "startOffset": 114333,
+                    "endLine": 1507,
                     "endColumn": 12,
-                    "endOffset": 114282
+                    "endOffset": 114693
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",
@@ -18697,11 +18718,11 @@
             },
             {
                 "to": {
-                    "startLine": 1500,
+                    "startLine": 1508,
                     "startColumn": 4,
-                    "startOffset": 114287,
+                    "startOffset": 114698,
                     "endColumn": 79,
-                    "endOffset": 114362
+                    "endOffset": 114773
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18716,11 +18737,11 @@
             },
             {
                 "to": {
-                    "startLine": 1501,
+                    "startLine": 1509,
                     "startColumn": 4,
-                    "startOffset": 114367,
+                    "startOffset": 114778,
                     "endColumn": 99,
-                    "endOffset": 114462
+                    "endOffset": 114873
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18735,11 +18756,11 @@
             },
             {
                 "to": {
-                    "startLine": 1502,
+                    "startLine": 1510,
                     "startColumn": 4,
-                    "startOffset": 114467,
+                    "startOffset": 114878,
                     "endColumn": 89,
-                    "endOffset": 114552
+                    "endOffset": 114963
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18754,11 +18775,11 @@
             },
             {
                 "to": {
-                    "startLine": 1503,
+                    "startLine": 1511,
                     "startColumn": 4,
-                    "startOffset": 114557,
+                    "startOffset": 114968,
                     "endColumn": 109,
-                    "endOffset": 114662
+                    "endOffset": 115073
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18773,11 +18794,11 @@
             },
             {
                 "to": {
-                    "startLine": 1504,
+                    "startLine": 1512,
                     "startColumn": 4,
-                    "startOffset": 114667,
+                    "startOffset": 115078,
                     "endColumn": 91,
-                    "endOffset": 114754
+                    "endOffset": 115165
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18792,12 +18813,12 @@
             },
             {
                 "to": {
-                    "startLine": 1505,
+                    "startLine": 1513,
                     "startColumn": 4,
-                    "startOffset": 114759,
-                    "endLine": 1506,
+                    "startOffset": 115170,
+                    "endLine": 1514,
                     "endColumn": 12,
-                    "endOffset": 114854
+                    "endOffset": 115265
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18813,12 +18834,12 @@
             },
             {
                 "to": {
-                    "startLine": 1507,
+                    "startLine": 1515,
                     "startColumn": 4,
-                    "startOffset": 114859,
-                    "endLine": 1508,
+                    "startOffset": 115270,
+                    "endLine": 1516,
                     "endColumn": 12,
-                    "endOffset": 114966
+                    "endOffset": 115377
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18834,12 +18855,12 @@
             },
             {
                 "to": {
-                    "startLine": 1509,
+                    "startLine": 1517,
                     "startColumn": 4,
-                    "startOffset": 114971,
-                    "endLine": 1510,
+                    "startOffset": 115382,
+                    "endLine": 1518,
                     "endColumn": 12,
-                    "endOffset": 115080
+                    "endOffset": 115491
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18855,12 +18876,12 @@
             },
             {
                 "to": {
-                    "startLine": 1511,
+                    "startLine": 1519,
                     "startColumn": 4,
-                    "startOffset": 115085,
-                    "endLine": 1512,
+                    "startOffset": 115496,
+                    "endLine": 1520,
                     "endColumn": 12,
-                    "endOffset": 115196
+                    "endOffset": 115607
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18876,12 +18897,12 @@
             },
             {
                 "to": {
-                    "startLine": 1513,
+                    "startLine": 1521,
                     "startColumn": 4,
-                    "startOffset": 115201,
-                    "endLine": 1514,
+                    "startOffset": 115612,
+                    "endLine": 1522,
                     "endColumn": 12,
-                    "endOffset": 115312
+                    "endOffset": 115723
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18897,11 +18918,11 @@
             },
             {
                 "to": {
-                    "startLine": 1515,
+                    "startLine": 1523,
                     "startColumn": 4,
-                    "startOffset": 115317,
+                    "startOffset": 115728,
                     "endColumn": 93,
-                    "endOffset": 115406
+                    "endOffset": 115817
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18916,11 +18937,11 @@
             },
             {
                 "to": {
-                    "startLine": 1516,
+                    "startLine": 1524,
                     "startColumn": 4,
-                    "startOffset": 115411,
+                    "startOffset": 115822,
                     "endColumn": 113,
-                    "endOffset": 115520
+                    "endOffset": 115931
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18935,11 +18956,11 @@
             },
             {
                 "to": {
-                    "startLine": 1517,
+                    "startLine": 1525,
                     "startColumn": 4,
-                    "startOffset": 115525,
+                    "startOffset": 115936,
                     "endColumn": 117,
-                    "endOffset": 115638
+                    "endOffset": 116049
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18954,12 +18975,12 @@
             },
             {
                 "to": {
-                    "startLine": 1518,
+                    "startLine": 1526,
                     "startColumn": 4,
-                    "startOffset": 115643,
-                    "endLine": 1519,
+                    "startOffset": 116054,
+                    "endLine": 1527,
                     "endColumn": 12,
-                    "endOffset": 115740
+                    "endOffset": 116151
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18975,12 +18996,12 @@
             },
             {
                 "to": {
-                    "startLine": 1520,
+                    "startLine": 1528,
                     "startColumn": 4,
-                    "startOffset": 115745,
-                    "endLine": 1521,
+                    "startOffset": 116156,
+                    "endLine": 1529,
                     "endColumn": 12,
-                    "endOffset": 115860
+                    "endOffset": 116271
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -18996,12 +19017,12 @@
             },
             {
                 "to": {
-                    "startLine": 1522,
+                    "startLine": 1530,
                     "startColumn": 4,
-                    "startOffset": 115865,
-                    "endLine": 1523,
+                    "startOffset": 116276,
+                    "endLine": 1531,
                     "endColumn": 12,
-                    "endOffset": 115982
+                    "endOffset": 116393
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19017,11 +19038,11 @@
             },
             {
                 "to": {
-                    "startLine": 1524,
+                    "startLine": 1532,
                     "startColumn": 4,
-                    "startOffset": 115987,
+                    "startOffset": 116398,
                     "endColumn": 81,
-                    "endOffset": 116064
+                    "endOffset": 116475
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19036,11 +19057,11 @@
             },
             {
                 "to": {
-                    "startLine": 1525,
+                    "startLine": 1533,
                     "startColumn": 4,
-                    "startOffset": 116069,
+                    "startOffset": 116480,
                     "endColumn": 103,
-                    "endOffset": 116168
+                    "endOffset": 116579
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19055,11 +19076,11 @@
             },
             {
                 "to": {
-                    "startLine": 1526,
+                    "startLine": 1534,
                     "startColumn": 4,
-                    "startOffset": 116173,
+                    "startOffset": 116584,
                     "endColumn": 119,
-                    "endOffset": 116288
+                    "endOffset": 116699
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19074,11 +19095,11 @@
             },
             {
                 "to": {
-                    "startLine": 1527,
+                    "startLine": 1535,
                     "startColumn": 4,
-                    "startOffset": 116293,
+                    "startOffset": 116704,
                     "endColumn": 125,
-                    "endOffset": 116414
+                    "endOffset": 116825
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19093,11 +19114,11 @@
             },
             {
                 "to": {
-                    "startLine": 1528,
+                    "startLine": 1536,
                     "startColumn": 4,
-                    "startOffset": 116419,
+                    "startOffset": 116830,
                     "endColumn": 97,
-                    "endOffset": 116512
+                    "endOffset": 116923
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19112,11 +19133,11 @@
             },
             {
                 "to": {
-                    "startLine": 1529,
+                    "startLine": 1537,
                     "startColumn": 4,
-                    "startOffset": 116517,
+                    "startOffset": 116928,
                     "endColumn": 93,
-                    "endOffset": 116606
+                    "endOffset": 117017
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19131,11 +19152,11 @@
             },
             {
                 "to": {
-                    "startLine": 1530,
+                    "startLine": 1538,
                     "startColumn": 4,
-                    "startOffset": 116611,
+                    "startOffset": 117022,
                     "endColumn": 87,
-                    "endOffset": 116694
+                    "endOffset": 117105
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19150,11 +19171,11 @@
             },
             {
                 "to": {
-                    "startLine": 1531,
+                    "startLine": 1539,
                     "startColumn": 4,
-                    "startOffset": 116699,
+                    "startOffset": 117110,
                     "endColumn": 111,
-                    "endOffset": 116806
+                    "endOffset": 117217
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19169,11 +19190,11 @@
             },
             {
                 "to": {
-                    "startLine": 1532,
+                    "startLine": 1540,
                     "startColumn": 4,
-                    "startOffset": 116811,
+                    "startOffset": 117222,
                     "endColumn": 115,
-                    "endOffset": 116922
+                    "endOffset": 117333
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19188,11 +19209,11 @@
             },
             {
                 "to": {
-                    "startLine": 1533,
+                    "startLine": 1541,
                     "startColumn": 4,
-                    "startOffset": 116927,
+                    "startOffset": 117338,
                     "endColumn": 121,
-                    "endOffset": 117044
+                    "endOffset": 117455
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19207,11 +19228,11 @@
             },
             {
                 "to": {
-                    "startLine": 1534,
+                    "startLine": 1542,
                     "startColumn": 4,
-                    "startOffset": 117049,
+                    "startOffset": 117460,
                     "endColumn": 111,
-                    "endOffset": 117156
+                    "endOffset": 117567
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19226,12 +19247,12 @@
             },
             {
                 "to": {
-                    "startLine": 1535,
+                    "startLine": 1543,
                     "startColumn": 4,
-                    "startOffset": 117161,
-                    "endLine": 1537,
+                    "startOffset": 117572,
+                    "endLine": 1545,
                     "endColumn": 12,
-                    "endOffset": 117331
+                    "endOffset": 117742
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19247,11 +19268,11 @@
             },
             {
                 "to": {
-                    "startLine": 1538,
+                    "startLine": 1546,
                     "startColumn": 4,
-                    "startOffset": 117336,
+                    "startOffset": 117747,
                     "endColumn": 115,
-                    "endOffset": 117447
+                    "endOffset": 117858
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19266,11 +19287,11 @@
             },
             {
                 "to": {
-                    "startLine": 1539,
+                    "startLine": 1547,
                     "startColumn": 4,
-                    "startOffset": 117452,
+                    "startOffset": 117863,
                     "endColumn": 85,
-                    "endOffset": 117533
+                    "endOffset": 117944
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19285,12 +19306,12 @@
             },
             {
                 "to": {
-                    "startLine": 1540,
+                    "startLine": 1548,
                     "startColumn": 4,
-                    "startOffset": 117538,
-                    "endLine": 1541,
+                    "startOffset": 117949,
+                    "endLine": 1549,
                     "endColumn": 12,
-                    "endOffset": 117645
+                    "endOffset": 118056
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19306,12 +19327,12 @@
             },
             {
                 "to": {
-                    "startLine": 1542,
+                    "startLine": 1550,
                     "startColumn": 4,
-                    "startOffset": 117650,
-                    "endLine": 1543,
+                    "startOffset": 118061,
+                    "endLine": 1551,
                     "endColumn": 12,
-                    "endOffset": 117769
+                    "endOffset": 118180
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19327,11 +19348,11 @@
             },
             {
                 "to": {
-                    "startLine": 1544,
+                    "startLine": 1552,
                     "startColumn": 4,
-                    "startOffset": 117774,
+                    "startOffset": 118185,
                     "endColumn": 66,
-                    "endOffset": 117836
+                    "endOffset": 118247
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19346,12 +19367,12 @@
             },
             {
                 "to": {
-                    "startLine": 1545,
+                    "startLine": 1553,
                     "startColumn": 4,
-                    "startOffset": 117841,
-                    "endLine": 1546,
+                    "startOffset": 118252,
+                    "endLine": 1554,
                     "endColumn": 12,
-                    "endOffset": 117962
+                    "endOffset": 118373
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19367,11 +19388,11 @@
             },
             {
                 "to": {
-                    "startLine": 1547,
+                    "startLine": 1555,
                     "startColumn": 4,
-                    "startOffset": 117967,
+                    "startOffset": 118378,
                     "endColumn": 67,
-                    "endOffset": 118030
+                    "endOffset": 118441
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19386,12 +19407,12 @@
             },
             {
                 "to": {
-                    "startLine": 1548,
+                    "startLine": 1556,
                     "startColumn": 4,
-                    "startOffset": 118035,
-                    "endLine": 1549,
+                    "startOffset": 118446,
+                    "endLine": 1557,
                     "endColumn": 12,
-                    "endOffset": 118158
+                    "endOffset": 118569
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19407,12 +19428,12 @@
             },
             {
                 "to": {
-                    "startLine": 1550,
+                    "startLine": 1558,
                     "startColumn": 4,
-                    "startOffset": 118163,
-                    "endLine": 1551,
+                    "startOffset": 118574,
+                    "endLine": 1559,
                     "endColumn": 12,
-                    "endOffset": 118302
+                    "endOffset": 118713
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19428,12 +19449,12 @@
             },
             {
                 "to": {
-                    "startLine": 1552,
+                    "startLine": 1560,
                     "startColumn": 4,
-                    "startOffset": 118307,
-                    "endLine": 1553,
+                    "startOffset": 118718,
+                    "endLine": 1561,
                     "endColumn": 12,
-                    "endOffset": 118430
+                    "endOffset": 118841
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19449,11 +19470,11 @@
             },
             {
                 "to": {
-                    "startLine": 1554,
+                    "startLine": 1562,
                     "startColumn": 4,
-                    "startOffset": 118435,
+                    "startOffset": 118846,
                     "endColumn": 68,
-                    "endOffset": 118499
+                    "endOffset": 118910
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19468,11 +19489,11 @@
             },
             {
                 "to": {
-                    "startLine": 1555,
+                    "startLine": 1563,
                     "startColumn": 4,
-                    "startOffset": 118504,
+                    "startOffset": 118915,
                     "endColumn": 94,
-                    "endOffset": 118594
+                    "endOffset": 119005
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19487,11 +19508,11 @@
             },
             {
                 "to": {
-                    "startLine": 1556,
+                    "startLine": 1564,
                     "startColumn": 4,
-                    "startOffset": 118599,
+                    "startOffset": 119010,
                     "endColumn": 114,
-                    "endOffset": 118709
+                    "endOffset": 119120
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19506,11 +19527,11 @@
             },
             {
                 "to": {
-                    "startLine": 1557,
+                    "startLine": 1565,
                     "startColumn": 4,
-                    "startOffset": 118714,
+                    "startOffset": 119125,
                     "endColumn": 112,
-                    "endOffset": 118822
+                    "endOffset": 119233
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19525,11 +19546,11 @@
             },
             {
                 "to": {
-                    "startLine": 1558,
+                    "startLine": 1566,
                     "startColumn": 4,
-                    "startOffset": 118827,
+                    "startOffset": 119238,
                     "endColumn": 98,
-                    "endOffset": 118921
+                    "endOffset": 119332
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19544,11 +19565,11 @@
             },
             {
                 "to": {
-                    "startLine": 1559,
+                    "startLine": 1567,
                     "startColumn": 4,
-                    "startOffset": 118926,
+                    "startOffset": 119337,
                     "endColumn": 108,
-                    "endOffset": 119030
+                    "endOffset": 119441
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19563,11 +19584,11 @@
             },
             {
                 "to": {
-                    "startLine": 1560,
+                    "startLine": 1568,
                     "startColumn": 4,
-                    "startOffset": 119035,
+                    "startOffset": 119446,
                     "endColumn": 110,
-                    "endOffset": 119141
+                    "endOffset": 119552
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19582,11 +19603,11 @@
             },
             {
                 "to": {
-                    "startLine": 1561,
+                    "startLine": 1569,
                     "startColumn": 4,
-                    "startOffset": 119146,
+                    "startOffset": 119557,
                     "endColumn": 110,
-                    "endOffset": 119252
+                    "endOffset": 119663
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19601,11 +19622,11 @@
             },
             {
                 "to": {
-                    "startLine": 1562,
+                    "startLine": 1570,
                     "startColumn": 4,
-                    "startOffset": 119257,
+                    "startOffset": 119668,
                     "endColumn": 100,
-                    "endOffset": 119353
+                    "endOffset": 119764
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19620,11 +19641,11 @@
             },
             {
                 "to": {
-                    "startLine": 1563,
+                    "startLine": 1571,
                     "startColumn": 4,
-                    "startOffset": 119358,
+                    "startOffset": 119769,
                     "endColumn": 104,
-                    "endOffset": 119458
+                    "endOffset": 119869
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19639,12 +19660,12 @@
             },
             {
                 "to": {
-                    "startLine": 1564,
+                    "startLine": 1572,
                     "startColumn": 4,
-                    "startOffset": 119463,
-                    "endLine": 1565,
+                    "startOffset": 119874,
+                    "endLine": 1573,
                     "endColumn": 12,
-                    "endOffset": 119570
+                    "endOffset": 119981
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19660,12 +19681,12 @@
             },
             {
                 "to": {
-                    "startLine": 1566,
+                    "startLine": 1574,
                     "startColumn": 4,
-                    "startOffset": 119575,
-                    "endLine": 1567,
+                    "startOffset": 119986,
+                    "endLine": 1575,
                     "endColumn": 12,
-                    "endOffset": 119700
+                    "endOffset": 120111
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19681,11 +19702,11 @@
             },
             {
                 "to": {
-                    "startLine": 1568,
+                    "startLine": 1576,
                     "startColumn": 4,
-                    "startOffset": 119705,
+                    "startOffset": 120116,
                     "endColumn": 90,
-                    "endOffset": 119791
+                    "endOffset": 120202
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19700,11 +19721,11 @@
             },
             {
                 "to": {
-                    "startLine": 1569,
+                    "startLine": 1577,
                     "startColumn": 4,
-                    "startOffset": 119796,
+                    "startOffset": 120207,
                     "endColumn": 122,
-                    "endOffset": 119914
+                    "endOffset": 120325
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19719,12 +19740,12 @@
             },
             {
                 "to": {
-                    "startLine": 1570,
+                    "startLine": 1578,
                     "startColumn": 4,
-                    "startOffset": 119919,
-                    "endLine": 1571,
+                    "startOffset": 120330,
+                    "endLine": 1579,
                     "endColumn": 12,
-                    "endOffset": 120026
+                    "endOffset": 120437
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19740,11 +19761,11 @@
             },
             {
                 "to": {
-                    "startLine": 1572,
+                    "startLine": 1580,
                     "startColumn": 4,
-                    "startOffset": 120031,
+                    "startOffset": 120442,
                     "endColumn": 85,
-                    "endOffset": 120112
+                    "endOffset": 120523
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19759,11 +19780,11 @@
             },
             {
                 "to": {
-                    "startLine": 1573,
+                    "startLine": 1581,
                     "startColumn": 4,
-                    "startOffset": 120117,
+                    "startOffset": 120528,
                     "endColumn": 103,
-                    "endOffset": 120216
+                    "endOffset": 120627
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19778,12 +19799,12 @@
             },
             {
                 "to": {
-                    "startLine": 1574,
+                    "startLine": 1582,
                     "startColumn": 4,
-                    "startOffset": 120221,
-                    "endLine": 1575,
+                    "startOffset": 120632,
+                    "endLine": 1583,
                     "endColumn": 12,
-                    "endOffset": 120324
+                    "endOffset": 120735
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19799,12 +19820,12 @@
             },
             {
                 "to": {
-                    "startLine": 1576,
+                    "startLine": 1584,
                     "startColumn": 4,
-                    "startOffset": 120329,
-                    "endLine": 1577,
+                    "startOffset": 120740,
+                    "endLine": 1585,
                     "endColumn": 12,
-                    "endOffset": 120424
+                    "endOffset": 120835
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19820,12 +19841,12 @@
             },
             {
                 "to": {
-                    "startLine": 1578,
+                    "startLine": 1586,
                     "startColumn": 4,
-                    "startOffset": 120429,
-                    "endLine": 1579,
+                    "startOffset": 120840,
+                    "endLine": 1587,
                     "endColumn": 12,
-                    "endOffset": 120542
+                    "endOffset": 120953
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19841,12 +19862,12 @@
             },
             {
                 "to": {
-                    "startLine": 1580,
+                    "startLine": 1588,
                     "startColumn": 4,
-                    "startOffset": 120547,
-                    "endLine": 1581,
+                    "startOffset": 120958,
+                    "endLine": 1589,
                     "endColumn": 12,
-                    "endOffset": 120646
+                    "endOffset": 121057
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19862,12 +19883,12 @@
             },
             {
                 "to": {
-                    "startLine": 1582,
+                    "startLine": 1590,
                     "startColumn": 4,
-                    "startOffset": 120651,
-                    "endLine": 1583,
+                    "startOffset": 121062,
+                    "endLine": 1591,
                     "endColumn": 12,
-                    "endOffset": 120750
+                    "endOffset": 121161
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19883,12 +19904,12 @@
             },
             {
                 "to": {
-                    "startLine": 1584,
+                    "startLine": 1592,
                     "startColumn": 4,
-                    "startOffset": 120755,
-                    "endLine": 1585,
+                    "startOffset": 121166,
+                    "endLine": 1593,
                     "endColumn": 12,
-                    "endOffset": 120876
+                    "endOffset": 121287
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19904,11 +19925,11 @@
             },
             {
                 "to": {
-                    "startLine": 1586,
+                    "startLine": 1594,
                     "startColumn": 4,
-                    "startOffset": 120881,
+                    "startOffset": 121292,
                     "endColumn": 87,
-                    "endOffset": 120964
+                    "endOffset": 121375
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19923,11 +19944,11 @@
             },
             {
                 "to": {
-                    "startLine": 1587,
+                    "startLine": 1595,
                     "startColumn": 4,
-                    "startOffset": 120969,
+                    "startOffset": 121380,
                     "endColumn": 89,
-                    "endOffset": 121054
+                    "endOffset": 121465
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19942,11 +19963,11 @@
             },
             {
                 "to": {
-                    "startLine": 1588,
+                    "startLine": 1596,
                     "startColumn": 4,
-                    "startOffset": 121059,
+                    "startOffset": 121470,
                     "endColumn": 109,
-                    "endOffset": 121164
+                    "endOffset": 121575
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19961,11 +19982,11 @@
             },
             {
                 "to": {
-                    "startLine": 1589,
+                    "startLine": 1597,
                     "startColumn": 4,
-                    "startOffset": 121169,
+                    "startOffset": 121580,
                     "endColumn": 83,
-                    "endOffset": 121248
+                    "endOffset": 121659
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19980,11 +20001,11 @@
             },
             {
                 "to": {
-                    "startLine": 1590,
+                    "startLine": 1598,
                     "startColumn": 4,
-                    "startOffset": 121253,
+                    "startOffset": 121664,
                     "endColumn": 53,
-                    "endOffset": 121302
+                    "endOffset": 121713
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -19999,11 +20020,11 @@
             },
             {
                 "to": {
-                    "startLine": 1591,
+                    "startLine": 1599,
                     "startColumn": 4,
-                    "startOffset": 121307,
+                    "startOffset": 121718,
                     "endColumn": 63,
-                    "endOffset": 121366
+                    "endOffset": 121777
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -20018,11 +20039,11 @@
             },
             {
                 "to": {
-                    "startLine": 1592,
+                    "startLine": 1600,
                     "startColumn": 4,
-                    "startOffset": 121371,
+                    "startOffset": 121782,
                     "endColumn": 105,
-                    "endOffset": 121472
+                    "endOffset": 121883
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -20037,11 +20058,11 @@
             },
             {
                 "to": {
-                    "startLine": 1593,
+                    "startLine": 1601,
                     "startColumn": 4,
-                    "startOffset": 121477,
+                    "startOffset": 121888,
                     "endColumn": 109,
-                    "endOffset": 121582
+                    "endOffset": 121993
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -20056,11 +20077,11 @@
             },
             {
                 "to": {
-                    "startLine": 1594,
+                    "startLine": 1602,
                     "startColumn": 4,
-                    "startOffset": 121587,
+                    "startOffset": 121998,
                     "endColumn": 83,
-                    "endOffset": 121666
+                    "endOffset": 122077
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -20075,11 +20096,11 @@
             },
             {
                 "to": {
-                    "startLine": 1595,
+                    "startLine": 1603,
                     "startColumn": 4,
-                    "startOffset": 121671,
+                    "startOffset": 122082,
                     "endColumn": 119,
-                    "endOffset": 121786
+                    "endOffset": 122197
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values\\values.xml",
@@ -20094,12 +20115,12 @@
             },
             {
                 "to": {
-                    "startLine": 1596,
+                    "startLine": 1604,
                     "startColumn": 4,
-                    "startOffset": 121791,
-                    "endLine": 1605,
+                    "startOffset": 122202,
+                    "endLine": 1613,
                     "endColumn": 10,
-                    "endOffset": 122227
+                    "endOffset": 122638
                 },
                 "from": {
                     "file": "C:\\Users\\BEAZE\\Desktop\\mobile1\\android\\app\\build\\intermediates\\exploded-aar\\com.facebook.react\\react-native\\0.55.4\\res\\values\\values.xml",

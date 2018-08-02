@@ -14,6 +14,7 @@ import { Button, Icon } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, createStackNavigator } from 'react-navigation';
 import resource from '../resource';
 import UploadPhoto from '../../Components/UploadPhoto';
+import ImagePicker from '../../Components/ImagePickers';
 import { colors } from 'theme';
 
 

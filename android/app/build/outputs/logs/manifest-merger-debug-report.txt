@@ -35,6 +35,7 @@ ADDED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.x
 application
 ADDED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.xml:11:5-28:19
 MERGED from [freliefagain:react-native-fetch-blob:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-fetch-blob\unspecified\AndroidManifest.xml:11:5-12:19
+MERGED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:11:5-21:19
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\AndroidManifest.xml:13:5-20
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:23.0.1] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\AndroidManifest.xml:22:5-20
@@ -77,6 +78,7 @@ ADDED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.x
 uses-sdk
 INJECTED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [freliefagain:react-native-fetch-blob:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-fetch-blob\unspecified\AndroidManifest.xml:7:5-9:41
+MERGED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [freliefagain:react-native-vector-icons:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-vector-icons\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [freliefagain:amazon-cognito-identity-js:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\amazon-cognito-identity-js\unspecified\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.55.4\AndroidManifest.xml:7:5-9:41
@@ -96,6 +98,22 @@ MERGED from [com.facebook.soloader:soloader:0.1.0] C:\Users\BEAZE\Desktop\mobile
 	android:minSdkVersion
 		INJECTED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.xml
+provider#com.imagepicker.FileProvider
+ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:12:9-20:20
+	android:authorities
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:14:13-60
+	android:grantUriPermissions
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:16:13-47
+	android:exported
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:15:13-37
+	android:name
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:13:13-56
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:17:13-19:58
+	android:resource
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:19:17-55
+	android:name
+		ADDED from [freliefagain:react-native-image-picker:unspecified] C:\Users\BEAZE\Desktop\mobile1\android\app\build\intermediates\exploded-aar\freliefagain\react-native-image-picker\unspecified\AndroidManifest.xml:18:17-67
 android:uses-permission#android.permission.READ_PHONE_STATE
 IMPLIED from C:\Users\BEAZE\Desktop\mobile1\android\app\src\main\AndroidManifest.xml:1:1-30:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 android:uses-permission#android.permission.READ_EXTERNAL_STORAGE

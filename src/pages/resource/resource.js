@@ -110,7 +110,7 @@ import { FormLabel,
       })
       .then(res => {
         this.setState({ images: res.edges })
-        this.props.navigation.navigate('UploadPhoto', { data: this.state, updateSelectedImage: this.updateSelectedImage })
+        this.props.navigation.navigate('ImagePicker', { data: this.state, updateSelectedImage: this.updateSelectedImage })
       })
       .catch(err => console.log('error getting photos...:', err))
   }

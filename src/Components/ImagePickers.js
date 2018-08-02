@@ -11,7 +11,7 @@ import {
 
 import ImagePicker from 'react-native-image-picker';
 
-export default class ImagePicker extends React.Component {
+export default class ImagePickers extends React.Component {
 
   state = {
     avatarSource: null,
@@ -126,5 +126,3 @@ const styles = StyleSheet.create({
     height: 150
   }
 });
-
-export default ImagePicker;
