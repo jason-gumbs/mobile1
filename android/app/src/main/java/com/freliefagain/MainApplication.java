@@ -3,6 +3,7 @@ package com.freliefagain;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.imagepicker.ImagePickerPackage;
 import com.amazonaws.RNAWSCognitoPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,8 +28,9 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new RNFetchBlobPackage(),
-            new RNAWSCognitoPackage(),
-            new VectorIconsPackage()
+          new RNAWSCognitoPackage(),
+          new ImagePickerPackage(),
+          new VectorIconsPackage()
       );
     }    @Override
     protected String getJSMainModuleName() {
