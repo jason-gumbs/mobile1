@@ -70,6 +70,7 @@ toggleModal() {
     const AddResourceRoutes = createStackNavigator({
       AddResource: { screen: resource },
       UploadPhoto: { screen: UploadPhoto },
+      ImagePicker: {screen: ImagePicker}
     });
 
     return (
