@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, View, Text, TouchableWithoutFeedback, ScrollView, Picker,Image,CameraRoll, Dimensions, StyleSheet } from 'react-native';
+import { Button, View, Text,  PixelRatio,  TouchableOpacity,TouchableWithoutFeedback, Modal, ScrollView, Picker,Image,CameraRoll, Dimensions, StyleSheet,ActivityIndicator,Platform } from 'react-native';
 import { FormLabel,
    FormInput,
    FormValidationMessage,Icon,
    Divider } from 'react-native-elements'
+   import ImagePicker from 'react-native-image-picker';
    import { API, Storage } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
    import{ files} from '../../Utils/files';
@@ -27,7 +28,9 @@ import { FormLabel,
     selectedImageIndex: null,
     images: [],
     Resources: [],
+    avatarSource: null,
     selectedGenderIndex: null,
+    isSelected: false,
     modalVisible: false,
     input: {
       name: '',
@@ -47,11 +50,11 @@ import { FormLabel,
 
   AddResource = async () => {
     const resourceInfo = this.state.input;
-    const { node: imageNode } = this.state.selectedImage;
-
+    const { node: imageNode } = this.state.selectedImage;gi
     this.setState({ showActivityIndicator: true });
+    console.log("***********",imageNode)
 
-    this.readImage(imageNode)
+    this.readImage(this.state.selectedImage)
       .then(fileInfo => ({
         ...resourceInfo,
         picKey: fileInfo && fileInfo.key,
@@ -59,41 +62,18 @@ import { FormLabel,
       .then(this.apiSaveResource)
       .then(data => {
         this.setState({ showActivityIndicator: false });
-        this.props.screenProps.handleRetrievePet();
-        this.props.screenProps.toggleModal();
+    this.props.navigation.push('Search');
       })
       .catch(err => {
-        console.log('error saving pet...', err);
+        console.log('error saving resource...', err);
         this.setState({ showActivityIndicator: false });
       });
   }
 
- apiSaveResource = ()=> {
-    return  API.post('Resource', '/resource',
-    { body: this.state.input }).then(response => {
-     console.log(response);
-  }).catch(error => {
-      console.log(error.response)
-  });
+  async apiSaveResource (resource) {
+    return await  API.post('Resource', '/resource',
+    { body: resource });
   }
-
-  
-  
-
-  updateSelectedImage = (selectedImage, selectedImageIndex) => {
-    if (selectedImageIndex === this.state.selectedImageIndex) {
-      this.setState({
-        selectedImageIndex: null,
-        selectedImage: {}
-      })
-    } else {
-      this.setState({
-        selectedImageIndex,
-        selectedImage,
-      });
-    }
-  }
-
   updateInput = (key, value) => {
     this.setState((state) => ({
       input: {
@@ -102,18 +82,7 @@ import { FormLabel,
       }
     }))
   }
-  getPhotos = () => {
-    console.log("get photos")
-    CameraRoll
-      .getPhotos({
-        first: 20,
-      })
-      .then(res => {
-        this.setState({ images: res.edges })
-        this.props.navigation.navigate('ImagePicker', { data: this.state, updateSelectedImage: this.updateSelectedImage })
-      })
-      .catch(err => console.log('error getting photos...:', err))
-  }
+ 
 
   toggleModal = () => {
     this.setState(() => ({ modalVisible: !this.state.modalVisible }))
@@ -121,32 +90,59 @@ import { FormLabel,
 
   readImage(imageNode = null) {
     if (imageNode === null) {
+      console.log("image null")
       return Promise.resolve();
     }
-
-    const { image } = imageNode;
-    const result = {};
-
-    if (Platform.OS === 'ios') {
-      result.type = mime.lookup(image.filename);
-    } else {
-      result.type = imageNode.type;
-    }
-
-    const extension = mime.extension(result.type);
-    const imagePath = image.uri;
+    const extension = mime.extension(imageNode.type);
+    const imagePath = imageNode.uri;
     const picName = `${uuid.v1()}.${extension}`;
     const key = `${picName}`;
-
-    return files.readFile(imagePath)
-      .then(buffer => Storage.put(key, buffer, { level: 'private', contentType: result.type }))
+    console.log(picName)
+    return Storage.put(key,imageNode.data, { level: 'private', contentType: imageNode.type })
       .then(fileInfo => ({ key: fileInfo.key }))
-      .then(x => console.log('SAVED', x) || x);
+      .then(x => console.log('SAVED', x) || x)
+      .catch(err => console.log(err));
   }
 
-  fileChangedHandler = (event) => {
-    this.setState({selectedFile: event.target.files[0]})
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+        this.setState({
+          selectedImage: response
+        });
+        console.log(this.state.selectedImage)
+      }
+    });
   }
+
 
 
 
@@ -166,32 +162,18 @@ import { FormLabel,
       <ScrollView  style={{ flex: 1 }}>
       <View style={{marginLeft: "auto", marginRight: "auto", marginTop: 15}}>
       <Text style ={{color: "black"}}>Add Image</Text>
-      <Icon
-            onPress={this.getPhotos}
-            raised
-            reverse
-            name='add'
-            size={50}
-            containerStyle={{ width: 75, height: 75 }}
-            color={colors.primary}
-          />
+      <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+            <Image style={styles.avatar} source={this.state.avatarSource} />
+          }
+          </View>
+        </TouchableOpacity>
       </View>
 
 
 
-           {
-              selectedImageIndex === null ? (
-                <View style={styles.addImageContainer}>
-                  {/* <Icon size={34} name='camera-roll' color={colors.grayIcon} />
-                  <Text style={styles.addImageTitle}>Upload Photo</Text> */}
-                </View>
-              ) : (
-                  <Image
-                    style={styles.addImageContainer}
-                    source={{ uri: selectedImage.node.image.uri }}
-                  />
-                )
-            }
+       
       
           <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}
@@ -293,9 +275,18 @@ import { FormLabel,
           />
           <Button
             title='submit'
-            onPress={this.apiSaveResource} />
+            onPress={this.AddResource} />
           <Divider style={{ backgroundColor: 'yellow', height: 10 }} />
           </ScrollView>
+          <Modal
+          visible={this.state.showActivityIndicator}
+          onRequestClose={() => null}
+        >
+          <ActivityIndicator
+            style={styles.activityIndicator}
+            size="large"
+          />
+        </Modal>
       </View>
     );
   }
@@ -341,6 +332,23 @@ styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF'
+  },
+  avatarContainer: {
+    borderColor: '#9B9B9B',
+    borderWidth: 1 / PixelRatio.get(),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  avatar: {
+    borderRadius: 75,
+    width: 150,
+    height: 150
   },
 });
 

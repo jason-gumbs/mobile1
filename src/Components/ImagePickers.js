@@ -15,8 +15,22 @@ export default class ImagePickers extends React.Component {
 
   state = {
     avatarSource: null,
-    videoSource: null
+    videoSource: null,
+    selectedImageIndex: null
+
   };
+  componentDidMount() {
+    // @todo - refactor into redux, we probably don't need to be setting state in componentDidMount,
+    // but for now we need to duplicate this state in this component for UI purposes.
+    let { selectedImageIndex } = this.props.navigation.state.params.data;
+    if (selectedImageIndex) {
+      this.setState(() => ({ selectedImageIndex }))
+    };
+  }
+
+  
+
+  
 
   selectPhotoTapped() {
     const options = {

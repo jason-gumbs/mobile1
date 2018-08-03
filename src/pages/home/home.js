@@ -6,6 +6,7 @@ import {
   Animated,
   StyleSheet,
   Image,
+   PixelRatio,
   Easing,
   TouchableHighlight,
   Modal,
@@ -69,9 +70,8 @@ toggleModal() {
     });
 
     const AddResourceRoutes = createStackNavigator({
-      AddResource: { screen: resource },
-      UploadPhoto: { screen: UploadPhoto },
-      ImagePicker: {screen: ImagePicker}
+      AddResource: { screen: resource }
+
     });
 
     return (
