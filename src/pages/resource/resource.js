@@ -5,7 +5,7 @@ import { FormLabel,
    FormValidationMessage,Icon,
    Divider } from 'react-native-elements'
    import ImagePicker from 'react-native-image-picker';
-   import { API, Storage } from 'aws-amplify';
+   import { API, Storage, Amplify } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
    import{ files} from '../../Utils/files';
    import { colors } from 'theme';
@@ -15,6 +15,11 @@ import { FormLabel,
    const { width, height } = Dimensions.get('window');
 
    let styles = {};
+   Storage.configure({
+    bucket: 'freliefmobileapp-hosting-mobilehub-1689805811',
+    region:'us-east-1',
+    identityPoolId: 'us-east-1:f99840c1-e6b6-4a3d-a96e-dde0413dae41'
+});
 
 
  class resource extends React.Component {
@@ -48,11 +53,12 @@ import { FormLabel,
   }
 
 
+
   AddResource = async () => {
     const resourceInfo = this.state.input;
-    const { node: imageNode } = this.state.selectedImage;gi
+    const { node: imageNode } = this.state.selectedImage;
     this.setState({ showActivityIndicator: true });
-    console.log("***********",imageNode)
+    console.log("***********",this.state.selectedImage)
 
     this.readImage(this.state.selectedImage)
       .then(fileInfo => ({
@@ -82,7 +88,7 @@ import { FormLabel,
       }
     }))
   }
- 
+
 
   toggleModal = () => {
     this.setState(() => ({ modalVisible: !this.state.modalVisible }))
@@ -97,11 +103,11 @@ import { FormLabel,
     const imagePath = imageNode.uri;
     const picName = `${uuid.v1()}.${extension}`;
     const key = `${picName}`;
-    console.log(picName)
-    return Storage.put(key,imageNode.data, { level: 'private', contentType: imageNode.type })
-      .then(fileInfo => ({ key: fileInfo.key }))
-      .then(x => console.log('SAVED', x) || x)
-      .catch(err => console.log(err));
+    console.log(imagePath)
+    return Storage.put(key, imageNode.data, { level: 'public', contentType: imageNode.type })
+    .then(fileInfo => ({ key: fileInfo.key }))
+    .then(x => console.log('SAVED', x) || x)
+      .catch(err => console.log("*******************",err));
   }
 
   selectPhotoTapped() {
@@ -156,7 +162,7 @@ import { FormLabel,
   }
   render() {
      const { selectedImageIndex, selectedImage, selectedGenderIndex } = this.state;
-  
+
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
@@ -173,8 +179,8 @@ import { FormLabel,
 
 
 
-       
-      
+
+
           <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}
           //inputStyle is used to style input box
@@ -225,7 +231,7 @@ import { FormLabel,
           value={this.state.input.address}
           />
            <View style={{flex: 1, flexDirection: 'row'}}>
-           
+
         <View style={{width: 150, height: 100, backgroundColor: 'powderblue'}} >
         <FormLabel>City</FormLabel>
           <FormInput onChangeText={(city) => this.updateInput('city', city)}

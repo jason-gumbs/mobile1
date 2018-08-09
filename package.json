@@ -21,8 +21,8 @@
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^2.0.16",
-    "aws-amplify": "^1.0.0",
-    "aws-amplify-react-native": "^1.0.0",
+    "aws-amplify": "^1.0.5",
+    "aws-amplify-react-native": "^1.0.5",
     "aws-sdk": "^2.279.1",
     "buffer": "^5.1.0",
     "eslint": "^3.19.0",

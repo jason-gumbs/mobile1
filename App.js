@@ -1,7 +1,7 @@
 global.Buffer = global.Buffer || require('buffer').Buffer;
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import Amplify, { API }  from 'aws-amplify';
+import Amplify, { API, Storage }  from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import resource from './src/pages/resource'; 
 import search from './src/pages/search';
