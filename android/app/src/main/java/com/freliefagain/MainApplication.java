@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
           new ImagePickerPackage(),
           new VectorIconsPackage()
       );
-    }    @Override
+    }   
+    @Override
     protected String getJSMainModuleName() {
       return "index";
     }

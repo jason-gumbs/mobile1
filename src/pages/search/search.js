@@ -28,6 +28,7 @@ class search extends React.Component {
     title: 'Resources Available',
   }
 
+
     state = {
     selectedImage: {},
     selectedImageIndex: null,
@@ -48,21 +49,33 @@ class search extends React.Component {
       zip: '',
     },
     showActivityIndicator: false,
+    apiResponse: null,
+    loading: true,
+    modalVisible: false,
   }
 
    componentDidMount() {
     this.loadResources();
   }
 
-    loadResources = () => {
-        console.log("hey")
-     return  API.get('Resource', '/resource')
-      .then(res =>
-        this.setState({ Resources: res })
-        //console.log(res)
-      )
-      .catch(err => console.log(err));
-  };
+    loadResources(){
+    API.get('Resource', '/resource')
+      .then(apiResponse =>{
+        return Promise.all(apiResponse.map(async (Resource) => {
+          const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
+          const picUrl = Resource.picKey && await Storage.get(key, { level: 'public' });
+           return { ...Resource, picUrl };
+      }));}).then(apiResponse => {
+        this.setState({ apiResponse, loading: false });
+      }).catch(e => {
+        this.setState({ apiResponse: e.message, loading: false });
+      });
+    }
+  
+  
+
+
+  
 
 keyExtractor = (item, index) => item.resourceId
 
@@ -70,7 +83,7 @@ renderItem = ({ item }) => (
   <ListItem
     title={item.name}
     subtitle={item.product}
-    leftIcon={{ name: 'flight-takeoff' }}
+    avatar={{uri:item.picUrl}}
   />
 )
 
@@ -92,7 +105,7 @@ renderItem = ({ item }) => (
 
     <FlatList
       keyExtractor={this.keyExtractor}
-      data={this.state.Resources}
+      data={this.state.apiResponse}
       renderItem={this.renderItem}
     />
 

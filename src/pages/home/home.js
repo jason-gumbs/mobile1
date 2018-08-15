@@ -17,6 +17,7 @@ import resource from '../resource';
 import UploadPhoto from '../../Components/UploadPhoto';
 import ImagePicker from '../../Components/ImagePickers';
 import { colors } from 'theme';
+import search from '../search/search';
 
 
 
@@ -70,7 +71,8 @@ toggleModal() {
     });
 
     const AddResourceRoutes = createStackNavigator({
-      AddResource: { screen: resource }
+      AddResource: { screen: resource },
+      Search: { screen: search }
 
     });
 
@@ -93,6 +95,11 @@ toggleModal() {
         <Button
           title="search Resources"
           onPress={() => this.props.navigation.push('Search')}
+        />
+           <Text>view map</Text>
+        <Button
+          title="search Resources"
+          onPress={() => this.props.navigation.push('Map')}
         />
                <Modal
           animationType={"slide"}

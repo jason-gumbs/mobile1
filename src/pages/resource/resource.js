@@ -50,7 +50,7 @@ import { FormLabel,
       zip: '',
     },
     showActivityIndicator: false,
-    this.baseState = this.state.input 
+    baseState : this.state.input 
   }
 
   componentDidMount() {
@@ -108,9 +108,10 @@ import { FormLabel,
     const picName = `${uuid.v1()}.${extension}`;
     const key = `${picName}`;
     console.log(imagePath)
-    return Storage.put(key, imageNode.data, { level: 'public', contentType: imageNode.type })
+    return files.readFile(imagePath)
+      .then(buffer => Storage.put(key, buffer, { level: 'public', contentType: imageNode.type })
     .then(fileInfo => ({ key: fileInfo.key }))
-    .then(x => console.log('SAVED', x) || x)
+    .then(x => console.log('SAVED', x) || x))
       .catch(err => console.log("*******************",err));
   }
 

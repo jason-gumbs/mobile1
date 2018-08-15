@@ -6,6 +6,7 @@ import awsmobile from './src/aws-exports';
 import resource from './src/pages/resource'; 
 import search from './src/pages/search';
 import home from './src/pages/home'; 
+import map from './src/pages/map'
 
 
 // Version can be specified in package.json
@@ -21,6 +22,9 @@ const RootStack = createStackNavigator(
     },
     Search: {
       screen: search,
+    },
+    Map: {
+      screen: map,
     },
   },
   {
