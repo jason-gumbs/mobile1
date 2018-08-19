@@ -1,11 +1,11 @@
 global.Buffer = global.Buffer || require('buffer').Buffer;
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
-import Amplify, { API, Storage }  from 'aws-amplify';
+import Amplify, {API, Storage }  from 'aws-amplify';
 import awsmobile from './src/aws-exports';
-import resource from './src/pages/resource'; 
+import resource from './src/pages/resource';
 import search from './src/pages/search';
-import home from './src/pages/home'; 
+import home from './src/pages/home';
 import map from './src/pages/map'
 
 
@@ -23,7 +23,7 @@ const RootStack = createStackNavigator(
     Search: {
       screen: search,
     },
-    Map: {
+    Maps: {
       screen: map,
     },
   },

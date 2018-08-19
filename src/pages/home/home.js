@@ -78,7 +78,7 @@ toggleModal() {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        
+
           <View style={{ position: 'absolute', bottom: 25, right: 26, zIndex: 1 }}>
           <Text style ={{color: "red"}}> add resource</Text>
           <Icon
@@ -99,7 +99,7 @@ toggleModal() {
            <Text>view map</Text>
         <Button
           title="search Resources"
-          onPress={() => this.props.navigation.push('Map')}
+          onPress={() => this.props.navigation.push('Maps')}
         />
                <Modal
           animationType={"slide"}
@@ -109,7 +109,7 @@ toggleModal() {
         >
           <AddResourceRoutes screenProps={{  toggleModal: this.toggleModal }} />
         </Modal>
-    
+
       </View>
     );
   }

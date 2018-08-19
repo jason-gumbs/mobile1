@@ -7,7 +7,7 @@ import { FormLabel,
    import ImagePicker from 'react-native-image-picker';
    import { API, Storage, Amplify } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
-   import{ files} from '../../Utils/files';
+   import files from '../../Utils/files';
    import { colors } from 'theme';
    import RNFetchBlob from 'react-native-fetch-blob';
    import uuid from 'react-native-uuid';
@@ -15,11 +15,6 @@ import { FormLabel,
    const { width, height } = Dimensions.get('window');
 
    let styles = {};
-   Storage.configure({
-    bucket: 'freliefmobileapp-hosting-mobilehub-1689805811',
-    region:'us-east-1',
-    identityPoolId: 'us-east-1:f99840c1-e6b6-4a3d-a96e-dde0413dae41'
-});
 
 
  class resource extends React.Component {
@@ -50,11 +45,11 @@ import { FormLabel,
       zip: '',
     },
     showActivityIndicator: false,
-    baseState : this.state.input 
+
   }
 
   componentDidMount() {
-    this.setState(this.baseState)
+
   }
 
 
