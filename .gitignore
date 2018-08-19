@@ -22,6 +22,7 @@ yarn-error.log*
 build/
 .idea
 .vscode
+.gradle
 local.properties
 *.iml
 
