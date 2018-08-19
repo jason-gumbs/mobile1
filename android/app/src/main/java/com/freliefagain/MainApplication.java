@@ -5,6 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.imagepicker.ImagePickerPackage;
 import com.amazonaws.RNAWSCognitoPackage;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -29,17 +30,18 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new RNFetchBlobPackage(),
           new RNAWSCognitoPackage(),
+          new MapsPackage(),
           new ImagePickerPackage(),
           new VectorIconsPackage()
       );
-    }   
+    }
     @Override
     protected String getJSMainModuleName() {
       return "index";
     }
   };
 
- 
+
 
   @Override
   public ReactNativeHost getReactNativeHost() {

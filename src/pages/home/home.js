@@ -98,7 +98,7 @@ toggleModal() {
         />
            <Text>view map</Text>
         <Button
-          title="search Resources"
+          title="view map"
           onPress={() => this.props.navigation.push('Maps')}
         />
                <Modal
