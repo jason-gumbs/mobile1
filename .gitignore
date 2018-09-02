@@ -21,6 +21,7 @@ yarn-error.log*
 #
 android/app/build
 .idea
+.vscode
 .gradle
 local.properties
 *.iml
