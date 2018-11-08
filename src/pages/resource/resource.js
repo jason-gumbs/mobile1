@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, View, Text,  PixelRatio,  TouchableOpacity,TouchableWithoutFeedback, Modal, ScrollView, Picker,Image,CameraRoll, Dimensions, StyleSheet,ActivityIndicator,Platform } from 'react-native';
 import { FormLabel,
    FormInput,
-   FormValidationMessage,Icon,
+   FormValidationMessage,
    Divider } from 'react-native-elements'
+   import Icon from 'react-native-vector-icons/FontAwesome';
    import ImagePicker from 'react-native-image-picker';
    import { API, Storage, Amplify } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
@@ -19,7 +20,13 @@ import { FormLabel,
 
  class resource extends React.Component {
   static navigationOptions = {
-    title: 'post an item',
+    title: 'List an item',
+    headerStyle: {
+backgroundColor: "#00A3FF",
+},
+headerTitleStyle:{
+  color: "white"
+}
   }
 
 
@@ -164,30 +171,27 @@ import { FormLabel,
      const { selectedImageIndex, selectedImage, selectedGenderIndex } = this.state;
 
     return (
-      <View style={{ flex: 1, paddingBottom: 0 }}>
-      <ScrollView  style={{ flex: 1 }}>
+      <View style={styles.container}>
+      <ScrollView  style={{ flex: 1 }}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
+       >
       <View style={{marginLeft: "auto", marginRight: "auto", marginTop: 15}}>
-      <Text style ={{color: "black"}}>Add Image</Text>
       <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
-            <Image style={styles.avatar} source={this.state.avatarSource} />
-          }
+          {this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+            <Image style={styles.avatar} source={this.state.avatarSource} />}
           </View>
         </TouchableOpacity>
       </View>
-
-
-
-
-
-          <FormLabel>Name</FormLabel>
+      <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}
           //inputStyle is used to style input box
           autoCapitalize="none"
+          selectionColor= {"black"}
           autoCorrect={false}
           returnKeyType="next"
-          inputStyle={{fontSize:26, color: "pink" }}
+          inputStyle={{fontSize:26 }}
           ref="name"
           textInputRef="nameInput"
           editable={true}
@@ -230,36 +234,36 @@ import { FormLabel,
           textInputRef="addressInput"
           value={this.state.input.address}
           />
+          <FormLabel>City</FormLabel>
+            <FormInput onChangeText={(city) => this.updateInput('city', city)}
+            //inputStyle is used to style input box
+            ref="city"
+            textInputRef="cityInput"
+            inputStyle={{fontSize:26 }}
+            value={this.state.input.city}
+            />
            <View style={{flex: 1, flexDirection: 'row'}}>
 
-        <View style={{width: 150, height: 100, backgroundColor: 'powderblue'}} >
-        <FormLabel>City</FormLabel>
-          <FormInput onChangeText={(city) => this.updateInput('city', city)}
-          //inputStyle is used to style input box
-          ref="city"
-          textInputRef="cityInput"
-          inputStyle={{fontSize:26, color: "pink" }}
-          value={this.state.input.city}
-          />
-        </View>
-        <View style={{width: 150, height: 100, backgroundColor: 'skyblue'}} >
-        <FormLabel> state</FormLabel>
+
+        <View style={{width: 150, height: 100}} >
+        <FormLabel> State</FormLabel>
           <FormInput onChangeText={( state) => this.updateInput('state',  state)}
           //inputStyle is used to style input box
           ref="state"
           textInputRef="stateInput"
-          inputStyle={{fontSize:26, color: "pink" }}
+          inputStyle={{fontSize:26}}
           value={this.state.input.state}
           />
         </View>
-        <View style={{width: 150, height: 100, backgroundColor: 'steelblue'}} >
-        <FormLabel> zip</FormLabel>
+        <View style={{width: 150, height: 100}} >
+        <FormLabel> Zip</FormLabel>
           <FormInput onChangeText={(zip) => this.updateInput('zip',  zip)}
           //inputStyle is used to style input box
           ref="zip"
+          keyboardType= "numeric"
           value={this.state.input.zip}
           textInputRef="zipInput"
-          inputStyle={{fontSize:26, color: "pink" }}/>
+          inputStyle={{fontSize:26}}/>
         </View>
         </View>
       <FormLabel>What are you offering</FormLabel>
@@ -268,21 +272,26 @@ import { FormLabel,
           ref="offering"
           textInputRef="offeringInput"
           value={this.state.input.offering}
-          inputStyle={{fontSize:26, color: "pink" }}
+          inputStyle={{fontSize:26}}
           />
           <FormLabel>Phone Number</FormLabel>
           <FormInput onChangeText={(number) => this.updateInput('number', number)}
           //inputStyle is used to style input box
+          keyboardType= "numeric"
           ref="number"
           textContentType= "telephoneNumber"
           textInputRef="numberInput"
           value={this.state.input.number}
           inputStyle={{fontSize:26, color: "pink" }}
           />
-          <Button
-            title='submit'
-            onPress={this.AddResource} />
-          <Divider style={{ backgroundColor: 'yellow', height: 10 }} />
+
+
+
+            <View style= {{marginTop:10, justifyContent: 'center',alignItems: 'center', marginBottom:20}}>
+            <Icon.Button name="paper-plane" backgroundColor="#00A3FF" onPress={this.AddResource}>
+            Add Resources
+            </Icon.Button>
+            </View>
           </ScrollView>
           <Modal
           visible={this.state.showActivityIndicator}
@@ -340,14 +349,16 @@ styles = StyleSheet.create({
     flex: 1,
   },
   container: {
+    paddingRight: 35,
+    paddingLeft:20,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: 'white'
   },
   avatarContainer: {
     borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
+    borderWidth: 5 / PixelRatio.get(),
     justifyContent: 'center',
     alignItems: 'center'
   },

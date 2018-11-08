@@ -11,7 +11,8 @@ import {
   TouchableHighlight,
   Modal,
 } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { DrawerNavigator, NavigationActions, createStackNavigator } from 'react-navigation';
 import resource from '../resource';
 import UploadPhoto from '../../Components/UploadPhoto';
@@ -23,6 +24,9 @@ import search from '../search/search';
 
 
  class home extends React.Component {
+   static navigationOptions = {
+     header: null,
+   }
   constructor(props) {
     super(props);
 
@@ -77,30 +81,30 @@ toggleModal() {
     });
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={styles.container}>
 
-          <View style={{ position: 'absolute', bottom: 25, right: 26, zIndex: 1 }}>
-          <Text style ={{color: "red"}}> add resource</Text>
-          <Icon
-            onPress={this.toggleModal}
-            raised
-            reverse
-            name='add'
-            size={44}
-            containerStyle={{ width: 50, height: 50 }}
-            color={colors.primary}
+
+        <Image
+            style={{width: 200, height: 200}}
+            source={{uri: 'https://raw.githubusercontent.com/wilfredgumbs/React-Frelief/master/client/src/pages/Home/logo.png'}}
           />
+          <View >
+        <View style= {{marginTop:20}}>
+        <Icon.Button name="search" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('Search')}>
+        Search Resources
+        </Icon.Button>
         </View>
-           <Text>view resources</Text>
-        <Button
-          title="search Resources"
-          onPress={() => this.props.navigation.push('Search')}
-        />
-           <Text>view map</Text>
-        <Button
-          title="view map"
-          onPress={() => this.props.navigation.push('Maps')}
-        />
+        <View style= {{marginTop:10}}>
+        <Icon.Button name="map" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('Maps')}>
+        View Map
+        </Icon.Button>
+        </View>
+        <View style= {{marginTop:10}}>
+        <Icon.Button name="plus" backgroundColor="#00A3FF"  onPress={this.toggleModal}>
+        Add Resources
+        </Icon.Button>
+        </View>
+        </View>
                <Modal
           animationType={"slide"}
           transparent={false}
@@ -116,17 +120,23 @@ toggleModal() {
 };
 styles = StyleSheet.create({
   container: {
-    padding: 25,
+    padding: 10,
+    backgroundColor: "#0D1E30",
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
   title: {
-    color: colors.darkGray,
+    color: colors.darkBlue,
     fontSize: 18,
     marginBottom: 15,
   },
   petInfoContainer: {
-    marginVertical: 10,
+    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
+
+
   },
   petInfoName: {
     color: colors.darkGray,

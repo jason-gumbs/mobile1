@@ -19,6 +19,12 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 const SPACE = 0.01;
 
 class map extends React.Component {
+  static navigationOptions = {
+    title: 'Map',
+    headerStyle: {
+backgroundColor: "#00A3FF",
+}
+  }
   constructor(props) {
     super(props);
     this.state = {
