@@ -10,6 +10,8 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
+      SplashScreen.show(this);  // here
+    super.onCreate(savedInstanceState);
         return "freliefagain";
     }
 }

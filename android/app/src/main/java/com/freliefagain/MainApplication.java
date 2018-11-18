@@ -3,6 +3,12 @@ package com.freliefagain;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+import com.airbnb.android.react.maps.MapsPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.amazonaws.RNAWSCognitoPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.amazonaws.RNAWSCognitoPackage;
 import com.airbnb.android.react.maps.MapsPackage;
@@ -28,6 +34,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SplashScreenReactPackage(),
+            new MapsPackage(),
+            new ImagePickerPackage(),
+            new RNFetchBlobPackage(),
+            new RNAWSCognitoPackage(),
           new RNFetchBlobPackage(),
           new RNAWSCognitoPackage(),
           new MapsPackage(),

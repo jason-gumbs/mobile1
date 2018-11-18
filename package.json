@@ -43,6 +43,7 @@
     "react-native-image-picker": "^0.26.10",
     "react-native-maps": "^0.21.0",
     "react-native-prompt": "^1.0.0",
+    "react-native-splash-screen": "3.0.6",
     "react-native-uuid": "^1.4.9",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.5.3"

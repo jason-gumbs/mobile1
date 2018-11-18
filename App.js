@@ -1,5 +1,6 @@
 global.Buffer = global.Buffer || require('buffer').Buffer;
 import React from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import { createStackNavigator } from 'react-navigation';
 import Amplify, {API, Storage }  from 'aws-amplify';
 import awsmobile from './src/aws-exports';
@@ -33,6 +34,9 @@ const RootStack = createStackNavigator(
 );
 
 export default class App extends React.Component {
+  componentDidMount() {
+   SplashScreen.hide()
+ }
   render() {
     return <RootStack />;
   }
