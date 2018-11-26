@@ -6,7 +6,7 @@ import { FormLabel,
    Divider } from 'react-native-elements'
    import Icon from 'react-native-vector-icons/FontAwesome';
    import ImagePicker from 'react-native-image-picker';
-   import { API, Storage, Amplify } from 'aws-amplify';
+   import { API, Storage } from 'aws-amplify';
    import awsmobile from '../../aws-exports';
    import files from '../../Utils/files';
    import { colors } from 'theme';
@@ -64,7 +64,7 @@ headerTitleStyle:{
     const resourceInfo = this.state.input;
     const { node: imageNode } = this.state.selectedImage;
     this.setState({ showActivityIndicator: true });
-    console.log("***********",this.state.selectedImage)
+    console.log("****selectedImage*******",this.state.selectedImage)
 
     this.readImage(this.state.selectedImage)
       .then(fileInfo => ({
@@ -83,7 +83,7 @@ headerTitleStyle:{
   }
 
   async apiSaveResource (resource) {
-    return await  API.post('Resource', '/resource',
+    return await  API.post('freeApi', '/resource',
     { body: resource });
   }
   updateInput = (key, value) => {
@@ -94,6 +94,7 @@ headerTitleStyle:{
       }
     }))
   }
+
 
 
   toggleModal = () => {
@@ -114,7 +115,7 @@ headerTitleStyle:{
       .then(buffer => Storage.put(key, buffer, { level: 'public', contentType: imageNode.type })
     .then(fileInfo => ({ key: fileInfo.key }))
     .then(x => console.log('SAVED', x) || x))
-      .catch(err => console.log("*******************",err));
+      .catch(err => console.log("********READIMAGE***********",err));
   }
 
   selectPhotoTapped() {

@@ -15,9 +15,7 @@ import { ListItem  } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 import { API, Storage } from 'aws-amplify';
 // import AddPet from './AddPet';
-// import ViewPet from './ViewPet';
-// import UploadPhoto from '../Components/UploadPhoto';
-// import SideMenuIcon from '../Components/SideMenuIcon';
+ import viewResource from './viewResource';
 import awsmobile from '../../aws-exports';
 import { colors } from 'theme';
 
@@ -59,7 +57,7 @@ class search extends React.Component {
   }
 
     loadResources(){
-    API.get('Resource', '/resource')
+    API.get('freeApi', '/resource')
       .then(apiResponse =>{
         return Promise.all(apiResponse.map(async (Resource) => {
           const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
@@ -71,20 +69,28 @@ class search extends React.Component {
         this.setState({ apiResponse: e.message, loading: false });
       });
     }
-  
-  
 
 
-  
+
+
+
 
 keyExtractor = (item, index) => item.resourceId
 
 renderItem = ({ item }) => (
+  // <TouchableHighlight
+  //    onPress={() => {
+  //      this.props.navigation.navigate('viewResource', { Resource })
+  //    }}
+  //    underlayColor='transparent'
+  //    key={Resource.resourceId}
+  //  >
   <ListItem
     title={item.name}
     subtitle={item.product}
     avatar={{uri:item.picUrl}}
   />
+      // </TouchableHighlight>
 )
 
 
@@ -98,7 +104,7 @@ renderItem = ({ item }) => (
     }))
   }
  render() {
-  
+
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
       <ScrollView  style={{ flex: 1 }}>
@@ -109,7 +115,7 @@ renderItem = ({ item }) => (
       renderItem={this.renderItem}
     />
 
-         
+
      </ScrollView>
       </View>
     );

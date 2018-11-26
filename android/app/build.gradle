@@ -133,16 +133,11 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-splash-screen')
-    compile project(':react-native-maps')
-    compile project(':react-native-image-picker')
-    compile project(':react-native-fetch-blob')
-    compile project(':amazon-cognito-identity-js')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-splash-screen')
+    implementation project(':react-native-maps')
     implementation project(':react-native-fetch-blob')
     implementation project(':react-native-image-picker')
-    implementation project(':react-native-vector-icons')
-    implementation project(':amazon-cognito-identity-js')
     implementation(project(':react-native-maps')){
     exclude group: 'com.google.android.gms', module: 'play-services-base'
     exclude group: 'com.google.android.gms', module: 'play-services-maps'}
