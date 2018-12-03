@@ -15,7 +15,7 @@ import { ListItem  } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 import { API, Storage } from 'aws-amplify';
 // import AddPet from './AddPet';
- import viewResource from './viewResource';
+ import viewResource from '../viewResource';
 import awsmobile from '../../aws-exports';
 import { colors } from 'theme';
 
@@ -78,19 +78,16 @@ class search extends React.Component {
 keyExtractor = (item, index) => item.resourceId
 
 renderItem = ({ item }) => (
-  // <TouchableHighlight
-  //    onPress={() => {
-  //      this.props.navigation.navigate('viewResource', { Resource })
-  //    }}
-  //    underlayColor='transparent'
-  //    key={Resource.resourceId}
-  //  >
   <ListItem
     title={item.name}
     subtitle={item.product}
     avatar={{uri:item.picUrl}}
+    onPress={() => {
+         this.props.navigation.navigate('ViewResource', { item })
+
+       }}
   />
-      // </TouchableHighlight>
+
 )
 
 

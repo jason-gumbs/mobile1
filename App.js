@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation';
 import Amplify, {API, Storage }  from 'aws-amplify';
 import awsmobile from './src/aws-exports';
 import resource from './src/pages/resource';
+import viewResource from './src/pages/viewResource';
 import search from './src/pages/search';
 import home from './src/pages/home';
 import map from './src/pages/map'
@@ -26,6 +27,9 @@ const RootStack = createStackNavigator(
     },
     Maps: {
       screen: map,
+    },
+    ViewResource: {
+      screen: viewResource,
     },
   },
   {
