@@ -14,7 +14,6 @@ import {
 import { ListItem  } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 import { API, Storage } from 'aws-amplify';
-// import AddPet from './AddPet';
  import viewResource from '../viewResource';
 import awsmobile from '../../aws-exports';
 import { colors } from 'theme';
@@ -54,6 +53,9 @@ class search extends React.Component {
 
    componentDidMount() {
     this.loadResources();
+  }
+  componentWillUnmount(){
+
   }
 
     loadResources(){

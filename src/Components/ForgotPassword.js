@@ -19,7 +19,7 @@ import {
   Button,
 } from 'react-native-elements';
 
-import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
+import MFAPrompt from './MFAPrompt';
 import { colors } from 'theme';
 
 const { width } = Dimensions.get('window');
@@ -136,7 +136,6 @@ class ForgotPassword extends React.Component {
         <View style={styles.imageContainer}>
           <Image
             resizeMode='contain'
-            source={require('../../assets/images/puppy.png')}
             style={styles.puppy}
           />
         </View>
@@ -200,4 +199,3 @@ class ForgotPassword extends React.Component {
 }
 
 export default ForgotPassword;
-

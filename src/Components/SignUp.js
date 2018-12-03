@@ -25,9 +25,7 @@ import {
   FormValidationMessage,
   Button,
 } from 'react-native-elements';
-import { StackNavigator } from 'react-navigation';
-
-import MFAPrompt from '../../lib/Categories/Auth/Components/MFAPrompt';
+import { createStackNavigator } from 'react-navigation';
 import { Auth } from 'aws-amplify';
 import Constants from '../Utils/constants';
 import { colors } from 'theme';
@@ -63,9 +61,6 @@ class SignUp extends React.Component {
     this.baseState = this.state;
 
     this.handleSignUp = this.handleSignUp.bind(this);
-    this.handleMFAValidate = this.handleMFAValidate.bind(this);
-    this.handleMFASuccess = this.handleMFASuccess.bind(this);
-    this.handleMFACancel = this.handleMFACancel.bind(this);
     this.onPhoneSubmit = this.onPhoneSubmit.bind(this);
   }
 
@@ -73,21 +68,17 @@ class SignUp extends React.Component {
     const { username, password, email, phoneNumber } = this.state;
     let userConfirmed = true;
 
-    Auth.signUp(username, password, email, phoneNumber)
-      .then(data => {
-        userConfirmed = data.userConfirmed;
-
-        this.setState({ showMFAPrompt: !userConfirmed });
-
-        if (userConfirmed) {
-          this.onSignUp();
+    Auth.signUp({
+        username,
+        password,
+        attributes: {
+            email,          // optional
+             // optional - E.164 number convention
+            // other custom attributes
         }
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ errorMessage: err.message });
-        return;
-      });
+        })
+        .then(data => console.log(data))
+        .catch(err => console.log("Auth signup ",err));
   }
 
   async handleMFAValidate(code = '') {
@@ -118,7 +109,7 @@ class SignUp extends React.Component {
   }
 
   checkPhonePattern = (phone) => {
-    return /\+[1-9]\d{1,14}$/.test(phone);
+    return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phone);
   }
 
   onPhoneSubmit(event) {
@@ -204,19 +195,14 @@ class SignUp extends React.Component {
             backgroundColor={colors.primary}
             icon={{ name: 'lock', size: 18, type: 'font-awesome' }}
             onPress={this.handleSignUp} />
-          {this.state.showMFAPrompt &&
-            <MFAPrompt
-              onValidate={this.handleMFAValidate}
-              onCancel={this.handleMFACancel}
-              onSuccess={this.handleMFASuccess}
-            />}
+
         </View>
       </View>
     );
   }
 }
 
-const SignUpStack = StackNavigator({
+const SignUpStack = createStackNavigator({
   SignUp: {
     screen: props => <SignUp {...props} onSignUp={props.screenProps.onSignUp} />,
     navigationOptions: {

@@ -28,6 +28,7 @@ import {
 } from 'react-native-elements';
 import { createStackNavigator } from 'react-navigation';
 import { Auth } from 'aws-amplify';
+import awsmobile from '../aws-exports';
 import ForgotPassword from './ForgotPassword';
 import { colors } from 'theme';
 import Constants from '../Utils/constants';
@@ -71,48 +72,44 @@ const styles = StyleSheet.create({
   },
 });
 
-class LogIn extends React.Component {
+class MFAPrompt extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       showActivityIndicator: false,
       username: '',
-      password: '',
+      code: '',
       showMFAPrompt: false,
       errorMessage: '',
       cognitoUser: '',
     };
 
-
+    this.baseState = this.state;
 
     this.handleLogInClick = this.handleLogInClick.bind(this);
-
+    this.handleMFAValidate = this.handleMFAValidate.bind(this);
+    this.handleMFACancel = this.handleMFACancel.bind(this);
+    this.handleMFASuccess = this.handleMFASuccess.bind(this);
     this.doLogin = this.doLogin.bind(this);
     this.onLogIn = this.onLogIn.bind(this);
   }
 
   async onLogIn() {
+    this.setState(this.baseState);
+
     this.props.onLogIn();
   }
-async doLogout(){
-    let session = null;
 
-session = Auth.signOut()
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
-
-}
   async doLogin() {
-    const { username, password } = this.state;
+    const { username, code } = this.state;
     let errorMessage = '';
     let showMFAPrompt = false;
     let session = null;
 
 
-      session = await Auth.signIn(username, password)
-    .then(user => console.log(user))
-    .catch(err => console.log("ERRORSS",err));
+      session = await Auth.confirmSignUp(username, code).then(data => console.log(data))
+  .catch(err => console.log(err));
 
     this.setState({
       showMFAPrompt,
@@ -197,33 +194,26 @@ session = Auth.signOut()
             onSubmitEditing={() => { this.refs.password.refs.passwordInput.focus() }}
             onChangeText={(username) => this.setState({ username })}
             value={this.state.username} />
-          <FormLabel>Password</FormLabel>
+          <FormLabel>Code</FormLabel>
           <FormInput
             inputStyle={styles.input}
             selectionColor={colors.primary}
             underlineColorAndroid="transparent"
             editable={true}
             secureTextEntry={true}
-            placeholder="Please enter your password"
+            placeholder="Please enter your code"
             returnKeyType="next"
-            ref="password"
-            textInputRef="passwordInput"
-            onChangeText={(password) => this.setState({ password })}
-            value={this.state.password} />
+            ref="code"
+            textInputRef="codeInput"
+            onChangeText={(code) => this.setState({ code })}
+            value={this.state.code} />
           <Button
             fontFamily='lato'
             containerViewStyle={{ marginTop: 20 }}
             backgroundColor={colors.primary}
             large
-            title="SIGN IN"
+            title="Confirm"
             onPress={this.handleLogInClick} />
-            <Button
-              fontFamily='lato'
-              containerViewStyle={{ marginTop: 20 }}
-              backgroundColor={colors.primary}
-              large
-              title="LOG OUT"
-              onPress={this.doLogout} />
           <Text
             onPress={() => this.props.navigation.navigate('ForgotPassword')}
             style={styles.passwordResetButton}
@@ -258,4 +248,4 @@ const LogInStack = (createStackNavigator({
   },
 }, { mode: 'modal' }));
 
-export default props => <LogInStack screenProps={{ ...props }} />;
+export default props => <MFAPrompt screenProps={{ ...props }} />;

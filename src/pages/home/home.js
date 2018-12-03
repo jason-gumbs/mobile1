@@ -6,12 +6,12 @@ import {
   Animated,
   StyleSheet,
   Image,
-   PixelRatio,
+  PixelRatio,
   Easing,
   TouchableHighlight,
   Modal,
 } from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { DrawerNavigator, NavigationActions, createStackNavigator } from 'react-navigation';
 import resource from '../resource';
@@ -19,6 +19,7 @@ import UploadPhoto from '../../Components/UploadPhoto';
 import ImagePicker from '../../Components/ImagePickers';
 import { colors } from 'theme';
 import search from '../search/search';
+import { Auth } from 'aws-amplify';
 
 
 
@@ -43,15 +44,30 @@ import search from '../search/search';
 }
 
 componentDidMount() {
-  this.animate();
+
+    Auth.currentUserInfo()
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
 }
+componentWillUnmount(){
+
+}
+
+  updateInput = (key, value) => {
+    this.setState((state) => ({
+      input: {
+        ...state.input,
+        [key]: value,
+      }
+    }))
+  }
 
 animate() {
   Animated.loop(
     Animated.timing(
       this.animatedIcon,
       {
-        toValue: 1,
+        toValue: 2,
         duration: 1300,
         easing: Easing.linear,
       }
@@ -76,7 +92,8 @@ toggleModal() {
 
     const AddResourceRoutes = createStackNavigator({
       AddResource: { screen: resource },
-      Search: { screen: search }
+      Search: { screen: search },
+
 
     });
 
@@ -89,9 +106,30 @@ toggleModal() {
             source={{uri: 'https://raw.githubusercontent.com/wilfredgumbs/React-Frelief/master/client/src/pages/Home/logo.png'}}
           />
           <View >
+          <SearchBar
+          round
+          onChangeText={this.updateInput}
+          containerStyle={{ backgroundColor: "#0D1E30",borderColor: "#0D1E30" }}
+          inputStyle={{ backgroundColor: 'white' }}
+          placeholder='Type Here...' />
         <View style= {{marginTop:20}}>
         <Icon.Button name="search" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('Search')}>
         Search Resources
+        </Icon.Button>
+        </View>
+        <View style= {{marginTop:20}}>
+        <Icon.Button name="search" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('SignUp')}>
+        Sign Up
+        </Icon.Button>
+        </View>
+        <View style= {{marginTop:20}}>
+        <Icon.Button name="search" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('UserConfirm')}>
+        MFA
+        </Icon.Button>
+        </View>
+        <View style= {{marginTop:20}}>
+        <Icon.Button name="search" backgroundColor="#00A3FF"  onPress={() => this.props.navigation.push('SignIn')}>
+        Sign In
         </Icon.Button>
         </View>
         <View style= {{marginTop:10}}>

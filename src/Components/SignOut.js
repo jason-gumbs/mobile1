@@ -18,7 +18,7 @@ export default class SignOut extends React.Component {
     const { auth } = this.props.screenProps;
     auth.signOut();
 
-    this.props.rootNavigator.navigate('FirstScreen');
+    this.props.rootNavigator.navigate('Home');
   }
 
   render() {

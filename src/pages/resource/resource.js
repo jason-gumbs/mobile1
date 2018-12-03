@@ -58,6 +58,9 @@ headerTitleStyle:{
   componentDidMount() {
 
   }
+  componentWillUnmount(){
+
+  }
 
 
   AddResource = async () => {
@@ -355,7 +358,7 @@ styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: "#00A3FF"
   },
   avatarContainer: {
     borderColor: '#9B9B9B',
