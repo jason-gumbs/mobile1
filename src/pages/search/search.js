@@ -11,9 +11,9 @@ import {
   TouchableHighlight,
   Modal,
 } from 'react-native';
-import { ListItem  } from 'react-native-elements';
+import { Card, ListItem, Button  } from 'react-native-elements';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
-import { API, Storage } from 'aws-amplify';
+import { API, Storage,Cache  } from 'aws-amplify';
  import viewResource from '../viewResource';
 import awsmobile from '../../aws-exports';
 import { colors } from 'theme';
@@ -52,14 +52,23 @@ class search extends React.Component {
   }
 
    componentDidMount() {
-    this.loadResources();
+     Cache.getItem('resources').then(apiResponse => {
+    if(apiResponse) {
+    this.setState({ apiResponse});
+
+    }
+})
+   this.loadResources();
   }
+
+
   componentWillUnmount(){
-
+Cache.removeItem('resources');
+Cache.setItem('resources', this.state.apiResponse);
   }
 
-    loadResources(){
-    API.get('freeApi', '/resource')
+    async loadResources(){
+    return await API.get('freeApi', '/resource')
       .then(apiResponse =>{
         return Promise.all(apiResponse.map(async (Resource) => {
           const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
@@ -80,15 +89,26 @@ class search extends React.Component {
 keyExtractor = (item, index) => item.resourceId
 
 renderItem = ({ item }) => (
-  <ListItem
-    title={item.name}
-    subtitle={item.product}
-    avatar={{uri:item.picUrl}}
-    onPress={() => {
-         this.props.navigation.navigate('ViewResource', { item })
 
-       }}
-  />
+
+  <Card
+title={item.name}
+featuredSubtitle={item.name}
+image={{uri:item.picUrl|| 'http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg'}}>
+<Text style={{marginBottom: 10}}>
+{item.description || 'No description'}
+</Text>
+<Button
+  icon={{name: 'pageview',size: 32}}
+  backgroundColor="#00A3FF"
+  buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
+  onPress={() => {
+       this.props.navigation.navigate('ViewResource', { item })
+
+     }}
+  title='VIEW NOW' />
+</Card>
+
 
 )
 
@@ -113,6 +133,9 @@ renderItem = ({ item }) => (
       data={this.state.apiResponse}
       renderItem={this.renderItem}
     />
+
+
+
 
 
      </ScrollView>

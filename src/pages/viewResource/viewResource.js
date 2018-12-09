@@ -22,7 +22,7 @@ class viewResource extends React.Component {
         <View style={styles.topContainer}>
           <Image
             style={styles.image}
-            source={uri ? { uri } : ""}
+            source={uri ? { uri } : {uri:"http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"}}
           />
           <View style={styles.infoContainer}>
             <Text style={styles.title}>{item.name || 'No name'}</Text>
