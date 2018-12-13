@@ -8,11 +8,25 @@ import {
 } from 'react-native';
 import { colors } from 'theme';
 import { Storage } from 'aws-amplify';
+import Geocoder from 'react-native-geocoding';
+
 
 class viewResource extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) => console.log(screenProps) || ({
     title: `Viewing ${navigation.state.params.item.name}`,
   })
+     componentDidMount() {
+       // to do only once
+Geocoder.init(''); // use a valid API key
+
+Geocoder.from("1600 Amphitheatre Parkway, Mountain View, CA")
+        .then(json => {
+            var location = json.results[0].geometry.location;
+            console.log(location
+            );
+        })
+        .catch(error => console.warn(error));
+     }
   render() {
     const { item } = this.props.navigation.state.params;
 
@@ -26,7 +40,7 @@ class viewResource extends React.Component {
           />
           <View style={styles.infoContainer}>
             <Text style={styles.title}>{item.name || 'No name'}</Text>
-            <Text style={styles.info}>{item.breed || 'No breed'}</Text>
+            <Text style={styles.info}>{item.address || 'No breed'}</Text>
             <Text style={styles.info}>{"birthDay"}</Text>
             <Text style={styles.info}>{item.gender || 'No gender'}</Text>
           </View>
@@ -41,6 +55,8 @@ const imageSize = 130;
 const styles = StyleSheet.create({
   infoContainer: {
     paddingLeft: 20,
+
+
   },
   breaker: {
     height: 1,
@@ -50,6 +66,9 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     flexDirection: 'row',
+    width: 600,
+    height: 600,
+    backgroundColor: "pink",
   },
   container: {
     padding: 20,

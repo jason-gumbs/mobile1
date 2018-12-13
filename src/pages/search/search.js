@@ -12,6 +12,7 @@ import {
   Modal,
 } from 'react-native';
 import { Card, ListItem, Button  } from 'react-native-elements';
+import Geocoder from 'react-native-geocoding';
 import { DrawerNavigator, NavigationActions, StackNavigator } from 'react-navigation';
 import { API, Storage,Cache  } from 'aws-amplify';
  import viewResource from '../viewResource';

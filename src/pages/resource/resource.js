@@ -13,9 +13,11 @@ import { FormLabel,
    import RNFetchBlob from 'react-native-fetch-blob';
    import uuid from 'react-native-uuid';
    import mime from 'mime-types';
+   import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
    const { width, height } = Dimensions.get('window');
 
    let styles = {};
+
 
 
  class resource extends React.Component {
@@ -43,6 +45,7 @@ headerTitleStyle:{
       name: '',
       product: '',
       address: '',
+      location:'',
       offering: '',
       category: '',
       city: '',
@@ -160,9 +163,6 @@ headerTitleStyle:{
     });
   }
 
-
-
-
   updateInput = (key, value) => {
     this.setState((state) => ({
       input: {
@@ -173,6 +173,7 @@ headerTitleStyle:{
   }
   render() {
      const { selectedImageIndex, selectedImage, selectedGenderIndex } = this.state;
+
 
     return (
       <View style={styles.container}>
@@ -188,6 +189,7 @@ headerTitleStyle:{
           </View>
         </TouchableOpacity>
       </View>
+
       <FormLabel>Name</FormLabel>
           <FormInput onChangeText={(name) => this.updateInput('name', name)}
           //inputStyle is used to style input box
@@ -238,6 +240,41 @@ headerTitleStyle:{
           textInputRef="addressInput"
           value={this.state.input.address}
           />
+          <GooglePlacesAutocomplete
+      placeholder='Enter Location'
+      onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
+       console.log( details.geometry.location);
+this.setState(state => (state.input.address = data.description, state))
+this.setState(state => (state.input.location = details.geometry.location, state))
+}}
+      minLength={2}
+      autoFocus={false}
+      returnKeyType={'done'}
+      fetchDetails={true}
+      query={{
+       // available options: https://developers.google.com/places/web-service/autocomplete
+       key: '',
+       language: 'en', // language of the results
+       types: 'address' // default: 'geocode'
+     }}
+      styles={{
+        textInputContainer: {
+          backgroundColor: 'rgba(0,0,0,0)',
+          borderTopWidth: 0,
+          borderBottomWidth:0
+        },
+        textInput: {
+          marginLeft: 0,
+          marginRight: 0,
+          height: 38,
+          color: '#5d5d5d',
+          fontSize: 16
+        },
+      }}
+      currentLocation={false}
+    />
+
+
           <FormLabel>City</FormLabel>
             <FormInput onChangeText={(city) => this.updateInput('city', city)}
             //inputStyle is used to style input box
@@ -358,7 +395,7 @@ styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#00A3FF"
+    backgroundColor: "white"
   },
   avatarContainer: {
     borderColor: '#9B9B9B',
