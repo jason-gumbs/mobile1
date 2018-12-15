@@ -14,9 +14,8 @@ class viewResource extends React.Component {
     geoLoc: {}
   };
   componentDidMount() {}
-  componentDidUpdate() {
-    console.log("ITEM.LOCATION", this.props.navigation.state.params.location);
-  }
+  componentDidUpdate() {}
+  componentWillUnmount() {}
   render() {
     const { item } = this.props.navigation.state.params;
     const lat = item.location.lat;

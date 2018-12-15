@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Button,
+  KeyboardAvoidingView,
   View,
   Text,
   PixelRatio,
@@ -193,6 +194,7 @@ class resource extends React.Component {
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
         >
           <View
             style={{ marginLeft: "auto", marginRight: "auto", marginTop: 15 }}
@@ -269,18 +271,10 @@ class resource extends React.Component {
             <Picker.Item label="Tech" value="Tech" />
           </Picker>
           <FormLabel>Address</FormLabel>
-          <FormInput
-            onChangeText={address => this.updateInput("address", address)}
-            //inputStyle is used to style input box
-            ref="address"
-            textInputRef="addressInput"
-            value={this.state.input.address}
-          />
+
           <GooglePlacesAutocomplete
             placeholder="Enter Location"
             onPress={(data, details = null) => {
-              // 'details' is provided when fetchDetails = true
-              console.log(details.geometry.location);
               this.setState(
                 state => ((state.input.address = data.description), state)
               );
@@ -290,19 +284,25 @@ class resource extends React.Component {
                 )
               );
             }}
+            getDefaultValue={() => ""}
+            listViewDisplayed="false"
             minLength={2}
             autoFocus={false}
-            returnKeyType={"done"}
             fetchDetails={true}
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
-              key: "",
+              key: "AIzaSyAbqRbp2uxog0Q2Ce41DLyOoQs8JMODsG4",
               language: "en", // language of the results
               types: "address" // default: 'geocode'
             }}
             styles={{
+              container: {
+                width: "75%",
+                marginBottom: 10
+              },
               textInputContainer: {
                 backgroundColor: "rgba(0,0,0,0)",
+                width: "75%",
                 borderTopWidth: 0,
                 borderBottomWidth: 0
               },
@@ -317,40 +317,6 @@ class resource extends React.Component {
             currentLocation={false}
           />
 
-          <FormLabel>City</FormLabel>
-          <FormInput
-            onChangeText={city => this.updateInput("city", city)}
-            //inputStyle is used to style input box
-            ref="city"
-            textInputRef="cityInput"
-            inputStyle={{ fontSize: 26 }}
-            value={this.state.input.city}
-          />
-          <View style={{ flex: 1, flexDirection: "row" }}>
-            <View style={{ width: 150, height: 100 }}>
-              <FormLabel> State</FormLabel>
-              <FormInput
-                onChangeText={state => this.updateInput("state", state)}
-                //inputStyle is used to style input box
-                ref="state"
-                textInputRef="stateInput"
-                inputStyle={{ fontSize: 26 }}
-                value={this.state.input.state}
-              />
-            </View>
-            <View style={{ width: 150, height: 100 }}>
-              <FormLabel> Zip</FormLabel>
-              <FormInput
-                onChangeText={zip => this.updateInput("zip", zip)}
-                //inputStyle is used to style input box
-                ref="zip"
-                keyboardType="numeric"
-                value={this.state.input.zip}
-                textInputRef="zipInput"
-                inputStyle={{ fontSize: 26 }}
-              />
-            </View>
-          </View>
           <FormLabel>What are you offering</FormLabel>
           <FormInput
             onChangeText={offering => this.updateInput("offering", offering)}
@@ -369,7 +335,7 @@ class resource extends React.Component {
             textContentType="telephoneNumber"
             textInputRef="numberInput"
             value={this.state.input.number}
-            inputStyle={{ fontSize: 26, color: "pink" }}
+            inputStyle={{ fontSize: 26, color: "black" }}
           />
 
           <View

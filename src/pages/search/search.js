@@ -131,7 +131,11 @@ class search extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0 }}>
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView
+          style={{ flex: 1 }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+        >
           <FlatList
             keyExtractor={this.keyExtractor}
             data={this.state.apiResponse}
