@@ -291,7 +291,7 @@ class resource extends React.Component {
             fetchDetails={true}
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
-              key: "AIzaSyAbqRbp2uxog0Q2Ce41DLyOoQs8JMODsG4",
+              key: "",
               language: "en", // language of the results
               types: "address" // default: 'geocode'
             }}
