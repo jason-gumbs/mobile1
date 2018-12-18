@@ -11,7 +11,7 @@ import {
   TouchableHighlight,
   Modal
 } from "react-native";
-import { Card, ListItem, Button } from "react-native-elements";
+import { Card, ListItem, Button, SearchBar } from "react-native-elements";
 import {
   DrawerNavigator,
   NavigationActions,
@@ -19,6 +19,8 @@ import {
 } from "react-navigation";
 import { API, Storage, Cache } from "aws-amplify";
 import viewResource from "../viewResource";
+import LogoTitle from "../../../src/Components/LogoTitle";
+import SignLogo from "../../../src/Components/SignLogo";
 import awsmobile from "../../aws-exports";
 import { colors } from "theme";
 
@@ -26,7 +28,9 @@ let styles = {};
 
 class search extends React.Component {
   static navigationOptions = {
-    title: "Resources Available"
+    // headerTitle instead of title
+    headerTitle: <LogoTitle />,
+    headerRight: <SignLogo />
   };
 
   state = {
@@ -92,30 +96,30 @@ class search extends React.Component {
 
   renderItem = ({ item }) => (
     <Card
-      title={item.name}
-      featuredSubtitle={item.name}
       image={{
         uri:
           item.picUrl ||
           "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
       }}
+      containerStyle={{ borderWidth: 0, borderRadius: 10 }}
+      imageStyle={{ height: 350 }}
     >
-      <Text style={{ marginBottom: 10 }}>
+      <Text style={{ fontSize: 18, color: "black" }}>
         {item.description || "No description"}
       </Text>
       <Button
-        icon={{ name: "pageview", size: 32 }}
         backgroundColor="#00A3FF"
         buttonStyle={{
-          borderRadius: 0,
+          borderRadius: 30,
           marginLeft: 0,
           marginRight: 0,
-          marginBottom: 0
+          marginBottom: 0,
+          height: 40
         }}
         onPress={() => {
           this.props.navigation.navigate("ViewResource", { item });
         }}
-        title="VIEW NOW"
+        title="More Info"
       />
     </Card>
   );
@@ -130,12 +134,23 @@ class search extends React.Component {
   };
   render() {
     return (
-      <View style={{ flex: 1, paddingBottom: 0 }}>
+      <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
         <ScrollView
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
         >
+          <SearchBar
+            round
+            onChangeText={this.updateInput}
+            containerStyle={{
+              backgroundColor: "#0D1E30",
+              borderColor: "#0D1E30",
+              borderBottomWidth: 0
+            }}
+            inputStyle={{ backgroundColor: "white" }}
+            placeholder="Type Here..."
+          />
           <FlatList
             keyExtractor={this.keyExtractor}
             data={this.state.apiResponse}
