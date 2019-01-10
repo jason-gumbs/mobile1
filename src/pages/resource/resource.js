@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   KeyboardAvoidingView,
   View,
   Text,
@@ -21,9 +20,9 @@ import {
   FormLabel,
   FormInput,
   FormValidationMessage,
-  Divider
+  Divider,
+  Button
 } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
 import ImagePicker from "react-native-image-picker";
 import { API, Storage } from "aws-amplify";
 import awsmobile from "../../aws-exports";
@@ -41,11 +40,15 @@ class resource extends React.Component {
   static navigationOptions = {
     title: "List an item",
     headerStyle: {
-      backgroundColor: "#00A3FF"
+      backgroundColor: "#0D1E30",
+      shadowColor: "transparent",
+      elevation: 0,
+      shadowOpacity: 0
     },
     headerTitleStyle: {
       color: "white"
-    }
+    },
+    headerTintColor: "white"
   };
 
   state = {
@@ -208,7 +211,7 @@ class resource extends React.Component {
                 ]}
               >
                 {this.state.avatarSource === null ? (
-                  <Text>Select a Photo</Text>
+                  <Text style={{ color: "white" }}>Select a Photo</Text>
                 ) : (
                   <Image
                     style={styles.avatar}
@@ -219,45 +222,82 @@ class resource extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <FormLabel>Name</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>Name</FormLabel>
           <FormInput
             onChangeText={name => this.updateInput("name", name)}
             //inputStyle is used to style input box
             autoCapitalize="none"
-            selectionColor={"black"}
-            autoCorrect={false}
+            selectionColor={"white"}
+            autoCorrect={true}
             returnKeyType="next"
-            inputStyle={{ fontSize: 26 }}
+            inputStyle={{
+              fontSize: 26,
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              color: "white"
+            }}
+            containerStyle={{
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              alignSelf: "stretch"
+            }}
             ref="name"
             textInputRef="nameInput"
             editable={true}
             value={this.state.input.name}
           />
-          <FormLabel>Product/Service</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>Product/Service</FormLabel>
           <FormInput
             onChangeText={product => this.updateInput("product", product)}
-            //inputStyle is used to style input box
+            autoCapitalize="none"
+            selectionColor={"white"}
+            autoCorrect={true}
+            containerStyle={{
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              alignSelf: "stretch"
+            }}
             ref="product"
             textInputRef="productInput"
+            inputStyle={{ fontSize: 26, color: "white" }}
             value={this.state.input.product}
           />
-          <FormLabel>Description</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>Description</FormLabel>
           <FormInput
             onChangeText={description =>
               this.updateInput("description", description)
             }
             //inputStyle is used to style input box
-            inputStyle={{ fontSize: 26, backgroundColor: "white" }}
+
+            containerStyle={{
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              alignSelf: "stretch"
+            }}
             multiline={true}
+            inputStyle={{ fontSize: 26, color: "white" }}
             numberOfLines={4}
+            autoCapitalize="none"
+            selectionColor={"white"}
+            autoCorrect={true}
             ref="description"
             textInputRef="descriptionInput"
             value={this.state.input.description}
           />
-          <FormLabel>Select a category</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>
+            Select a category
+          </FormLabel>
           <Picker
             selectedValue={this.state.input.category}
-            style={{ height: 50, width: 200 }}
+            itemStyle={{ color: "white" }}
+            style={{
+              marginLeft: 12,
+              color: "white",
+              borderWidth: 0.5,
+              shadowColor: "white",
+              borderColor: "white"
+            }}
+            borderStyle="solid"
             onValueChange={(itemValue, itemIndex) =>
               this.updateInput("category", itemValue)
             }
@@ -270,7 +310,8 @@ class resource extends React.Component {
             <Picker.Item label="Survival" value="Survival" />
             <Picker.Item label="Tech" value="Tech" />
           </Picker>
-          <FormLabel>Address</FormLabel>
+
+          <FormLabel labelStyle={{ color: "white" }}>Address</FormLabel>
 
           <GooglePlacesAutocomplete
             placeholder="Enter Location"
@@ -298,7 +339,11 @@ class resource extends React.Component {
             styles={{
               container: {
                 width: "75%",
-                marginBottom: 10
+                marginBottom: 10,
+                marginLeft: 12,
+                borderWidth: 0.5,
+                borderColor: "#d6d7da",
+                alignSelf: "stretch"
               },
               textInputContainer: {
                 backgroundColor: "rgba(0,0,0,0)",
@@ -310,23 +355,33 @@ class resource extends React.Component {
                 marginLeft: 0,
                 marginRight: 0,
                 height: 38,
-                color: "#5d5d5d",
+                color: "white",
                 fontSize: 16
               }
             }}
             currentLocation={false}
           />
 
-          <FormLabel>What are you offering</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>
+            What are you offering
+          </FormLabel>
           <FormInput
             onChangeText={offering => this.updateInput("offering", offering)}
             //inputStyle is used to style input box
             ref="offering"
             textInputRef="offeringInput"
             value={this.state.input.offering}
-            inputStyle={{ fontSize: 26 }}
+            inputStyle={{ fontSize: 26, color: "white" }}
+            autoCapitalize="none"
+            selectionColor={"white"}
+            autoCorrect={true}
+            containerStyle={{
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              alignSelf: "stretch"
+            }}
           />
-          <FormLabel>Phone Number</FormLabel>
+          <FormLabel labelStyle={{ color: "white" }}>Phone Number</FormLabel>
           <FormInput
             onChangeText={number => this.updateInput("number", number)}
             //inputStyle is used to style input box
@@ -335,7 +390,15 @@ class resource extends React.Component {
             textContentType="telephoneNumber"
             textInputRef="numberInput"
             value={this.state.input.number}
-            inputStyle={{ fontSize: 26, color: "black" }}
+            inputStyle={{ fontSize: 26, color: "white" }}
+            autoCapitalize="none"
+            selectionColor={"white"}
+            autoCorrect={true}
+            containerStyle={{
+              borderWidth: 0.5,
+              borderColor: "#d6d7da",
+              alignSelf: "stretch"
+            }}
           />
 
           <View
@@ -346,13 +409,18 @@ class resource extends React.Component {
               marginBottom: 20
             }}
           >
-            <Icon.Button
-              name="paper-plane"
-              backgroundColor="#00A3FF"
+            <Button
               onPress={this.AddResource}
-            >
-              Add Resources
-            </Icon.Button>
+              title="Add Resources"
+              backgroundColor="#00A3FF"
+              buttonStyle={{
+                borderRadius: 30,
+                marginLeft: 0,
+                marginRight: 0,
+                marginBottom: 0,
+                height: 40
+              }}
+            />
           </View>
         </ScrollView>
         <Modal
@@ -373,7 +441,7 @@ styles = StyleSheet.create({
     width: 120,
     height: 120,
     backgroundColor: "gray",
-    borderColor: "black",
+    borderColor: "white",
     borderWidth: 1.5,
     marginVertical: 14,
     borderRadius: 60,
@@ -408,12 +476,10 @@ styles = StyleSheet.create({
     flex: 1
   },
   container: {
-    paddingRight: 35,
+    paddingRight: 20,
     paddingLeft: 20,
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white"
+    backgroundColor: "#0D1E30"
   },
   avatarContainer: {
     borderColor: "#9B9B9B",

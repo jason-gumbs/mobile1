@@ -11,7 +11,13 @@ import {
   TouchableHighlight,
   Modal
 } from "react-native";
-import { Card, ListItem, Button, SearchBar } from "react-native-elements";
+import {
+  Card,
+  ListItem,
+  Button,
+  SearchBar,
+  Header
+} from "react-native-elements";
 import {
   DrawerNavigator,
   NavigationActions,
@@ -20,6 +26,7 @@ import {
 import { API, Storage, Cache } from "aws-amplify";
 import viewResource from "../viewResource";
 import LogoTitle from "../../../src/Components/LogoTitle";
+import Footer from "../../../src/Components/Footer";
 import SignLogo from "../../../src/Components/SignLogo";
 import awsmobile from "../../aws-exports";
 import { colors } from "theme";
@@ -30,7 +37,13 @@ class search extends React.Component {
   static navigationOptions = {
     // headerTitle instead of title
     headerTitle: <LogoTitle />,
-    headerRight: <SignLogo />
+    headerRight: <SignLogo />,
+    headerStyle: {
+      backgroundColor: "#0D1E30",
+      shadowColor: "transparent",
+      elevation: 0,
+      shadowOpacity: 0
+    }
   };
 
   state = {
@@ -92,6 +105,9 @@ class search extends React.Component {
       });
   }
 
+  handleAddResource = e => this.props.navigation.push("Resource");
+  handleHome = e => this.props.navigation.push("Search");
+
   keyExtractor = (item, index) => item.resourceId;
 
   renderItem = ({ item }) => (
@@ -146,10 +162,11 @@ class search extends React.Component {
             containerStyle={{
               backgroundColor: "#0D1E30",
               borderColor: "#0D1E30",
-              borderBottomWidth: 0
+              borderBottomWidth: 0,
+              borderTopWidth: 0
             }}
             inputStyle={{ backgroundColor: "white" }}
-            placeholder="Type Here..."
+            placeholder="Search"
           />
           <FlatList
             keyExtractor={this.keyExtractor}
@@ -157,6 +174,10 @@ class search extends React.Component {
             renderItem={this.renderItem}
           />
         </ScrollView>
+        <Footer
+          handleAddResource={this.handleAddResource}
+          handleHome={this.handleHome}
+        />
       </View>
     );
   }

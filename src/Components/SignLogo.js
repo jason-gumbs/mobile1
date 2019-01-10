@@ -1,15 +1,33 @@
 import React from "react";
-import { Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  ActivityIndicator,
+  Modal,
+  Dimensions
+} from "react-native";
+import { Icon } from "react-native-elements";
 
 class SignLogo extends React.Component {
   render() {
     return (
-      <Image
-        source={{
-          uri: "https://img.icons8.com/material-outlined/24/000000/enter-2.png"
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          height: 50
         }}
-        style={{ width: 30, height: 30, marginRight: 10 }}
-      />
+      >
+        <Icon
+          name="gear"
+          type="evilicon"
+          color="#00aced"
+          size={40}
+          containerStyle={{ marginTop: 5, marginRight: 20 }}
+        />
+      </View>
     );
   }
 }
