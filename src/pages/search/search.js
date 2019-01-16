@@ -23,7 +23,7 @@ import {
   NavigationActions,
   StackNavigator
 } from "react-navigation";
-import { API, Storage, Cache } from "aws-amplify";
+import { API, Storage, Cache, Auth } from "aws-amplify";
 import viewResource from "../viewResource";
 import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
@@ -34,16 +34,21 @@ import { colors } from "theme";
 let styles = {};
 
 class search extends React.Component {
-  static navigationOptions = {
-    // headerTitle instead of title
-    headerTitle: <LogoTitle />,
-    headerRight: <SignLogo />,
-    headerStyle: {
-      backgroundColor: "#0D1E30",
-      shadowColor: "transparent",
-      elevation: 0,
-      shadowOpacity: 0
-    }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: <LogoTitle />,
+      headerRight: (
+        <SignLogo
+          handleSettingClick={navigation.getParam("handleSettingClick")}
+        />
+      ),
+      headerStyle: {
+        backgroundColor: "#0D1E30",
+        shadowColor: "transparent",
+        elevation: 0,
+        shadowOpacity: 0
+      }
+    };
   };
 
   state = {
@@ -53,6 +58,7 @@ class search extends React.Component {
     Resources: [],
     selectedGenderIndex: null,
     modalVisible: false,
+    currentUser: {},
     input: {
       name: "",
       product: "",
@@ -71,13 +77,22 @@ class search extends React.Component {
     modalVisible: false
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    const user = await Auth.currentSession()
+      .then(data => {
+        console.log(data);
+        this.setState({ currentUser: data });
+      })
+      .catch(err => console.log(err));
     Cache.getItem("resources").then(apiResponse => {
       if (apiResponse) {
         this.setState({ apiResponse });
       }
     });
     this.loadResources();
+    this.props.navigation.setParams({
+      handleSettingClick: this.handleSettingClick
+    });
   }
 
   componentWillUnmount() {
@@ -107,6 +122,8 @@ class search extends React.Component {
 
   handleAddResource = e => this.props.navigation.push("Resource");
   handleHome = e => this.props.navigation.push("Search");
+  handleSettingClick = e =>
+    this.props.navigation.navigate("Settings", this.state.currentUser);
 
   keyExtractor = (item, index) => item.resourceId;
 

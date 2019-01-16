@@ -34,7 +34,15 @@ import Constants from "../Utils/constants";
 
 const { width } = Dimensions.get("window");
 
-class LogIn extends React.Component {
+class Settings extends React.Component {
+  static navigationOptions = ({ navigation, screenProps }) =>
+    console.log(navigation) || {
+      title: `hey`
+    };
+  state = {
+    isVisible: false,
+    geoLoc: {}
+  };
   state = {
     showActivityIndicator: false,
     username: "",
@@ -44,59 +52,15 @@ class LogIn extends React.Component {
     cognitoUser: ""
   };
 
-  onLogIn = async () => {
+  async onLogIn() {
     this.props.onLogIn();
-  };
-  doLogout = async () => {
+  }
+  async doLogout() {
     let session = null;
 
     session = Auth.signOut()
       .then(data => console.log(data))
       .catch(err => console.log(err));
-  };
-  doLogin = async () => {
-    const { username, password } = this.state;
-    let errorMessage = "";
-    let showMFAPrompt = false;
-    let session = null;
-    session = await Auth.signIn(username, password)
-      .then(user => console.log(user))
-      .catch(err => console.log("ERRORSS", err));
-
-    this.setState(
-      {
-        showMFAPrompt,
-        errorMessage,
-        session,
-        showActivityIndicator: false
-      },
-      () => {
-        if (session) {
-          this.onLogIn();
-        }
-      }
-    );
-  };
-
-  handleLogInClick = () => {
-    this.setState({ showActivityIndicator: true });
-
-    setTimeout(this.doLogin, 0);
-  };
-
-  handleMFACancel() {
-    this.setState({ showMFAPrompt: false });
-  }
-
-  handleMFASuccess() {
-    this.setState(
-      {
-        showMFAPrompt: false
-      },
-      () => {
-        this.onLogIn();
-      }
-    );
   }
 
   render() {
@@ -216,4 +180,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LogIn;
+export default Settings;

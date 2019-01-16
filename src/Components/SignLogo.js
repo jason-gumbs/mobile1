@@ -25,6 +25,7 @@ class SignLogo extends React.Component {
           type="evilicon"
           color="#00aced"
           size={40}
+          onPress={this.props.handleSettingClick}
           containerStyle={{ marginTop: 5, marginRight: 20 }}
         />
       </View>

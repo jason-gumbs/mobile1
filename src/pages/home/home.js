@@ -44,11 +44,7 @@ class home extends React.Component {
     };
   }
 
-  componentDidMount() {
-    Auth.currentUserInfo()
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  }
+  componentDidMount() {}
   componentWillUnmount() {}
 
   updateInput = (key, value) => {

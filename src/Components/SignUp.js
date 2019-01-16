@@ -78,7 +78,7 @@ class SignUp extends React.Component {
               editable
               autoCapitalize="none"
               autoCorrect={false}
-              selectionColor={"white"}
+              selectionColor={"#00A3FF"}
               inputStyle={{
                 fontSize: 26,
                 borderWidth: 0.5,
@@ -109,7 +109,7 @@ class SignUp extends React.Component {
             <FormInput
               editable
               autoCapitalize="none"
-              selectionColor={"white"}
+              selectionColor={"#00A3FF"}
               inputStyle={{
                 fontSize: 26,
                 borderWidth: 0.5,
@@ -142,7 +142,7 @@ class SignUp extends React.Component {
               editable
               autoCapitalize="none"
               keyboardType="email-address"
-              selectionColor={"white"}
+              selectionColor={"#00A3FF"}
               inputStyle={{
                 fontSize: 26,
                 borderWidth: 0.5,
@@ -174,7 +174,7 @@ class SignUp extends React.Component {
               editable
               autoCapitalize="none"
               keyboardType="phone-pad"
-              selectionColor={"white"}
+              selectionColor={"#00A3FF"}
               underlineColorAndroid="transparent"
               returnKeyType="next"
               ref="phone"
