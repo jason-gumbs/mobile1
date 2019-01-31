@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Card, ListItem, Button } from "react-native-elements";
-import { colors } from "theme";
+import { colors } from "../../Utils/theme";
 import { Storage } from "aws-amplify";
 import { Popup } from "react-native-map-link";
 

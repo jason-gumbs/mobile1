@@ -29,7 +29,7 @@ import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
 import SignLogo from "../../../src/Components/SignLogo";
 import awsmobile from "../../aws-exports";
-import { colors } from "theme";
+import { colors } from "../../Utils/theme";
 
 let styles = {};
 
@@ -77,8 +77,8 @@ class search extends React.Component {
     modalVisible: false
   };
 
-  async componentDidMount() {
-    const user = await Auth.currentSession()
+  componentDidMount() {
+    const user = Auth.currentAuthenticatedUser()
       .then(data => {
         console.log(data);
         this.setState({ currentUser: data });

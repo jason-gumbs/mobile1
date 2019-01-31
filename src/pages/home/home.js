@@ -21,9 +21,9 @@ import {
 import resource from "../resource";
 import UploadPhoto from "../../Components/UploadPhoto";
 import ImagePicker from "../../Components/ImagePickers";
-import { colors } from "theme";
+import { colors } from "../../Utils/theme";
 import search from "../search/search";
-import { Auth } from "aws-amplify";
+import { Auth, Hub, Logger } from "aws-amplify";
 
 class home extends React.Component {
   static navigationOptions = {
@@ -46,7 +46,6 @@ class home extends React.Component {
 
   componentDidMount() {}
   componentWillUnmount() {}
-
   updateInput = (key, value) => {
     this.setState(state => ({
       input: {

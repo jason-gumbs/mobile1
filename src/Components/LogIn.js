@@ -29,7 +29,7 @@ import {
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
 import ForgotPassword from "./ForgotPassword";
-import { colors } from "theme";
+import { colors } from "../Utils/theme";
 import Constants from "../Utils/constants";
 
 const { width } = Dimensions.get("window");

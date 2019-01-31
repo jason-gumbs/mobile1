@@ -10,60 +10,67 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import React from 'react';
-import { Image, View, ScrollView, Text, StyleSheet, Dimensions } from 'react-native';
+import React from "react";
+import {
+  Image,
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  Dimensions
+} from "react-native";
 import {
   FormLabel,
   FormInput,
   FormValidationMessage,
-  Button,
-} from 'react-native-elements';
+  Button
+} from "react-native-elements";
 
-import MFAPrompt from './MFAPrompt';
-import { colors } from 'theme';
+import MFAPrompt from "./MFAPrompt";
+import { colors } from "../Utils/theme";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    justifyContent: "center",
+    backgroundColor: "white"
   },
   activityIndicator: {
     backgroundColor: colors.mask,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
   },
   formContainer: {
     height: 190,
-    justifyContent: 'space-around',
-    paddingHorizontal: 5,
+    justifyContent: "space-around",
+    paddingHorizontal: 5
   },
   input: {
-    fontFamily: 'lato',
+    fontFamily: "lato"
   },
   validationText: {
-    fontFamily: 'lato',
+    fontFamily: "lato"
   },
   puppy: {
     width: width / 2,
-    height: width / 2,
+    height: width / 2
   },
   imageContainer: {
-    alignItems: 'center',
+    alignItems: "center"
   },
   cancelButton: {
     color: colors.primary,
     marginTop: 20,
-    textAlign: 'center',
+    textAlign: "center"
   },
   resetInfoMessage: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 10,
-    paddingHorizontal: 11,
-  },
+    paddingHorizontal: 11
+  }
 });
 
 class ForgotPassword extends React.Component {
@@ -72,10 +79,10 @@ class ForgotPassword extends React.Component {
 
     this.state = {
       signedInUser: null,
-      username: '',
-      password: '',
-      errorMessage: '',
-      showMFAPrompt: false,
+      username: "",
+      password: "",
+      errorMessage: "",
+      showMFAPrompt: false
     };
 
     this.handleResetClick = this.handleResetClick.bind(this);
@@ -91,20 +98,24 @@ class ForgotPassword extends React.Component {
   }
 
   getCurrentUser() {
-    return this.props.auth.currentUser()
-      .catch((err) => { return null });
+    return this.props.auth.currentUser().catch(err => {
+      return null;
+    });
   }
 
   handleResetClick() {
     const { auth } = this.props;
     const { username, signedInUser: user } = this.state;
     const send = user ? user.username : username;
-    auth.forgotPassword(send)
+    auth
+      .forgotPassword(send)
       .then(this.setState({ showMFAPrompt: true }))
-      .catch((err) => { console.log(err) });
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  async handleMFAValidate(code = '') {
+  async handleMFAValidate(code = "") {
     const { auth } = this.props;
     const { username, password, signedInUser: user } = this.state;
     const send = user ? user.username : username;
@@ -121,11 +132,14 @@ class ForgotPassword extends React.Component {
   }
 
   handleMFASuccess() {
-    this.setState({
-      showMFAPrompt: false,
-    }, () => {
-      this.props.onSuccess();
-    });
+    this.setState(
+      {
+        showMFAPrompt: false
+      },
+      () => {
+        this.props.onSuccess();
+      }
+    );
   }
 
   render() {
@@ -134,13 +148,16 @@ class ForgotPassword extends React.Component {
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.imageContainer}>
-          <Image
-            resizeMode='contain'
-            style={styles.puppy}
-          />
+          <Image resizeMode="contain" style={styles.puppy} />
         </View>
-        <Text style={styles.resetInfoMessage}>{user ? 'Change your password' : 'Please enter your username and we’ll help you reset your password.'}</Text>
-        <FormValidationMessage labelStyle={styles.validationText}>{this.state.errorMessage}</FormValidationMessage>
+        <Text style={styles.resetInfoMessage}>
+          {user
+            ? "Change your password"
+            : "Please enter your username and we’ll help you reset your password."}
+        </Text>
+        <FormValidationMessage labelStyle={styles.validationText}>
+          {this.state.errorMessage}
+        </FormValidationMessage>
         <View style={styles.formContainer}>
           <FormLabel>Username</FormLabel>
           <FormInput
@@ -154,8 +171,10 @@ class ForgotPassword extends React.Component {
             returnKeyType="next"
             ref="username"
             textInputRef="usernameInput"
-            onSubmitEditing={() => { this.refs.password.refs.passwordInput.focus() }}
-            onChangeText={(username) => this.setState({ username })}
+            onSubmitEditing={() => {
+              this.refs.password.refs.passwordInput.focus();
+            }}
+            onChangeText={username => this.setState({ username })}
             value={user ? user.username : this.state.username}
           />
           <FormLabel>New password</FormLabel>
@@ -171,27 +190,30 @@ class ForgotPassword extends React.Component {
             returnKeyType="next"
             ref="password"
             textInputRef="passwordInput"
-            onChangeText={(password) => this.setState({ password })}
+            onChangeText={password => this.setState({ password })}
             value={this.state.password}
           />
           <Button
-            fontFamily='lato'
+            fontFamily="lato"
             containerViewStyle={{ marginTop: 20 }}
             backgroundColor={colors.primary}
             large
             title="RESET"
             onPress={this.handleResetClick}
           />
-          {this.state.showMFAPrompt &&
+          {this.state.showMFAPrompt && (
             <MFAPrompt
               onValidate={this.handleMFAValidate}
               onCancel={this.handleMFACancel}
               onSuccess={this.handleMFASuccess}
-            />}
+            />
+          )}
           <Text
             onPress={() => this.props.onCancel()}
             style={styles.cancelButton}
-          >Cancel</Text>
+          >
+            Cancel
+          </Text>
         </View>
       </ScrollView>
     );

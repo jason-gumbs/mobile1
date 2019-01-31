@@ -10,7 +10,7 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-import React from 'react';
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -18,58 +18,58 @@ import {
   Image,
   ActivityIndicator,
   Modal,
-  Dimensions,
-} from 'react-native';
+  Dimensions
+} from "react-native";
 import {
   FormLabel,
   FormInput,
   FormValidationMessage,
-  Button,
-} from 'react-native-elements';
-import { createStackNavigator } from 'react-navigation';
-import { Auth } from 'aws-amplify';
-import awsmobile from '../aws-exports';
-import ForgotPassword from './ForgotPassword';
-import { colors } from 'theme';
-import Constants from '../Utils/constants';
+  Button
+} from "react-native-elements";
+import { createStackNavigator } from "react-navigation";
+import { Auth } from "aws-amplify";
+import awsmobile from "../aws-exports";
+import ForgotPassword from "./ForgotPassword";
+import { colors } from "../Utils/theme";
+import Constants from "../Utils/constants";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 const styles = StyleSheet.create({
   bla: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white',
+    justifyContent: "center",
+    backgroundColor: "white"
   },
   activityIndicator: {
     backgroundColor: colors.mask,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
   },
   formContainer: {
     height: 250,
-    justifyContent: 'space-around',
-    paddingHorizontal: 5,
+    justifyContent: "space-around",
+    paddingHorizontal: 5
   },
   input: {
-    fontFamily: 'lato',
+    fontFamily: "lato"
   },
   validationText: {
-    fontFamily: 'lato',
+    fontFamily: "lato"
   },
   puppy: {
     width: width / 2,
-    height: width / 2,
+    height: width / 2
   },
   imageContainer: {
-    alignItems: 'center',
+    alignItems: "center"
   },
   passwordResetButton: {
     color: colors.primary,
     marginTop: 10,
-    textAlign: 'center',
-  },
+    textAlign: "center"
+  }
 });
 
 class MFAPrompt extends React.Component {
@@ -78,11 +78,11 @@ class MFAPrompt extends React.Component {
 
     this.state = {
       showActivityIndicator: false,
-      username: '',
-      code: '',
+      username: "",
+      code: "",
       showMFAPrompt: false,
-      errorMessage: '',
-      cognitoUser: '',
+      errorMessage: "",
+      cognitoUser: ""
     };
 
     this.baseState = this.state;
@@ -103,24 +103,27 @@ class MFAPrompt extends React.Component {
 
   async doLogin() {
     const { username, code } = this.state;
-    let errorMessage = '';
+    let errorMessage = "";
     let showMFAPrompt = false;
     let session = null;
 
+    session = await Auth.confirmSignUp(username, code)
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
 
-      session = await Auth.confirmSignUp(username, code).then(data => console.log(data))
-  .catch(err => console.log(err));
-
-    this.setState({
-      showMFAPrompt,
-      errorMessage,
-      session,
-      showActivityIndicator: false,
-    }, () => {
-      if (session) {
-        this.onLogIn();
+    this.setState(
+      {
+        showMFAPrompt,
+        errorMessage,
+        session,
+        showActivityIndicator: false
+      },
+      () => {
+        if (session) {
+          this.onLogIn();
+        }
       }
-    });
+    );
   }
 
   handleLogInClick() {
@@ -129,16 +132,15 @@ class MFAPrompt extends React.Component {
     setTimeout(this.doLogin, 0);
   }
 
-  async handleMFAValidate(code = '') {
+  async handleMFAValidate(code = "") {
     const { auth } = this.props;
 
     try {
       let session = null;
-      await auth.confirmSignIn(this.state.cognitoUser, code)
-        .then(async () => {
-          session = await auth.currentSession();
-          this.setState({ session });
-        });
+      await auth.confirmSignIn(this.state.cognitoUser, code).then(async () => {
+        session = await auth.currentSession();
+        this.setState({ session });
+      });
     } catch (exception) {
       return exception.message;
     }
@@ -151,34 +153,32 @@ class MFAPrompt extends React.Component {
   }
 
   handleMFASuccess() {
-    this.setState({
-      showMFAPrompt: false,
-    }, () => {
-      this.onLogIn();
-    });
+    this.setState(
+      {
+        showMFAPrompt: false
+      },
+      () => {
+        this.onLogIn();
+      }
+    );
   }
 
   render() {
     return (
       <View style={styles.bla}>
-
         <Modal
           visible={this.state.showActivityIndicator}
           onRequestClose={() => null}
         >
-          <ActivityIndicator
-            style={styles.activityIndicator}
-            size="large"
-          />
+          <ActivityIndicator style={styles.activityIndicator} size="large" />
         </Modal>
         <View style={styles.imageContainer}>
-          <Image
-            resizeMode='contain'
-            style={styles.puppy}
-          />
+          <Image resizeMode="contain" style={styles.puppy} />
         </View>
         <View style={styles.formContainer}>
-          <FormValidationMessage labelStyle={styles.validationText}>{this.state.errorMessage}</FormValidationMessage>
+          <FormValidationMessage labelStyle={styles.validationText}>
+            {this.state.errorMessage}
+          </FormValidationMessage>
           <FormLabel>Username</FormLabel>
           <FormInput
             inputStyle={styles.input}
@@ -191,9 +191,12 @@ class MFAPrompt extends React.Component {
             returnKeyType="next"
             ref="username"
             textInputRef="usernameInput"
-            onSubmitEditing={() => { this.refs.password.refs.passwordInput.focus() }}
-            onChangeText={(username) => this.setState({ username })}
-            value={this.state.username} />
+            onSubmitEditing={() => {
+              this.refs.password.refs.passwordInput.focus();
+            }}
+            onChangeText={username => this.setState({ username })}
+            value={this.state.username}
+          />
           <FormLabel>Code</FormLabel>
           <FormInput
             inputStyle={styles.input}
@@ -205,47 +208,60 @@ class MFAPrompt extends React.Component {
             returnKeyType="next"
             ref="code"
             textInputRef="codeInput"
-            onChangeText={(code) => this.setState({ code })}
-            value={this.state.code} />
+            onChangeText={code => this.setState({ code })}
+            value={this.state.code}
+          />
           <Button
-            fontFamily='lato'
+            fontFamily="lato"
             containerViewStyle={{ marginTop: 20 }}
             backgroundColor={colors.primary}
             large
             title="Confirm"
-            onPress={this.handleLogInClick} />
+            onPress={this.handleLogInClick}
+          />
           <Text
-            onPress={() => this.props.navigation.navigate('ForgotPassword')}
+            onPress={() => this.props.navigation.navigate("ForgotPassword")}
             style={styles.passwordResetButton}
-          >Forgot your password?</Text>
+          >
+            Forgot your password?
+          </Text>
         </View>
       </View>
     );
   }
-
 }
 
-const LogInStack = (createStackNavigator({
-  LogIn: {
-    screen: (props) => {
-      const { screenProps, ...otherProps } = props;
+const LogInStack = createStackNavigator(
+  {
+    LogIn: {
+      screen: props => {
+        const { screenProps, ...otherProps } = props;
 
-      return <LogIn {...screenProps} {...otherProps} />;
+        return <LogIn {...screenProps} {...otherProps} />;
+      },
+      navigationOptions: {
+        title: Constants.APP_NAME
+      }
     },
-    navigationOptions: {
-      title: Constants.APP_NAME,
-    },
-  },
-  ForgotPassword: {
-    screen: (props) => {
-      const { screenProps, ...otherProps } = props;
+    ForgotPassword: {
+      screen: props => {
+        const { screenProps, ...otherProps } = props;
 
-      return <ForgotPassword {...screenProps} {...otherProps} onCancel={() => otherProps.navigation.goBack()} onSuccess={() => otherProps.navigation.goBack()} />;
-    },
-    navigationOptions: {
-      title: Constants.APP_NAME,
-    },
+        return (
+          <ForgotPassword
+            {...screenProps}
+            {...otherProps}
+            onCancel={() => otherProps.navigation.goBack()}
+            onSuccess={() => otherProps.navigation.goBack()}
+          />
+        );
+      },
+      navigationOptions: {
+        title: Constants.APP_NAME
+      }
+    }
   },
-}, { mode: 'modal' }));
+  { mode: "modal" }
+);
 
 export default props => <MFAPrompt screenProps={{ ...props }} />;

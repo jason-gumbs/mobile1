@@ -21,13 +21,14 @@ import {
   FormInput,
   FormValidationMessage,
   Divider,
-  Button
+  Button,
+  Avatar
 } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { API, Storage } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
-import { colors } from "theme";
+import { colors } from "../../Utils/theme";
 import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
@@ -140,7 +141,7 @@ class resource extends React.Component {
       .catch(err => console.log("********READIMAGE***********", err));
   }
 
-  selectPhotoTapped() {
+  selectPhotoTapped = () => {
     const options = {
       quality: 1.0,
       maxWidth: 500,
@@ -174,7 +175,7 @@ class resource extends React.Component {
         console.log(this.state.selectedImage);
       }
     });
-  }
+  };
 
   updateInput = (key, value) => {
     this.setState(state => ({
@@ -199,29 +200,27 @@ class resource extends React.Component {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="always"
         >
-          <View
-            style={{ marginLeft: "auto", marginRight: "auto", marginTop: 15 }}
-          >
-            <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-              <View
-                style={[
-                  styles.avatar,
-                  styles.avatarContainer,
-                  { marginBottom: 20 }
-                ]}
-              >
-                {this.state.avatarSource === null ? (
-                  <Text style={{ color: "white" }}>Select a Photo</Text>
-                ) : (
-                  <Image
-                    style={styles.avatar}
-                    source={this.state.avatarSource}
-                  />
-                )}
-              </View>
-            </TouchableOpacity>
+          <View style={styles.image_view}>
+            {this.state.avatarSource === null ? (
+              <Avatar
+                xlarge
+                rounded
+                icon={{ name: "image", type: "font-awesome" }}
+                onPress={this.selectPhotoTapped}
+                activeOpacity={0.7}
+                showEditButton
+              />
+            ) : (
+              <Avatar
+                xlarge
+                rounded
+                source={this.state.avatarSource}
+                onPress={this.selectPhotoTapped}
+                activeOpacity={0.7}
+                showEditButton
+              />
+            )}
           </View>
-
           <FormLabel labelStyle={{ color: "white" }}>Name</FormLabel>
           <FormInput
             onChangeText={name => this.updateInput("name", name)}
@@ -481,16 +480,14 @@ styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0D1E30"
   },
+  image_view: {
+    alignItems: "center"
+  },
   avatarContainer: {
     borderColor: "#9B9B9B",
     borderWidth: 5 / PixelRatio.get(),
     justifyContent: "center",
     alignItems: "center"
-  },
-  avatar: {
-    borderRadius: 75,
-    width: 150,
-    height: 150
   }
 });
 

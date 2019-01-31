@@ -1,20 +1,7 @@
-/*
- * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
 import React from "react";
 import {
   View,
   StyleSheet,
-  Text,
   Image,
   ActivityIndicator,
   Modal,
@@ -24,32 +11,31 @@ import {
   FormLabel,
   FormInput,
   FormValidationMessage,
-  Button
+  Button,
+  Avatar,
+  Text
 } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
-import ForgotPassword from "./ForgotPassword";
-import { colors } from "theme";
+import ImagePicker from "react-native-image-picker";
+import { colors } from "../Utils/theme";
 import Constants from "../Utils/constants";
 
 const { width } = Dimensions.get("window");
 
 class Settings extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(navigation) || {
+    console.log(navigation.state.params.username) || {
       title: `hey`
     };
-  state = {
-    isVisible: false,
-    geoLoc: {}
-  };
   state = {
     showActivityIndicator: false,
     username: "",
     password: "",
-    showMFAPrompt: false,
     errorMessage: "",
-    cognitoUser: ""
+    cognitoUser: "",
+    avatarSource: null,
+    selectedImage: {}
   };
 
   async onLogIn() {
@@ -62,107 +48,139 @@ class Settings extends React.Component {
       .then(data => console.log(data))
       .catch(err => console.log(err));
   }
+  AddUser = async () => {
+    const resourceInfo = this.state.input;
+    const { node: imageNode } = this.state.selectedImage;
+    this.setState({ showActivityIndicator: true });
+    console.log("****selectedImage*******", this.state.selectedImage);
+
+    this.readImage(this.state.selectedImage)
+      .then(fileInfo => ({
+        ...resourceInfo,
+        picKey: fileInfo && fileInfo.key
+      }))
+      .then(this.apiSaveUser)
+      .then(data => {
+        this.setState({ showActivityIndicator: false });
+        this.props.navigation.push("Search");
+      })
+      .catch(err => {
+        console.log("error saving resource...", err);
+        this.setState({ showActivityIndicator: false });
+      });
+  };
+  apiSaveUser = async resource => {
+    return await API.post("freeApi", "/resource", { body: resource });
+  };
+  readImage = (imageNode = null) => {
+    if (imageNode === null) {
+      console.log("image null");
+      return Promise.resolve();
+    }
+    const extension = mime.extension(imageNode.type);
+    const imagePath = imageNode.uri;
+    const picName = `${uuid.v1()}.${extension}`;
+    const key = `${picName}`;
+    console.log(imagePath);
+    return files
+      .readFile(imagePath)
+      .then(buffer =>
+        Storage.put(key, buffer, {
+          level: "public",
+          contentType: imageNode.type
+        })
+          .then(fileInfo => ({ key: fileInfo.key }))
+          .then(x => console.log("SAVED", x) || x)
+      )
+      .catch(err => console.log("********READIMAGE***********", err));
+  };
+  selectPhotoTapped = () => {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, response => {
+      console.log("Response = ", response);
+
+      if (response.didCancel) {
+        console.log("User cancelled photo picker");
+      } else if (response.error) {
+        console.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.log("User tapped custom button: ", response.customButton);
+      } else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+        this.setState({
+          selectedImage: response
+        });
+        console.log(this.state.selectedImage);
+      }
+    });
+  };
 
   render() {
+    const {
+      payload
+    } = this.props.navigation.state.params.signInUserSession.idToken;
+
     return (
       <View style={styles.bla}>
         <Modal
           visible={this.state.showActivityIndicator}
           onRequestClose={() => null}
         >
-          <ActivityIndicator style={styles.activityIndicator} size="large" />
+          <ActivityIndicator size="large" />
         </Modal>
-
+        <View style={styles.image_view}>
+          {this.state.avatarSource === null ? (
+            <Avatar
+              xlarge
+              rounded
+              icon={{ name: "user", type: "font-awesome" }}
+              onPress={this.selectPhotoTapped}
+              activeOpacity={0.7}
+              showEditButton
+            />
+          ) : (
+            <Avatar
+              xlarge
+              rounded
+              source={this.state.avatarSource}
+              onPress={this.selectPhotoTapped}
+              activeOpacity={0.7}
+              showEditButton
+            />
+          )}
+        </View>
         <View style={styles.formContainer}>
-          <FormValidationMessage labelStyle={styles.validationText}>
-            {this.state.errorMessage}
-          </FormValidationMessage>
-          <FormLabel>Username</FormLabel>
-          <FormInput
-            inputStyle={{
-              fontSize: 26,
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              color: "white"
-            }}
-            containerStyle={{
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              alignSelf: "stretch"
-            }}
-            selectionColor={"white"}
-            autoCapitalize="none"
-            autoCorrect={false}
-            underlineColorAndroid="transparent"
-            editable={true}
-            placeholder="Please enter your username"
-            returnKeyType="next"
-            ref="username"
-            textInputRef="usernameInput"
-            onSubmitEditing={() => {
-              this.refs.password.refs.passwordInput.focus();
-            }}
-            onChangeText={username => this.setState({ username })}
-            value={this.state.username}
-          />
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            inputStyle={{
-              fontSize: 26,
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              color: "white"
-            }}
-            containerStyle={{
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              alignSelf: "stretch"
-            }}
-            selectionColor={"white"}
-            underlineColorAndroid="transparent"
-            editable={true}
-            secureTextEntry={true}
-            placeholder="Please enter your password"
-            returnKeyType="next"
-            ref="password"
-            textInputRef="passwordInput"
-            onChangeText={password => this.setState({ password })}
-            value={this.state.password}
-          />
-          <Button
-            fontFamily="lato"
-            containerViewStyle={{ marginTop: 20 }}
-            backgroundColor={colors.primary}
-            buttonStyle={{
-              borderRadius: 30,
-              marginTop: 30,
-              marginRight: 0,
-              marginBottom: 0,
-              height: 40
-            }}
-            title="SIGN IN"
-            onPress={this.handleLogInClick}
-          />
-          <Button
-            fontFamily="lato"
-            containerViewStyle={{ marginTop: 20 }}
-            backgroundColor={colors.primary}
-            buttonStyle={{
-              borderRadius: 30,
-              marginTop: 30,
-              marginRight: 0,
-              marginBottom: 0,
-              height: 40
-            }}
-            title="LOG OUT"
-            onPress={this.doLogout}
-          />
-          <Text
-            onPress={() => this.props.navigation.navigate("ForgotPassword")}
-            style={styles.passwordResetButton}
-          >
-            Forgot your password?
+          <Text style={{ color: "white" }}>
+            Username: {this.props.navigation.state.params.username}
           </Text>
+          <Text style={{ color: "white" }}>Email: {payload.email}</Text>
+          <Button
+            backgroundColor="#00A3FF"
+            buttonStyle={{
+              borderRadius: 30,
+              marginLeft: 0,
+              marginRight: 0,
+              marginBottom: 0,
+              height: 40
+            }}
+            onPress={() => this.setState({ isVisible: true })}
+            title="Save Profile"
+          />
         </View>
       </View>
     );
@@ -177,6 +195,9 @@ const styles = StyleSheet.create({
   formContainer: {
     justifyContent: "space-around",
     height: 420
+  },
+  image_view: {
+    alignItems: "center"
   }
 });
 

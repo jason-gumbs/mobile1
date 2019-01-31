@@ -10,7 +10,7 @@ import {
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
 import Constants from "../Utils/constants";
-import { colors } from "theme";
+import { colors } from "../Utils/theme";
 
 class SignUp extends React.Component {
   static navigationOptions = {
