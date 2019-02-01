@@ -16,10 +16,11 @@ import {
   Text
 } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
-import { Auth } from "aws-amplify";
+import { Auth, API, Storage } from "aws-amplify";
 import ImagePicker from "react-native-image-picker";
 import { colors } from "../Utils/theme";
 import Constants from "../Utils/constants";
+import uuid from "react-native-uuid";
 
 const { width } = Dimensions.get("window");
 
@@ -30,12 +31,11 @@ class Settings extends React.Component {
     };
   state = {
     showActivityIndicator: false,
-    username: "",
-    password: "",
     errorMessage: "",
     cognitoUser: "",
     avatarSource: null,
-    selectedImage: {}
+    selectedImage: {},
+    user: { userId: "", usersid: "", username: "", email: "" }
   };
 
   async onLogIn() {
@@ -49,14 +49,15 @@ class Settings extends React.Component {
       .catch(err => console.log(err));
   }
   AddUser = async () => {
-    const resourceInfo = this.state.input;
+    const userinfo = { ...this.state.user };
+
     const { node: imageNode } = this.state.selectedImage;
     this.setState({ showActivityIndicator: true });
     console.log("****selectedImage*******", this.state.selectedImage);
 
     this.readImage(this.state.selectedImage)
       .then(fileInfo => ({
-        ...resourceInfo,
+        ...userInfo,
         picKey: fileInfo && fileInfo.key
       }))
       .then(this.apiSaveUser)
@@ -69,8 +70,10 @@ class Settings extends React.Component {
         this.setState({ showActivityIndicator: false });
       });
   };
-  apiSaveUser = async resource => {
-    return await API.post("freeApi", "/resource", { body: resource });
+  apiSaveUser = async user => {
+    return await API.post("Users", "/Users", {
+      body: user
+    });
   };
   readImage = (imageNode = null) => {
     if (imageNode === null) {
@@ -94,6 +97,9 @@ class Settings extends React.Component {
       )
       .catch(err => console.log("********READIMAGE***********", err));
   };
+
+  componentDidMount() {}
+  componentWillUnmount() {}
   selectPhotoTapped = () => {
     const options = {
       quality: 1.0,
@@ -106,6 +112,7 @@ class Settings extends React.Component {
 
     ImagePicker.showImagePicker(options, response => {
       console.log("Response = ", response);
+      console.log(this.state.user);
 
       if (response.didCancel) {
         console.log("User cancelled photo picker");
@@ -178,9 +185,15 @@ class Settings extends React.Component {
               marginBottom: 0,
               height: 40
             }}
-            onPress={() => this.setState({ isVisible: true })}
+            onPress={this.AddUser}
             title="Save Profile"
           />
+          <Modal
+            visible={this.state.showActivityIndicator}
+            onRequestClose={() => null}
+          >
+            <ActivityIndicator style={styles.activityIndicator} size="large" />
+          </Modal>
         </View>
       </View>
     );
@@ -198,6 +211,12 @@ const styles = StyleSheet.create({
   },
   image_view: {
     alignItems: "center"
+  },
+  activityIndicator: {
+    backgroundColor: "gray",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1
   }
 });
 
