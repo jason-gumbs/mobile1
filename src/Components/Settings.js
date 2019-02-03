@@ -20,7 +20,10 @@ import { Auth, API, Storage } from "aws-amplify";
 import ImagePicker from "react-native-image-picker";
 import { colors } from "../Utils/theme";
 import Constants from "../Utils/constants";
+import files from "../Utils/files";
 import uuid from "react-native-uuid";
+import mime from "mime-types";
+import RNFetchBlob from "react-native-fetch-blob";
 
 const { width } = Dimensions.get("window");
 
@@ -35,7 +38,7 @@ class Settings extends React.Component {
     cognitoUser: "",
     avatarSource: null,
     selectedImage: {},
-    user: { userId: "", usersid: "", username: "", email: "" }
+    user: { userId: "", usersid: "" }
   };
 
   async onLogIn() {
@@ -49,7 +52,9 @@ class Settings extends React.Component {
       .catch(err => console.log(err));
   }
   AddUser = async () => {
-    const userinfo = { ...this.state.user };
+    const resourceInfo = {};
+    resourceInfo.usersid = `${uuid.v1()}`;
+    console.log("###################", resourceInfo);
 
     const { node: imageNode } = this.state.selectedImage;
     this.setState({ showActivityIndicator: true });
@@ -57,23 +62,28 @@ class Settings extends React.Component {
 
     this.readImage(this.state.selectedImage)
       .then(fileInfo => ({
-        ...userInfo,
+        ...resourceInfo,
         picKey: fileInfo && fileInfo.key
       }))
       .then(this.apiSaveUser)
       .then(data => {
         this.setState({ showActivityIndicator: false });
-        this.props.navigation.push("Search");
       })
       .catch(err => {
         console.log("error saving resource...", err);
         this.setState({ showActivityIndicator: false });
       });
   };
-  apiSaveUser = async user => {
+  apiSaveUser = async resource => {
     return await API.post("Users", "/Users", {
-      body: user
-    });
+      body: resource
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   };
   readImage = (imageNode = null) => {
     if (imageNode === null) {
@@ -112,8 +122,6 @@ class Settings extends React.Component {
 
     ImagePicker.showImagePicker(options, response => {
       console.log("Response = ", response);
-      console.log(this.state.user);
-
       if (response.didCancel) {
         console.log("User cancelled photo picker");
       } else if (response.error) {
@@ -175,7 +183,9 @@ class Settings extends React.Component {
           <Text style={{ color: "white" }}>
             Username: {this.props.navigation.state.params.username}
           </Text>
-          <Text style={{ color: "white" }}>Email: {payload.email}</Text>
+          <Text style={{ color: "white" }}>
+            Email: {payload.email || "hey"}
+          </Text>
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{
