@@ -16,7 +16,7 @@ import {
   Text
 } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
-import { Auth, API, Storage } from "aws-amplify";
+import { Auth, API, Storage, Logger } from "aws-amplify";
 import ImagePicker from "react-native-image-picker";
 import { colors } from "../Utils/theme";
 import Constants from "../Utils/constants";
@@ -26,6 +26,7 @@ import mime from "mime-types";
 import RNFetchBlob from "react-native-fetch-blob";
 
 const { width } = Dimensions.get("window");
+const logger = new Logger("foo");
 
 class Settings extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -37,6 +38,7 @@ class Settings extends React.Component {
     errorMessage: "",
     cognitoUser: "",
     avatarSource: null,
+    apiResponse: null,
     selectedImage: {},
     user: { userId: "", usersid: "" }
   };
@@ -107,8 +109,32 @@ class Settings extends React.Component {
       )
       .catch(err => console.log("********READIMAGE***********", err));
   };
+  async loadUser() {
+    this.setState({ showActivityIndicator: true });
+    return await API.get("Users", "/Users/123")
+      .then(apiResponse => {
+        return Promise.all(
+          apiResponse.map(async Resource => {
+            const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
+            const picUrl =
+              Resource.picKey && (await Storage.get(key, { level: "public" }));
+            return { ...Resource, picUrl };
+          })
+        );
+      })
+      .then(apiResponse => {
+        this.setState({ apiResponse, showActivityIndicator: false });
+        console.log(this.state.apiResponse[0].picUrl);
+      })
+      .catch(e => {
+        this.setState({ apiResponse: e.message, showActivityIndicator: false });
+        console.log(e.message);
+      });
+  }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.loadUser();
+  }
   componentWillUnmount() {}
   selectPhotoTapped = () => {
     const options = {
@@ -159,11 +185,16 @@ class Settings extends React.Component {
           <ActivityIndicator size="large" />
         </Modal>
         <View style={styles.image_view}>
-          {this.state.avatarSource === null ? (
+          {this.state.apiResponse !== null ||
+          this.state.avatarSource !== null ? (
             <Avatar
               xlarge
               rounded
-              icon={{ name: "user", type: "font-awesome" }}
+              source={
+                this.state.avatarSource === null
+                  ? { uri: this.state.apiResponse[0].picUrl }
+                  : this.state.avatarSource
+              }
               onPress={this.selectPhotoTapped}
               activeOpacity={0.7}
               showEditButton
@@ -172,7 +203,7 @@ class Settings extends React.Component {
             <Avatar
               xlarge
               rounded
-              source={this.state.avatarSource}
+              icon={{ name: "user", type: "font-awesome" }}
               onPress={this.selectPhotoTapped}
               activeOpacity={0.7}
               showEditButton
