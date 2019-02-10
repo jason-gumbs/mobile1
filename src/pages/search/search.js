@@ -28,6 +28,7 @@ import viewResource from "../viewResource";
 import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
 import SignLogo from "../../../src/Components/SignLogo";
+import SigninLogo from "../../../src/Components/SigninLogo";
 import awsmobile from "../../aws-exports";
 import { colors } from "../../Utils/theme";
 
@@ -35,13 +36,20 @@ let styles = {};
 
 class search extends React.Component {
   static navigationOptions = ({ navigation }) => {
+    console.log(navigation.state.params);
     return {
       headerTitle: <LogoTitle />,
-      headerRight: (
-        <SignLogo
-          handleSettingClick={navigation.getParam("handleSettingClick")}
-        />
-      ),
+      headerRight:
+        navigation.getParam("currentUser", "No current user") ==
+        "No current user" ? (
+          <SigninLogo
+            handleSigninClick={navigation.getParam("handleSigninClick")}
+          />
+        ) : (
+          <SignLogo
+            handleSettingClick={navigation.getParam("handleSettingClick")}
+          />
+        ),
       headerStyle: {
         backgroundColor: "#0D1E30",
         shadowColor: "transparent",
@@ -78,12 +86,28 @@ class search extends React.Component {
   };
 
   componentDidMount() {
-    const user = Auth.currentAuthenticatedUser()
-      .then(data => {
-        console.log(data);
-        this.setState({ currentUser: data });
-      })
+    // Auth.currentAuthenticatedUser()
+    //   .then(data => {
+    //     console.log(data);
+    //     this.setState({ currentUser: data });
+    //   })
+    //   .catch(err => console.log(err));
+    Auth.signOut()
+      .then(data => console.log(data))
       .catch(err => console.log(err));
+    Auth.currentSession()
+      .then(data => {
+        this.setState({ currentUser: data });
+        this.props.navigation.setParams({
+          currentUser: data
+        });
+      })
+      .catch(err => {
+        this.setState({ currentUser: err });
+        this.props.navigation.setParams({
+          currentUser: err
+        });
+      });
     Cache.getItem("resources").then(apiResponse => {
       if (apiResponse) {
         this.setState({ apiResponse });
@@ -92,6 +116,9 @@ class search extends React.Component {
     this.loadResources();
     this.props.navigation.setParams({
       handleSettingClick: this.handleSettingClick
+    });
+    this.props.navigation.setParams({
+      handleSigninClick: this.handleSigninClick
     });
   }
 
@@ -124,6 +151,7 @@ class search extends React.Component {
   handleHome = e => this.props.navigation.push("Search");
   handleSettingClick = e =>
     this.props.navigation.navigate("Settings", this.state.currentUser);
+  handleSigninClick = e => this.props.navigation.navigate("SignIn");
 
   keyExtractor = (item, index) => item.resourceId;
 
