@@ -30,7 +30,7 @@ const logger = new Logger("foo");
 
 class Settings extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(navigation.state.params.username) || {
+    console.log(navigation.state.params.idToken.payload) || {
       title: `hey`
     };
   state = {
@@ -124,7 +124,6 @@ class Settings extends React.Component {
       })
       .then(apiResponse => {
         this.setState({ apiResponse, showActivityIndicator: false });
-        console.log(this.state.apiResponse[0].picUrl);
       })
       .catch(e => {
         this.setState({ apiResponse: e.message, showActivityIndicator: false });
@@ -172,10 +171,7 @@ class Settings extends React.Component {
   };
 
   render() {
-    const {
-      payload
-    } = this.props.navigation.state.params.signInUserSession.idToken;
-
+    const { payload } = this.props.navigation.state.params.idToken;
     return (
       <View style={styles.bla}>
         <Modal
@@ -212,7 +208,7 @@ class Settings extends React.Component {
         </View>
         <View style={styles.formContainer}>
           <Text style={{ color: "white" }}>
-            Username: {this.props.navigation.state.params.username}
+            Username: {payload["cognito:username"] || "hey"}
           </Text>
           <Text style={{ color: "white" }}>
             Email: {payload.email || "hey"}
@@ -227,7 +223,7 @@ class Settings extends React.Component {
               height: 40
             }}
             onPress={this.AddUser}
-            title="Save Profile"
+            title="Update Profile"
           />
           <Modal
             visible={this.state.showActivityIndicator}
