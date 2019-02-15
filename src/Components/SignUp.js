@@ -1,34 +1,36 @@
 import React from "react";
-import { View, StyleSheet, Text, TextInput, Image } from "react-native";
-import {
-  Icon,
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
-  Button
-} from "react-native-elements";
+import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { Icon, Input, Button } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
+import LogoTitle from "./LogoTitle";
+import MyAppText from "./MyAppText";
 import Constants from "../Utils/constants";
 import { colors } from "../Utils/theme";
 
 class SignUp extends React.Component {
-  static navigationOptions = {
-    title: "Sign up",
-    headerTitleStyle: {
-      color: "white"
-    },
-    headerStyle: {
-      backgroundColor: "#0D1E30",
-      shadowColor: "transparent",
-      elevation: 0,
-      shadowOpacity: 0
-    }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: <LogoTitle />,
+
+      headerTitleStyle: {
+        color: "white",
+        alignSelf: "center",
+        flex: 1
+      },
+      headerStyle: {
+        backgroundColor: "#0D1E30",
+        shadowColor: "transparent",
+        elevation: 0,
+        shadowOpacity: 0
+      }
+    };
   };
   state = {
     showMFAPrompt: false,
     username: "",
     password: "",
+    confirmpassword: "",
     email: "",
     phoneNumber: "",
     errorMessage: ""
@@ -68,137 +70,147 @@ class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.bla}>
-        <View style={styles.formContainer}>
-          <View>
-            <FormValidationMessage>
-              {this.state.errorMessage}
-            </FormValidationMessage>
-            <FormLabel labelStyle={{ color: "white" }}>Username</FormLabel>
-            <FormInput
-              editable
-              autoCapitalize="none"
-              autoCorrect={false}
-              selectionColor={"#00A3FF"}
-              inputStyle={{
-                fontSize: 26,
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                color: "white"
-              }}
-              underlineColorAndroid="transparent"
-              returnKeyType="next"
-              ref="username"
-              textInputRef="usernameInput"
-              containerStyle={{
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                alignSelf: "stretch"
-              }}
-              onSubmitEditing={() => {
-                this.refs.password.refs.passwordInput.focus();
-              }}
-              value={this.state.username}
-              onChangeText={username => this.setState({ username })}
-            />
-            {false && (
-              <FormValidationMessage>Error message</FormValidationMessage>
-            )}
-          </View>
-          <View>
-            <FormLabel labelStyle={{ color: "white" }}>Password</FormLabel>
-            <FormInput
-              editable
-              autoCapitalize="none"
-              selectionColor={"#00A3FF"}
-              inputStyle={{
-                fontSize: 26,
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                color: "white"
-              }}
-              underlineColorAndroid="transparent"
-              returnKeyType="next"
-              ref="password"
-              textInputRef="passwordInput"
-              containerStyle={{
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                alignSelf: "stretch"
-              }}
-              onSubmitEditing={() => {
-                this.refs.email.refs.emailInput.focus();
-              }}
-              secureTextEntry
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })}
-            />
-            {false && (
-              <FormValidationMessage>Error message</FormValidationMessage>
-            )}
-          </View>
-          <View>
-            <FormLabel labelStyle={{ color: "white" }}>Email</FormLabel>
-            <FormInput
-              editable
-              autoCapitalize="none"
-              keyboardType="email-address"
-              selectionColor={"#00A3FF"}
-              inputStyle={{
-                fontSize: 26,
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                color: "white"
-              }}
-              underlineColorAndroid="transparent"
-              returnKeyType="next"
-              ref="email"
-              textInputRef="emailInput"
-              containerStyle={{
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                alignSelf: "stretch"
-              }}
-              onSubmitEditing={() => {
-                this.refs.phone.refs.phoneInput.focus();
-              }}
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
-            />
-            {false && (
-              <FormValidationMessage>Error message</FormValidationMessage>
-            )}
-          </View>
-          <View>
-            <FormLabel labelStyle={{ color: "white" }}>Phone Number</FormLabel>
-            <FormInput
-              editable
-              autoCapitalize="none"
-              keyboardType="phone-pad"
-              selectionColor={"#00A3FF"}
-              underlineColorAndroid="transparent"
-              returnKeyType="next"
-              ref="phone"
-              textInputRef="phoneInput"
-              inputStyle={{
-                fontSize: 26,
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                color: "white"
-              }}
-              containerStyle={{
-                borderWidth: 0.5,
-                borderColor: "#d6d7da",
-                alignSelf: "stretch"
-              }}
-              value={this.state.phoneNumber}
-              onBlur={this.onPhoneSubmit}
-              onSubmitEditing={this.onPhoneSubmit}
-              onChangeText={phoneNumber => this.setState({ phoneNumber })}
-            />
-            {false && (
-              <FormValidationMessage>Error message</FormValidationMessage>
-            )}
-          </View>
+        <ScrollView
+          style={{ flex: 1 }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
+        >
+          <Input
+            label="Username"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            autoCapitalize="none"
+            autoCorrect={false}
+            selectionColor={"white"}
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
+            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
+            returnKeyType="next"
+            ref="username"
+            textInputRef="usernameInput"
+            onSubmitEditing={() => {
+              this.refs.password.refs.passwordInput.focus();
+            }}
+            value={this.state.username}
+            onChangeText={username => this.setState({ username })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "user",
+              color: colors.primary
+            }}
+          />
+
+          <Input
+            label="Password"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            autoCapitalize="none"
+            selectionColor={"white"}
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
+            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
+            returnKeyType="next"
+            ref="password"
+            textInputRef="passwordInput"
+            onSubmitEditing={() => {
+              this.refs.email.refs.emailInput.focus();
+            }}
+            secureTextEntry
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "lock",
+              color: colors.primary
+            }}
+          />
+          <Input
+            label="Confirm Password"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            autoCapitalize="none"
+            selectionColor={"white"}
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
+            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
+            returnKeyType="next"
+            ref="confirmpassword"
+            textInputRef="passwordInput"
+            onSubmitEditing={() => {
+              this.refs.email.refs.emailInput.focus();
+            }}
+            secureTextEntry
+            value={this.state.confirmpassword}
+            onChangeText={confirmpassword => this.setState({ confirmpassword })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "lock",
+              color: colors.primary
+            }}
+          />
+
+          <Input
+            label="Email"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            selectionColor={"white"}
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
+            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
+            underlineColorAndroid="transparent"
+            returnKeyType="next"
+            ref="email"
+            textInputRef="emailInput"
+            onSubmitEditing={() => {
+              this.refs.phone.refs.phoneInput.focus();
+            }}
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "at",
+              color: colors.primary
+            }}
+          />
+
+          <Input
+            label="Phone Number"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            autoCapitalize="none"
+            keyboardType="phone-pad"
+            selectionColor={"white"}
+            underlineColorAndroid="transparent"
+            returnKeyType="next"
+            ref="phone"
+            textInputRef="phoneInput"
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
+            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
+            value={this.state.phoneNumber}
+            onBlur={this.onPhoneSubmit}
+            onSubmitEditing={this.onPhoneSubmit}
+            onChangeText={phoneNumber => this.setState({ phoneNumber })}
+            leftIcon={{
+              type: "font-awesome",
+              name: "phone",
+              color: colors.primary
+            }}
+          />
+
           <Button
             title="Sign Up"
             backgroundColor="#00A3FF"
@@ -209,10 +221,15 @@ class SignUp extends React.Component {
               marginBottom: 0,
               height: 40
             }}
-            icon={{ name: "lock", size: 18, type: "font-awesome" }}
+            icon={{
+              name: "paper-plane",
+              size: 18,
+              color: "white",
+              type: "font-awesome"
+            }}
             onPress={this.handleSignUp}
           />
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -221,10 +238,12 @@ const styles = StyleSheet.create({
   bla: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#0D1E30"
+    backgroundColor: "#0D1E30",
+    paddingRight: 20,
+    paddingLeft: 20
   },
   formContainer: {
-    justifyContent: "space-around",
+    justifyContent: "center",
     height: 420
   }
 });
