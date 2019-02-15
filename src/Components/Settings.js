@@ -176,6 +176,7 @@ class Settings extends React.Component {
       <View style={styles.bla}>
         <Modal
           visible={this.state.showActivityIndicator}
+          transparent={true}
           onRequestClose={() => null}
         >
           <ActivityIndicator size="large" />

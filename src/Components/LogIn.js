@@ -18,14 +18,11 @@ import {
   Image,
   ActivityIndicator,
   Modal,
-  Dimensions
+  Dimensions,
+  ScrollView
 } from "react-native";
-import {
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
-  Button
-} from "react-native-elements";
+import { Button, Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
 import ForgotPassword from "./ForgotPassword";
@@ -35,6 +32,18 @@ import Constants from "../Utils/constants";
 const { width } = Dimensions.get("window");
 
 class LogIn extends React.Component {
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: "#0D1E30",
+      shadowColor: "transparent",
+      elevation: 0,
+      shadowOpacity: 0
+    },
+    headerTitleStyle: {
+      color: "white"
+    },
+    headerTintColor: "white"
+  };
   state = {
     showActivityIndicator: false,
     username: "",
@@ -101,37 +110,45 @@ class LogIn extends React.Component {
 
   render() {
     return (
-      <View style={styles.bla}>
-        <Modal
-          visible={this.state.showActivityIndicator}
-          onRequestClose={() => null}
+      <View style={styles.container}>
+        <ScrollView
+          style={{ flex: 1 }}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="always"
         >
-          <ActivityIndicator style={styles.activityIndicator} size="large" />
-        </Modal>
+          <View style={styles.image_view}>
+            <Image
+              style={{ width: 200, height: 200 }}
+              source={{
+                uri:
+                  "https://raw.githubusercontent.com/wilfredgumbs/React-Frelief/master/client/src/pages/Home/logo.png"
+              }}
+            />
+          </View>
 
-        <View style={styles.formContainer}>
-          <FormValidationMessage labelStyle={styles.validationText}>
-            {this.state.errorMessage}
-          </FormValidationMessage>
-          <FormLabel>Username</FormLabel>
-          <FormInput
-            inputStyle={{
-              fontSize: 26,
-              borderWidth: 0.5,
+          <Modal
+            visible={this.state.showActivityIndicator}
+            transparent={true}
+            onRequestClose={() => null}
+          >
+            <ActivityIndicator style={styles.activityIndicator} size="large" />
+          </Modal>
+
+          <Input
+            label="username"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 30,
               borderColor: "#d6d7da",
-              color: "white"
+              marginBottom: 0
             }}
-            containerStyle={{
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              alignSelf: "stretch"
-            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
             selectionColor={"white"}
             autoCapitalize="none"
             autoCorrect={false}
-            underlineColorAndroid="transparent"
             editable={true}
-            placeholder="Please enter your username"
             returnKeyType="next"
             ref="username"
             textInputRef="usernameInput"
@@ -140,66 +157,81 @@ class LogIn extends React.Component {
             }}
             onChangeText={username => this.setState({ username })}
             value={this.state.username}
+            leftIcon={{
+              type: "font-awesome",
+              name: "user",
+              color: colors.primary
+            }}
           />
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            inputStyle={{
-              fontSize: 26,
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              color: "white"
+          <Input
+            label="password"
+            labelStyle={{ color: "white", marginBottom: 5 }}
+            inputContainerStyle={{
+              borderRadius: 30,
+              borderWidth: 1,
+              borderColor: "#d6d7da"
             }}
-            containerStyle={{
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              alignSelf: "stretch"
-            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
             selectionColor={"white"}
-            underlineColorAndroid="transparent"
             editable={true}
             secureTextEntry={true}
-            placeholder="Please enter your password"
             returnKeyType="next"
             ref="password"
             textInputRef="passwordInput"
             onChangeText={password => this.setState({ password })}
             value={this.state.password}
+            leftIcon={{
+              type: "font-awesome",
+              name: "lock",
+              color: colors.primary
+            }}
           />
           <Button
             fontFamily="lato"
             containerViewStyle={{ marginTop: 20 }}
             backgroundColor={colors.primary}
+            icon={
+              <Icon
+                name="check-circle"
+                size={20}
+                color="white"
+                iconStyle={{ marginRight: 20 }}
+              />
+            }
+            iconContainerStyle={{ marginRight: 20 }}
             buttonStyle={{
               borderRadius: 30,
-              marginTop: 30,
+              marginTop: 15,
               marginRight: 0,
               marginBottom: 0,
-              height: 40
+              height: 50
             }}
             title="SIGN IN"
+            titleStyle={{ marginLeft: 5 }}
             onPress={this.handleLogInClick}
           />
-          <Button
-            fontFamily="lato"
-            containerViewStyle={{ marginTop: 20 }}
-            backgroundColor={colors.primary}
-            buttonStyle={{
-              borderRadius: 30,
-              marginTop: 30,
-              marginRight: 0,
-              marginBottom: 0,
-              height: 40
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 15
             }}
-            title="LOG OUT"
-            onPress={this.doLogout}
-          />
-          <Text
-            onPress={() => this.props.navigation.navigate("ForgotPassword")}
-            style={styles.passwordResetButton}
           >
-            Forgot your password?
-          </Text>
-        </View>
+            <Text
+              onPress={() => this.props.navigation.navigate("ForgotPassword")}
+              style={{ color: colors.primary }}
+            >
+              Forgot Password
+            </Text>
+            <Text
+              onPress={() => this.props.navigation.navigate("SignUp")}
+              style={{ color: colors.primary }}
+            >
+              Create Account
+            </Text>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -211,8 +243,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#0D1E30"
   },
   formContainer: {
-    justifyContent: "space-around",
+    justifyContent: "center",
     height: 420
+  },
+  image_view: {
+    alignItems: "center"
+  },
+  container: {
+    paddingRight: 20,
+    paddingLeft: 20,
+
+    flex: 1,
+    backgroundColor: "#0D1E30"
   }
 });
 
