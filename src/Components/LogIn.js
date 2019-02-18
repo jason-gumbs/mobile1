@@ -1,15 +1,3 @@
-/*
- * Copyright 2017-2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
- * the License. A copy of the License is located at
- *
- *     http://aws.amazon.com/apache2.0/
- *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
- * and limitations under the License.
- */
 import React from "react";
 import {
   View,
@@ -90,7 +78,7 @@ class LogIn extends React.Component {
   handleLogInClick = () => {
     this.setState({ showActivityIndicator: true });
 
-    setTimeout(this.doLogin, 0);
+    this.doLogin();
   };
 
   handleMFACancel() {
@@ -126,14 +114,6 @@ class LogIn extends React.Component {
               }}
             />
           </View>
-
-          <Modal
-            visible={this.state.showActivityIndicator}
-            transparent={true}
-            onRequestClose={() => null}
-          >
-            <ActivityIndicator style={styles.activityIndicator} size="large" />
-          </Modal>
 
           <Input
             label="username"
@@ -208,6 +188,7 @@ class LogIn extends React.Component {
             }}
             title="SIGN IN"
             titleStyle={{ marginLeft: 5 }}
+            loading={this.state.showActivityIndicator ? true : false}
             onPress={this.handleLogInClick}
           />
           <View

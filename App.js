@@ -12,7 +12,7 @@ import map from "./src/pages/map";
 import SignIn from "./src/Components/LogIn";
 import SignUp from "./src/Components/SignUp";
 import Settings from "./src/Components/Settings";
-import MFAPrompt from "./src/Components/MFAPrompt";
+import ForgotPassword from "./src/Components/ForgotPassword";
 
 // Version can be specified in package.json
 Amplify.configure(awsmobile);
@@ -64,6 +64,9 @@ const RootStack = createStackNavigator(
     },
     Settings: {
       screen: Settings
+    },
+    ForgotPassword: {
+      screen: ForgotPassword
     }
   },
   {

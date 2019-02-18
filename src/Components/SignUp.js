@@ -23,7 +23,8 @@ class SignUp extends React.Component {
         shadowColor: "transparent",
         elevation: 0,
         shadowOpacity: 0
-      }
+      },
+      headerTintColor: "white"
     };
   };
   state = {
@@ -36,7 +37,7 @@ class SignUp extends React.Component {
     errorMessage: ""
   };
 
-  async handleSignUp() {
+  handleSignUp = e => {
     const { username, password, email, phoneNumber } = this.state;
     let userConfirmed = true;
 
@@ -51,7 +52,7 @@ class SignUp extends React.Component {
     })
       .then(data => console.log(data))
       .catch(err => console.log("Auth signup ", err));
-  }
+  };
 
   checkPhonePattern = phone => {
     return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phone);

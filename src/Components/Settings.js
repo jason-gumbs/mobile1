@@ -185,7 +185,7 @@ class Settings extends React.Component {
           {this.state.apiResponse !== null ||
           this.state.avatarSource !== null ? (
             <Avatar
-              xlarge
+              size="xlarge"
               rounded
               source={
                 this.state.avatarSource === null
@@ -198,7 +198,7 @@ class Settings extends React.Component {
             />
           ) : (
             <Avatar
-              xlarge
+              size="xlarge"
               rounded
               icon={{ name: "user", type: "font-awesome" }}
               onPress={this.selectPhotoTapped}

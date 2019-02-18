@@ -40,14 +40,15 @@ class Footer extends React.Component {
             name="plus"
             type="evilicon"
             color="#00aced"
-            size={80}
+            size={70}
+            iconStyle={{ marginTop: 7 }}
             onPress={this.props.handleAddResource}
             containerStyle={{
-              marginTop: -30,
+              marginTop: -27,
               backgroundColor: "#0D1E30",
-              borderRadius: 100,
+              borderRadius: 90,
               width: 90,
-              height: 90
+              height: 100
             }}
           />
         </View>

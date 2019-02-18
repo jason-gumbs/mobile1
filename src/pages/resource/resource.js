@@ -2,7 +2,6 @@ import React from "react";
 import {
   KeyboardAvoidingView,
   View,
-  Text,
   PixelRatio,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -16,14 +15,7 @@ import {
   ActivityIndicator,
   Platform
 } from "react-native";
-import {
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
-  Divider,
-  Button,
-  Avatar
-} from "react-native-elements";
+import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { API, Storage } from "aws-amplify";
 import awsmobile from "../../aws-exports";
@@ -203,7 +195,7 @@ class resource extends React.Component {
           <View style={styles.image_view}>
             {this.state.avatarSource === null ? (
               <Avatar
-                xlarge
+                size="xlarge"
                 rounded
                 icon={{ name: "image", type: "font-awesome" }}
                 onPress={this.selectPhotoTapped}
@@ -212,7 +204,7 @@ class resource extends React.Component {
               />
             ) : (
               <Avatar
-                xlarge
+                size="xlarge"
                 rounded
                 source={this.state.avatarSource}
                 onPress={this.selectPhotoTapped}
@@ -221,60 +213,61 @@ class resource extends React.Component {
               />
             )}
           </View>
-          <FormLabel labelStyle={{ color: "white" }}>Name</FormLabel>
-          <FormInput
+          <Input
+            label="Name"
+            labelStyle={{ color: "white", marginBottom: 5 }}
             onChangeText={name => this.updateInput("name", name)}
             //inputStyle is used to style input box
             autoCapitalize="none"
             selectionColor={"white"}
             autoCorrect={true}
             returnKeyType="next"
-            inputStyle={{
-              fontSize: 26,
-              borderWidth: 0.5,
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 30,
               borderColor: "#d6d7da",
-              color: "white"
+              marginBottom: 0
             }}
-            containerStyle={{
-              borderWidth: 0.5,
-              borderColor: "#d6d7da",
-              alignSelf: "stretch"
-            }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
             ref="name"
             textInputRef="nameInput"
             editable={true}
             value={this.state.input.name}
           />
-          <FormLabel labelStyle={{ color: "white" }}>Product/Service</FormLabel>
-          <FormInput
+          <Input
+            label="Product/Service"
+            labelStyle={{ color: "white", marginBottom: 5 }}
             onChangeText={product => this.updateInput("product", product)}
             autoCapitalize="none"
             selectionColor={"white"}
             autoCorrect={true}
-            containerStyle={{
-              borderWidth: 0.5,
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 30,
               borderColor: "#d6d7da",
-              alignSelf: "stretch"
+              marginBottom: 0
             }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
             ref="product"
             textInputRef="productInput"
-            inputStyle={{ fontSize: 26, color: "white" }}
             value={this.state.input.product}
           />
-          <FormLabel labelStyle={{ color: "white" }}>Description</FormLabel>
-          <FormInput
+          <Input
+            label="Description"
+            labelStyle={{ color: "white", marginBottom: 5 }}
             onChangeText={description =>
               this.updateInput("description", description)
             }
             //inputStyle is used to style input box
 
-            containerStyle={{
-              borderWidth: 0.5,
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 15,
               borderColor: "#d6d7da",
-              alignSelf: "stretch"
+              marginBottom: 0
             }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
             multiline={true}
-            inputStyle={{ fontSize: 26, color: "white" }}
             numberOfLines={4}
             autoCapitalize="none"
             selectionColor={"white"}
@@ -283,9 +276,7 @@ class resource extends React.Component {
             textInputRef="descriptionInput"
             value={this.state.input.description}
           />
-          <FormLabel labelStyle={{ color: "white" }}>
-            Select a category
-          </FormLabel>
+
           <Picker
             selectedValue={this.state.input.category}
             itemStyle={{ color: "white" }}
@@ -309,11 +300,19 @@ class resource extends React.Component {
             <Picker.Item label="Survival" value="Survival" />
             <Picker.Item label="Tech" value="Tech" />
           </Picker>
-
-          <FormLabel labelStyle={{ color: "white" }}>Address</FormLabel>
-
+          <Text
+            style={{
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginLeft: 11,
+              marginBottom: 3
+            }}
+          >
+            Address
+          </Text>
           <GooglePlacesAutocomplete
-            placeholder="Enter Location"
+            placeholder=""
             onPress={(data, details = null) => {
               this.setState(
                 state => ((state.input.address = data.description), state)
@@ -327,6 +326,7 @@ class resource extends React.Component {
             getDefaultValue={() => ""}
             listViewDisplayed="false"
             minLength={2}
+            selectionColor={"white"}
             autoFocus={false}
             fetchDetails={true}
             query={{
@@ -337,51 +337,50 @@ class resource extends React.Component {
             }}
             styles={{
               container: {
-                width: "75%",
-                marginBottom: 10,
-                marginLeft: 12,
-                borderWidth: 0.5,
+                borderWidth: 1.5,
+                borderRadius: 30,
                 borderColor: "#d6d7da",
-                alignSelf: "stretch"
+                marginBottom: 0
               },
               textInputContainer: {
-                backgroundColor: "rgba(0,0,0,0)",
-                width: "75%",
-                borderTopWidth: 0,
-                borderBottomWidth: 0
+                backgroundColor: "#0D1E30",
+                padding: 5,
+                width: "85%",
+                marginLeft: 20
               },
               textInput: {
-                marginLeft: 0,
-                marginRight: 0,
-                height: 38,
+                width: "75%",
+
                 color: "white",
-                fontSize: 16
+                fontSize: 16,
+                backgroundColor: "#0D1E30"
               }
             }}
             currentLocation={false}
           />
 
-          <FormLabel labelStyle={{ color: "white" }}>
-            What are you offering
-          </FormLabel>
-          <FormInput
+          <Input
+            label="What are you offering"
+            labelStyle={{ color: "white", marginBottom: 5 }}
             onChangeText={offering => this.updateInput("offering", offering)}
             //inputStyle is used to style input box
             ref="offering"
             textInputRef="offeringInput"
             value={this.state.input.offering}
-            inputStyle={{ fontSize: 26, color: "white" }}
             autoCapitalize="none"
             selectionColor={"white"}
             autoCorrect={true}
-            containerStyle={{
-              borderWidth: 0.5,
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 30,
               borderColor: "#d6d7da",
-              alignSelf: "stretch"
+              marginBottom: 0
             }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
           />
-          <FormLabel labelStyle={{ color: "white" }}>Phone Number</FormLabel>
-          <FormInput
+          <Input
+            label="Phone Number"
+            labelStyle={{ color: "white", marginBottom: 5 }}
             onChangeText={number => this.updateInput("number", number)}
             //inputStyle is used to style input box
             keyboardType="numeric"
@@ -389,15 +388,16 @@ class resource extends React.Component {
             textContentType="telephoneNumber"
             textInputRef="numberInput"
             value={this.state.input.number}
-            inputStyle={{ fontSize: 26, color: "white" }}
             autoCapitalize="none"
             selectionColor={"white"}
             autoCorrect={true}
-            containerStyle={{
-              borderWidth: 0.5,
+            inputContainerStyle={{
+              borderWidth: 1,
+              borderRadius: 30,
               borderColor: "#d6d7da",
-              alignSelf: "stretch"
+              marginBottom: 0
             }}
+            inputStyle={{ marginLeft: 5, color: "white" }}
           />
 
           <View
