@@ -2,7 +2,10 @@ global.Buffer = global.Buffer || require("buffer").Buffer;
 import React from "react";
 import SplashScreen from "react-native-splash-screen";
 import { createStackNavigator } from "react-navigation";
-import Amplify, { API, Storage, Aut, Hub, Logger } from "aws-amplify";
+import Amplify, { API, Storage, Auth, Hub, Logger } from "aws-amplify";
+import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
+import { Rehydrated } from "aws-appsync-react";
+import { graphql, ApolloProvider, compose } from "react-apollo";
 import awsmobile from "./src/aws-exports";
 import resource from "./src/pages/resource";
 import viewResource from "./src/pages/viewResource";
@@ -16,28 +19,38 @@ import ForgotPassword from "./src/Components/ForgotPassword";
 
 // Version can be specified in package.json
 Amplify.configure(awsmobile);
-const alex = new Logger("Alexander_the_auth_watcher");
 
-alex.onHubCapsule = capsule => {
-  switch (capsule.payload.event) {
-    case "signIn":
-      alex.error("user signed in"); //[ERROR] Alexander_the_auth_watcher - user signed in
-      break;
-    case "signUp":
-      alex.error("user signed up");
-      break;
-    case "signOut":
-      alex.error("user signed out");
-      break;
-    case "signIn_failure":
-      alex.error("user sign in failed");
-      break;
-    case "configured":
-      alex.error("the Auth module is configured");
-  }
-};
+const GRAPHQL_API_REGION = awsmobile.aws_appsync_region;
+const GRAPHQL_API_ENDPOINT_URL = awsmobile.aws_appsync_graphqlEndpoint;
+const S3_BUCKET_REGION = awsmobile.aws_user_files_s3_bucket_region;
+const S3_BUCKET_NAME = awsmobile.aws_user_files_s3_bucket;
 
-Hub.listen("auth", alex);
+const client = new AWSAppSyncClient({
+  url: awsmobile.aws_appsync_graphqlEndpoint,
+  region: awsmobile.aws_appsync_region,
+  auth: {
+    type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+    // Get the currently logged in users credential.
+    jwtToken: async () =>
+      (await Auth.currentSession()).getAccessToken().getJwtToken() ||
+      awsmobile.aws_cognito_identity_pool_id
+  },
+  offlineConfig: {
+    callback: (err, succ) => {
+      if (err) {
+        const { mutation, variables } = err;
+
+        console.warn(`ERROR for ${mutation}`, err);
+      } else {
+        const { mutation, variables } = succ;
+
+        console.info(`SUCCESS for ${mutation}`, succ);
+      }
+    }
+  },
+  // Amplify uses Amazon IAM to authorize calls to Amazon S3. This provides the relevant IAM credentials.
+  complexObjectsCredentials: () => Auth.currentCredentials()
+});
 
 const RootStack = createStackNavigator(
   {
@@ -70,15 +83,19 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
+    initialRouteParams: { bucket: S3_BUCKET_NAME, region: S3_BUCKET_REGION }
   }
 );
 
 export default class App extends React.Component {
-  componentDidMount() {
-    SplashScreen.hide();
-  }
   render() {
-    return <RootStack />;
+    return (
+      <ApolloProvider client={client}>
+        <Rehydrated>
+          <RootStack />
+        </Rehydrated>
+      </ApolloProvider>
+    );
   }
 }

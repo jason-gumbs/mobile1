@@ -1,0 +1,45 @@
+type Company @model {
+  id: ID!
+  companyname: String!
+  email: String!
+  phonenumber: String!
+  files: S3Object
+  visibility: Visibility
+  resources: [Resource] @connection(name: "ResourcePosts")
+}
+type Resource @model {
+  id: ID!
+  name: String!
+  product: String
+  address: String
+  location: String
+  owner: String
+  offering: String
+  category: String
+  city: String
+  description: String
+  number: String
+  state: String
+  zip: String
+  visibility: Visibility
+  file: S3Object
+  content: String!
+  comment: [Comment] @connection(name: "ResourceComments")
+  company: Company @connection(name: "ResourcePosts")
+}
+type Comment @model {
+  id: ID!
+  content: String
+  resource: Resource @connection(name: "ResourceComments")
+}
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+enum Visibility {
+  public
+  private
+}

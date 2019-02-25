@@ -1,0 +1,16 @@
+projects:
+  freeql:
+    schemaPath: src\graphql\schema.json
+    includes:
+      - src\graphql\**\*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src\graphql
+        graphQLApiId: rtwwwglxsbhovgbwdlhhzktwsa
+      endpoints:
+        prod: >-
+          https://hi7sqiebhfbo3blsttxcgfyypa.appsync-api.us-east-1.amazonaws.com/graphql

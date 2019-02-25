@@ -86,15 +86,6 @@ class search extends React.Component {
   };
 
   componentDidMount() {
-    // Auth.currentAuthenticatedUser()
-    //   .then(data => {
-    //     console.log(data);
-    //     this.setState({ currentUser: data });
-    //   })
-    //   .catch(err => console.log(err));
-    // Auth.signOut()
-    //   .then(data => console.log(data))
-    //   .catch(err => console.log(err));
     Auth.currentSession()
       .then(data => {
         this.setState({ currentUser: data });

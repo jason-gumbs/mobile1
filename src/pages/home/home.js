@@ -23,6 +23,7 @@ import UploadPhoto from "../../Components/UploadPhoto";
 import ImagePicker from "../../Components/ImagePickers";
 import { colors } from "../../Utils/theme";
 import search from "../search/search";
+import SplashScreen from "react-native-splash-screen";
 import { Auth, Hub, Logger } from "aws-amplify";
 
 class home extends React.Component {
@@ -44,7 +45,11 @@ class home extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    SplashScreen.hide();
+
+    console.log(this.props.navigation.state.params);
+  }
   componentWillUnmount() {}
   updateInput = (key, value) => {
     this.setState(state => ({

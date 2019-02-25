@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
+import { graphql, ApolloProvider, compose } from "react-apollo";
 import { API, Storage } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
@@ -24,6 +25,8 @@ import { colors } from "../../Utils/theme";
 import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
+import { createBlog } from "../../graphql/mutations";
+import { listBlogs } from "../../graphql/queries";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 const { width, height } = Dimensions.get("window");
 
@@ -69,7 +72,9 @@ class resource extends React.Component {
     showActivityIndicator: false
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.createBlog({ id: ``, name: "create frelief blog" });
+  }
   componentWillUnmount() {}
 
   AddResource = async () => {
@@ -234,6 +239,64 @@ class resource extends React.Component {
             editable={true}
             value={this.state.input.name}
           />
+          <Text
+            style={{
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginLeft: 11,
+              marginBottom: 3
+            }}
+          >
+            Address
+          </Text>
+          <GooglePlacesAutocomplete
+            placeholder=""
+            onPress={(data, details = null) => {
+              this.setState(
+                state => ((state.input.address = data.description), state)
+              );
+              this.setState(
+                state => (
+                  (state.input.location = details.geometry.location), state
+                )
+              );
+            }}
+            getDefaultValue={() => ""}
+            listViewDisplayed="false"
+            minLength={2}
+            selectionColor={"white"}
+            autoFocus={false}
+            fetchDetails={true}
+            query={{
+              // available options: https://developers.google.com/places/web-service/autocomplete
+              key: "",
+              language: "en", // language of the results
+              types: "address" // default: 'geocode'
+            }}
+            styles={{
+              container: {
+                borderWidth: 1.5,
+                borderRadius: 30,
+                borderColor: "#d6d7da",
+                marginBottom: 0
+              },
+              textInputContainer: {
+                backgroundColor: "#0D1E30",
+                padding: 5,
+                width: "85%",
+                marginLeft: 20
+              },
+              textInput: {
+                width: "75%",
+
+                color: "white",
+                fontSize: 16,
+                backgroundColor: "#0D1E30"
+              }
+            }}
+            currentLocation={false}
+          />
           <Input
             label="Product/Service"
             labelStyle={{ color: "white", marginBottom: 5 }}
@@ -300,65 +363,6 @@ class resource extends React.Component {
             <Picker.Item label="Survival" value="Survival" />
             <Picker.Item label="Tech" value="Tech" />
           </Picker>
-          <Text
-            style={{
-              color: "white",
-              fontSize: 16,
-              fontWeight: "bold",
-              marginLeft: 11,
-              marginBottom: 3
-            }}
-          >
-            Address
-          </Text>
-          <GooglePlacesAutocomplete
-            placeholder=""
-            onPress={(data, details = null) => {
-              this.setState(
-                state => ((state.input.address = data.description), state)
-              );
-              this.setState(
-                state => (
-                  (state.input.location = details.geometry.location), state
-                )
-              );
-            }}
-            getDefaultValue={() => ""}
-            listViewDisplayed="false"
-            minLength={2}
-            selectionColor={"white"}
-            autoFocus={false}
-            fetchDetails={true}
-            query={{
-              // available options: https://developers.google.com/places/web-service/autocomplete
-              key: "",
-              language: "en", // language of the results
-              types: "address" // default: 'geocode'
-            }}
-            styles={{
-              container: {
-                borderWidth: 1.5,
-                borderRadius: 30,
-                borderColor: "#d6d7da",
-                marginBottom: 0
-              },
-              textInputContainer: {
-                backgroundColor: "#0D1E30",
-                padding: 5,
-                width: "85%",
-                marginLeft: 20
-              },
-              textInput: {
-                width: "75%",
-
-                color: "white",
-                fontSize: 16,
-                backgroundColor: "#0D1E30"
-              }
-            }}
-            currentLocation={false}
-          />
-
           <Input
             label="What are you offering"
             labelStyle={{ color: "white", marginBottom: 5 }}
@@ -491,4 +495,36 @@ styles = StyleSheet.create({
   }
 });
 
-export default resource;
+export default (AddResourceData = compose(
+  graphql(createBlog, {
+    options: {
+      refetchQueries: [{ query: listBlogs }],
+      update: (dataProxy, { data: { createBlog } }) => {
+        const query = listBlogs;
+        const data = dataProxy.readQuery({ query });
+        data.listBlogs.items = [
+          ...data.listBlogs.items.filter(blog => blog.id !== createBlog.id),
+          createBlog
+        ];
+        dataProxy.writeQuery({ query, data });
+      }
+    },
+    props: ({ ownProps, mutate }) => ({
+      createBlog: resource =>
+        mutate({
+          variables: { input: resource },
+          optimisticResponse: () => ({
+            createBlog: {
+              ...resource,
+              __typename: "Blog",
+              posts: {
+                __typename: "blogComments",
+                items: [],
+                nextToken: null
+              }
+            }
+          })
+        })
+    })
+  })
+)(resource));
