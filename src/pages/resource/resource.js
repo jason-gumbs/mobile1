@@ -25,8 +25,8 @@ import { colors } from "../../Utils/theme";
 import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
-import { createBlog } from "../../graphql/mutations";
-import { listBlogs } from "../../graphql/queries";
+import { createCompany } from "../../graphql/mutations";
+import { listCompanys } from "../../graphql/queries";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 const { width, height } = Dimensions.get("window");
 
@@ -73,7 +73,11 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    this.props.createBlog({ id: ``, name: "create frelief blog" });
+    this.props.createCompany({
+      name: "create frelief blog",
+      email: "wilfred@knglegacyl.com",
+      phonenumber: "4045510080"
+    });
   }
   componentWillUnmount() {}
 
@@ -496,29 +500,31 @@ styles = StyleSheet.create({
 });
 
 export default (AddResourceData = compose(
-  graphql(createBlog, {
+  graphql(createCompany, {
     options: {
-      refetchQueries: [{ query: listBlogs }],
-      update: (dataProxy, { data: { createBlog } }) => {
-        const query = listBlogs;
+      refetchQueries: [{ query: listCompanys }],
+      update: (dataProxy, { data: { createCompany } }) => {
+        const query = listCompanys;
         const data = dataProxy.readQuery({ query });
-        data.listBlogs.items = [
-          ...data.listBlogs.items.filter(blog => blog.id !== createBlog.id),
-          createBlog
+        data.listCompanys.items = [
+          ...data.listCompanys.items.filter(
+            blog => blog.id !== createCompany.id
+          ),
+          createCompany
         ];
         dataProxy.writeQuery({ query, data });
       }
     },
     props: ({ ownProps, mutate }) => ({
-      createBlog: resource =>
+      createCompany: resource =>
         mutate({
           variables: { input: resource },
           optimisticResponse: () => ({
-            createBlog: {
+            createCompany: {
               ...resource,
-              __typename: "Blog",
-              posts: {
-                __typename: "blogComments",
+              __typename: "Company",
+              resources: {
+                __typename: "ResourcePosts",
                 items: [],
                 nextToken: null
               }
