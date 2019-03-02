@@ -138,7 +138,8 @@ class search extends React.Component {
       });
   }
 
-  handleAddResource = e => this.props.navigation.push("Resource");
+  handleAddResource = e =>
+    this.props.navigation.push("Resource", this.state.currentUser);
   handleHome = e => this.props.navigation.push("Search");
   handleSettingClick = e =>
     this.props.navigation.navigate("Settings", this.state.currentUser);

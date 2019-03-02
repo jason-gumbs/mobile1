@@ -18,7 +18,7 @@ import {
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { graphql, ApolloProvider, compose } from "react-apollo";
-import { API, Storage } from "aws-amplify";
+import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
 import { colors } from "../../Utils/theme";
@@ -33,25 +33,27 @@ const { width, height } = Dimensions.get("window");
 let styles = {};
 
 class resource extends React.Component {
-  static navigationOptions = {
-    title: "List an item",
-    headerStyle: {
-      backgroundColor: "#0D1E30",
-      shadowColor: "transparent",
-      elevation: 0,
-      shadowOpacity: 0
-    },
-    headerTitleStyle: {
-      color: "white"
-    },
-    headerTintColor: "white"
-  };
+  static navigationOptions = ({ navigation, screenProps }) =>
+    console.log(navigation.state.params.idToken.payload) || {
+      title: "List an item",
+      headerStyle: {
+        backgroundColor: "#0D1E30",
+        shadowColor: "transparent",
+        elevation: 0,
+        shadowOpacity: 0
+      },
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerTintColor: "white"
+    };
 
   state = {
     selectedImage: {},
     selectedImageIndex: null,
     images: [],
     Resources: [],
+    fileInput: {},
     avatarSource: null,
     selectedGenderIndex: null,
     isSelected: false,
@@ -73,26 +75,56 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    this.props.createCompany({
-      name: "create frelief blog",
-      email: "wilfred@knglegacyl.com",
-      phonenumber: "4045510080"
-    });
+    console.log(this.props);
+    // });
   }
   componentWillUnmount() {}
 
-  AddResource = async () => {
-    const resourceInfo = this.state.input;
-    const { node: imageNode } = this.state.selectedImage;
+  AddResource = async e => {
+    e.preventDefault();
     this.setState({ showActivityIndicator: true });
-    console.log("****selectedImage*******", this.state.selectedImage);
+    // const { bucket, region } = this.props.navigation.state.params;
+    const visibility = "public";
+    const resources = this.state.input;
+    const { identityId } = await Auth.currentCredentials();
+    const { payload } = this.props.navigation.state.params.idToken || "null";
+    const owner = payload["cognito:username"];
+    const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
+    const region = "us-east-1";
+    resources.owner = owner;
+    resources.content = "fowl";
+    resources.id = `${uuid.v1()}`;
+    console.log(this.state.selectedImage.uri);
 
-    this.readImage(this.state.selectedImage)
-      .then(fileInfo => ({
-        ...resourceInfo,
-        picKey: fileInfo && fileInfo.key
-      }))
-      .then(this.apiSaveResource)
+    let file;
+
+    if (this.state.selectedImage) {
+      const { fileName, type } = this.state.selectedImage;
+      const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(fileName);
+
+      const mimeType = type;
+      const key = `${visibility}/${identityId}/${uuid()}${extension &&
+        "."}${extension}`;
+
+      file = {
+        bucket,
+        key,
+        region,
+        mimeType,
+        localUri: this.state.selectedImage.uri
+      };
+    }
+
+    this.props
+      .createCompany({
+        id: `${uuid.v1()}`,
+        companyname: owner,
+        email: payload.email,
+        phonenumber: "7704345548",
+        resources,
+        visibility,
+        file
+      })
       .then(data => {
         this.setState({ showActivityIndicator: false });
         this.props.navigation.push("Search");
@@ -101,6 +133,22 @@ class resource extends React.Component {
         console.log("error saving resource...", err);
         this.setState({ showActivityIndicator: false });
       });
+    // console.log("****selectedImage*******", this.state.selectedImage);
+    //
+    // this.readImage(this.state.selectedImage)
+    //   .then(fileInfo => ({
+    //     ...items,
+    //     picKey: fileInfo && fileInfo.key
+    //   }))
+    //   .then(this.apiSaveResource)
+    //   .then(data => {
+    //     this.setState({ showActivityIndicator: false });
+    //     this.props.navigation.push("Search");
+    //   })
+    //   .catch(err => {
+    //     console.log("error saving resource...", err);
+    //     this.setState({ showActivityIndicator: false });
+    //   });
   };
 
   async apiSaveResource(resource) {
@@ -502,34 +550,28 @@ styles = StyleSheet.create({
 export default (AddResourceData = compose(
   graphql(createCompany, {
     options: {
-      refetchQueries: [{ query: listCompanys }],
-      update: (dataProxy, { data: { createCompany } }) => {
+      update: (proxy, { data: { createCompany } }) => {
         const query = listCompanys;
-        const data = dataProxy.readQuery({ query });
+        const data = proxy.readQuery({ query });
         data.listCompanys.items = [
           ...data.listCompanys.items.filter(
-            blog => blog.id !== createCompany.id
+            photo => photo.id !== createCompany.id
           ),
           createCompany
         ];
-        dataProxy.writeQuery({ query, data });
+        proxy.writeQuery({ query, data });
       }
     },
     props: ({ ownProps, mutate }) => ({
       createCompany: resource =>
         mutate({
-          variables: { input: resource },
-          optimisticResponse: () => ({
-            createCompany: {
-              ...resource,
-              __typename: "Company",
-              resources: {
-                __typename: "ResourcePosts",
-                items: [],
-                nextToken: null
-              }
+          variables: {
+            input: {
+              companyname: " $companyname",
+              email: "$email",
+              phonenumber: "phonenumber"
             }
-          })
+          }
         })
     })
   })

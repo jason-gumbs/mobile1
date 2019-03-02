@@ -1,20 +1,233 @@
-// eslint-disable
-// this is an auto generated file. This will be overwritten
+import gql from "graphql-tag";
 
-export const onCreateCompany = `subscription OnCreateCompany {
-  onCreateCompany {
-    id
-    companyname
-    email
-    phonenumber
-    files {
-      bucket
-      region
-      key
+export const onCreateCompany = gql`
+  subscription OnCreateCompany {
+    onCreateCompany {
+      id
+      companyname
+      email
+      phonenumber
+      files {
+        bucket
+        region
+        key
+      }
+      visibility
+      resources {
+        items {
+          id
+          name
+          product
+          address
+          location
+          owner
+          offering
+          category
+          city
+          description
+          number
+          state
+          zip
+          content
+        }
+        nextToken
+      }
     }
-    visibility
-    resources {
-      items {
+  }
+`;
+export const onUpdateCompany = gql`
+  subscription OnUpdateCompany {
+    onUpdateCompany {
+      id
+      companyname
+      email
+      phonenumber
+      files {
+        bucket
+        region
+        key
+      }
+      visibility
+      resources {
+        items {
+          id
+          name
+          product
+          address
+          location
+          owner
+          offering
+          category
+          city
+          description
+          number
+          state
+          zip
+          content
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onDeleteCompany = gql`
+  subscription OnDeleteCompany {
+    onDeleteCompany {
+      id
+      companyname
+      email
+      phonenumber
+      files {
+        bucket
+        region
+        key
+      }
+      visibility
+      resources {
+        items {
+          id
+          name
+          product
+          address
+          location
+          owner
+          offering
+          category
+          city
+          description
+          number
+          state
+          zip
+          content
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const onCreateResource = gql`
+  subscription OnCreateResource {
+    onCreateResource {
+      id
+      name
+      product
+      address
+      location
+      owner
+      offering
+      category
+      city
+      description
+      number
+      state
+      zip
+      visibility
+      file {
+        bucket
+        region
+        key
+      }
+      content
+      comment {
+        items {
+          id
+          content
+        }
+        nextToken
+      }
+      company {
+        id
+        companyname
+        email
+        phonenumber
+      }
+    }
+  }
+`;
+export const onUpdateResource = gql`
+  subscription OnUpdateResource {
+    onUpdateResource {
+      id
+      name
+      product
+      address
+      location
+      owner
+      offering
+      category
+      city
+      description
+      number
+      state
+      zip
+      visibility
+      file {
+        bucket
+        region
+        key
+      }
+      content
+      comment {
+        items {
+          id
+          content
+        }
+        nextToken
+      }
+      company {
+        id
+        companyname
+        email
+        phonenumber
+      }
+    }
+  }
+`;
+export const onDeleteResource = gql`
+  subscription OnDeleteResource {
+    onDeleteResource {
+      id
+      name
+      product
+      address
+      location
+      owner
+      offering
+      category
+      city
+      description
+      number
+      state
+      zip
+      visibility
+      file {
+        bucket
+        region
+        key
+      }
+      content
+      comment {
+        items {
+          id
+          content
+        }
+        nextToken
+      }
+      company {
+        id
+        companyname
+        email
+        phonenumber
+      }
+    }
+  }
+`;
+export const onCreateComment = gql`
+  subscription OnCreateComment {
+    onCreateComment {
+      id
+      content
+      resource {
         id
         name
         product
@@ -30,25 +243,15 @@ export const onCreateCompany = `subscription OnCreateCompany {
         zip
         content
       }
-      nextToken
     }
   }
-}
 `;
-export const onUpdateCompany = `subscription OnUpdateCompany {
-  onUpdateCompany {
-    id
-    companyname
-    email
-    phonenumber
-    files {
-      bucket
-      region
-      key
-    }
-    visibility
-    resources {
-      items {
+export const onUpdateComment = gql`
+  subscription OnUpdateComment {
+    onUpdateComment {
+      id
+      content
+      resource {
         id
         name
         product
@@ -64,25 +267,15 @@ export const onUpdateCompany = `subscription OnUpdateCompany {
         zip
         content
       }
-      nextToken
     }
   }
-}
 `;
-export const onDeleteCompany = `subscription OnDeleteCompany {
-  onDeleteCompany {
-    id
-    companyname
-    email
-    phonenumber
-    files {
-      bucket
-      region
-      key
-    }
-    visibility
-    resources {
-      items {
+export const onDeleteComment = gql`
+  subscription OnDeleteComment {
+    onDeleteComment {
+      id
+      content
+      resource {
         id
         name
         product
@@ -98,191 +291,6 @@ export const onDeleteCompany = `subscription OnDeleteCompany {
         zip
         content
       }
-      nextToken
     }
   }
-}
-`;
-export const onCreateResource = `subscription OnCreateResource {
-  onCreateResource {
-    id
-    name
-    product
-    address
-    location
-    owner
-    offering
-    category
-    city
-    description
-    number
-    state
-    zip
-    visibility
-    file {
-      bucket
-      region
-      key
-    }
-    content
-    comment {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    company {
-      id
-      companyname
-      email
-      phonenumber
-    }
-  }
-}
-`;
-export const onUpdateResource = `subscription OnUpdateResource {
-  onUpdateResource {
-    id
-    name
-    product
-    address
-    location
-    owner
-    offering
-    category
-    city
-    description
-    number
-    state
-    zip
-    visibility
-    file {
-      bucket
-      region
-      key
-    }
-    content
-    comment {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    company {
-      id
-      companyname
-      email
-      phonenumber
-    }
-  }
-}
-`;
-export const onDeleteResource = `subscription OnDeleteResource {
-  onDeleteResource {
-    id
-    name
-    product
-    address
-    location
-    owner
-    offering
-    category
-    city
-    description
-    number
-    state
-    zip
-    visibility
-    file {
-      bucket
-      region
-      key
-    }
-    content
-    comment {
-      items {
-        id
-        content
-      }
-      nextToken
-    }
-    company {
-      id
-      companyname
-      email
-      phonenumber
-    }
-  }
-}
-`;
-export const onCreateComment = `subscription OnCreateComment {
-  onCreateComment {
-    id
-    content
-    resource {
-      id
-      name
-      product
-      address
-      location
-      owner
-      offering
-      category
-      city
-      description
-      number
-      state
-      zip
-      content
-    }
-  }
-}
-`;
-export const onUpdateComment = `subscription OnUpdateComment {
-  onUpdateComment {
-    id
-    content
-    resource {
-      id
-      name
-      product
-      address
-      location
-      owner
-      offering
-      category
-      city
-      description
-      number
-      state
-      zip
-      content
-    }
-  }
-}
-`;
-export const onDeleteComment = `subscription OnDeleteComment {
-  onDeleteComment {
-    id
-    content
-    resource {
-      id
-      name
-      product
-      address
-      location
-      owner
-      offering
-      category
-      city
-      description
-      number
-      state
-      zip
-      content
-    }
-  }
-}
 `;
