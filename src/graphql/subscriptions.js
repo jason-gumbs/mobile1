@@ -1,3 +1,5 @@
+// eslint-disable
+// this is an auto generated file. This will be overwritten
 import gql from "graphql-tag";
 
 export const onCreateCompany = gql`
@@ -140,6 +142,11 @@ export const onCreateResource = gql`
         companyname
         email
         phonenumber
+        files {
+          bucket
+          region
+          key
+        }
       }
     }
   }
@@ -179,6 +186,11 @@ export const onUpdateResource = gql`
         companyname
         email
         phonenumber
+        files {
+          bucket
+          region
+          key
+        }
       }
     }
   }
@@ -218,6 +230,11 @@ export const onDeleteResource = gql`
         companyname
         email
         phonenumber
+        files {
+          bucket
+          region
+          key
+        }
       }
     }
   }

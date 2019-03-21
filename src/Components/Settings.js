@@ -23,7 +23,7 @@ import Constants from "../Utils/constants";
 import files from "../Utils/files";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
-import RNFetchBlob from "react-native-fetch-blob";
+// import RNFetchBlob from "react-native-fetch-blob";
 
 const { width } = Dimensions.get("window");
 const logger = new Logger("foo");

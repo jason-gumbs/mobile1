@@ -1,11 +1,10 @@
-global.Buffer = global.Buffer || require("buffer").Buffer;
 import React from "react";
 import SplashScreen from "react-native-splash-screen";
 import { createStackNavigator } from "react-navigation";
 import Amplify, { API, Storage, Auth, Hub, Logger } from "aws-amplify";
 import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
-import { graphql, ApolloProvider, compose } from "react-apollo";
+import { ApolloProvider } from "react-apollo";
 import awsmobile from "./src/aws-exports";
 import resource from "./src/pages/resource";
 import viewResource from "./src/pages/viewResource";
@@ -34,19 +33,6 @@ const client = new AWSAppSyncClient({
     jwtToken: async () =>
       (await Auth.currentSession()).getAccessToken().getJwtToken() ||
       awsmobile.aws_cognito_identity_pool_id
-  },
-  offlineConfig: {
-    callback: (err, succ) => {
-      if (err) {
-        const { mutation, variables } = err;
-
-        console.warn(`ERROR for ${mutation}`, err);
-      } else {
-        const { mutation, variables } = succ;
-
-        console.info(`SUCCESS for ${mutation}`, succ);
-      }
-    }
   },
   // Amplify uses Amazon IAM to authorize calls to Amazon S3. This provides the relevant IAM credentials.
   complexObjectsCredentials: () => Auth.currentCredentials()

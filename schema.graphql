@@ -3,7 +3,7 @@ type Company @model {
   companyname: String!
   email: String!
   phonenumber: String!
-  files: S3Object
+  files: [S3Object]
   visibility: Visibility
   resources: [Resource] @connection(name: "ResourcePosts")
 }

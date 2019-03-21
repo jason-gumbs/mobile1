@@ -17,12 +17,12 @@ import {
 } from "react-native";
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
-import { graphql, ApolloProvider, compose } from "react-apollo";
+import { graphql } from "react-apollo";
 import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
 import { colors } from "../../Utils/theme";
-import RNFetchBlob from "react-native-fetch-blob";
+// import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
 import { createCompany } from "../../graphql/mutations";
@@ -34,7 +34,7 @@ let styles = {};
 
 class resource extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(navigation.state.params.idToken.payload) || {
+    console.log("") || {
       title: "List an item",
       headerStyle: {
         backgroundColor: "#0D1E30",
@@ -75,8 +75,23 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
-    // });
+    this.props
+      .createCompany({
+        id: "",
+        companyname: "create frelief blog",
+        email: "wilfred@knglegacyl.com",
+        phonenumber: "4045510080",
+        files: null,
+        visibility: "public"
+      })
+      .then(data => {
+        this.setState({ showActivityIndicator: false });
+        console.log("Congrats...", data);
+      })
+      .catch(err => {
+        console.log("error saving resource...", err);
+        this.setState({ showActivityIndicator: false });
+      });
   }
   componentWillUnmount() {}
 
@@ -88,7 +103,7 @@ class resource extends React.Component {
     const resources = this.state.input;
     const { identityId } = await Auth.currentCredentials();
     const { payload } = this.props.navigation.state.params.idToken || "null";
-    const owner = payload["cognito:username"];
+    const owner = payload["cognito:username"] || "null";
     const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
     const region = "us-east-1";
     resources.owner = owner;
@@ -120,14 +135,14 @@ class resource extends React.Component {
         id: `${uuid.v1()}`,
         companyname: owner,
         email: payload.email,
-        phonenumber: "7704345548",
-        resources,
-        visibility,
-        file
+        phonenumber: "7704345548"
+        // resources,
+        // visibility: "public",
+        // file: []
       })
       .then(data => {
         this.setState({ showActivityIndicator: false });
-        this.props.navigation.push("Search");
+        // this.props.navigation.push("Search");
       })
       .catch(err => {
         console.log("error saving resource...", err);
@@ -547,32 +562,35 @@ styles = StyleSheet.create({
   }
 });
 
-export default (AddResourceData = compose(
-  graphql(createCompany, {
-    options: {
-      update: (proxy, { data: { createCompany } }) => {
-        const query = listCompanys;
-        const data = proxy.readQuery({ query });
-        data.listCompanys.items = [
-          ...data.listCompanys.items.filter(
-            photo => photo.id !== createCompany.id
-          ),
-          createCompany
-        ];
-        proxy.writeQuery({ query, data });
-      }
-    },
-    props: ({ ownProps, mutate }) => ({
-      createCompany: resource =>
-        mutate({
-          variables: {
-            input: {
-              companyname: " $companyname",
-              email: "$email",
-              phonenumber: "phonenumber"
+export default graphql(createCompany, {
+  options: {
+    refetchQueries: [{ query: listCompanys }],
+    update: (dataProxy, { data: { createCompany } }) => {
+      const query = listCompanys;
+      const data = dataProxy.readQuery({ query });
+      data.listCompanys = {
+        ...data.listCompanys,
+        items: [...data.listCompanys.items, createCompany]
+      };
+      dataProxy.writeQuery({ query, data });
+    }
+  },
+  props: ({ ownProps, mutate }) => ({
+    createCompany: resource =>
+      mutate({
+        variables: { input: resource },
+        optimisticResponse: () => ({
+          createCompany: {
+            ...resource,
+            __typename: "Company",
+            file: { ...resource.file, __typename: "S3Object" },
+            resources: {
+              __typename: "ResourcePosts",
+              items: [],
+              nextToken: null
             }
           }
         })
-    })
+      })
   })
-)(resource));
+})(resource);

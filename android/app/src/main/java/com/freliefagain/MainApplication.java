@@ -8,7 +8,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -32,7 +31,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNAWSCognitoPackage(),
             new VectorIconsPackage(),
             new SplashScreenReactPackage(),
-            new MapsPackage(),
             new ImagePickerPackage(),
             new RNFetchBlobPackage()
       );

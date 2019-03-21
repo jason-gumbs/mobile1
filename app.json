@@ -1,7 +1,6 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0"
-  },
   "name": "freliefagain",
   "displayName": "Frelief"
 }
+/* `rm -rf /tmp/metro-bundler-cache-*`
+rm -rf /tmp/haste-map-react-native-packager-* */

@@ -1,3 +1,5 @@
+// eslint-disable
+// this is an auto generated file. This will be overwritten
 import gql from "graphql-tag";
 
 export const getCompany = gql`
@@ -112,6 +114,11 @@ export const getResource = gql`
         companyname
         email
         phonenumber
+        files {
+          bucket
+          region
+          key
+        }
       }
     }
   }
@@ -156,6 +163,11 @@ export const listResources = gql`
           companyname
           email
           phonenumber
+          files {
+            bucket
+            region
+            key
+          }
         }
       }
       nextToken
