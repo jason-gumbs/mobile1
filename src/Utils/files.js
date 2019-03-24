@@ -10,10 +10,12 @@
  * CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
  * and limitations under the License.
  */
-// import RNFetchBlob from 'react-native-fetch-blob';
-//
-// export default {
-//   readFile(filePath) {
-//     return RNFetchBlob.fs.readFile(filePath, 'base64').then(data => new Buffer(data, 'base64'));
-//   },
-// };
+import RNFetchBlob from "react-native-fetch-blob";
+
+export default {
+  readFile(filePath) {
+    return RNFetchBlob.fs
+      .readFile(filePath, "base64")
+      .then(data => new Buffer(data, "base64"));
+  }
+};

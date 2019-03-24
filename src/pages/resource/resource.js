@@ -75,23 +75,23 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    this.props
-      .createCompany({
-        id: "",
-        companyname: "create frelief blog",
-        email: "wilfred@knglegacyl.com",
-        phonenumber: "4045510080",
-        files: null,
-        visibility: "public"
-      })
-      .then(data => {
-        this.setState({ showActivityIndicator: false });
-        console.log("Congrats...", data);
-      })
-      .catch(err => {
-        console.log("error saving resource...", err);
-        this.setState({ showActivityIndicator: false });
-      });
+    // this.props
+    //   .createCompany({
+    //     id: "",
+    //     companyname: "create frelief blog",
+    //     email: "wilfred@knglegacyl.com",
+    //     phonenumber: "4045510080",
+    //     files: null,
+    //     visibility: "public"
+    //   })
+    //   .then(data => {
+    //     this.setState({ showActivityIndicator: false });
+    //     console.log("Congrats...", data);
+    //   })
+    //   .catch(err => {
+    //     console.log("error saving resource...", err);
+    //     this.setState({ showActivityIndicator: false });
+    //   });
   }
   componentWillUnmount() {}
 
@@ -122,27 +122,27 @@ class resource extends React.Component {
         "."}${extension}`;
 
       file = {
+        __typename: "S3Object",
         bucket,
-        key,
         region,
+        key,
         mimeType,
-        localUri: this.state.selectedImage.uri
+        localUri: this.state.selectedImage
       };
     }
 
     this.props
       .createCompany({
-        id: `${uuid.v1()}`,
-        companyname: owner,
+        id: "",
+        companyname: resources.owner,
         email: payload.email,
-        phonenumber: "7704345548"
-        // resources,
-        // visibility: "public",
-        // file: []
+        phonenumber: "7704345548",
+        visibility: "public",
+        files: file
       })
       .then(data => {
         this.setState({ showActivityIndicator: false });
-        // this.props.navigation.push("Search");
+        console.log("Congrats...", data);
       })
       .catch(err => {
         console.log("error saving resource...", err);
@@ -216,7 +216,7 @@ class resource extends React.Component {
     };
 
     ImagePicker.showImagePicker(options, response => {
-      console.log("Response = ", response);
+      console.log("Response = ", response.mimeType);
 
       if (response.didCancel) {
         console.log("User cancelled photo picker");
@@ -228,7 +228,7 @@ class resource extends React.Component {
         let source = { uri: response.uri };
 
         // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        //let source = { uri: "data:image/jpeg;base64," + response.data };
 
         this.setState({
           avatarSource: source
