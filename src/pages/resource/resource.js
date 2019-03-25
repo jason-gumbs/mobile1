@@ -22,7 +22,7 @@ import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
 import { colors } from "../../Utils/theme";
-// import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
 import { createCompany } from "../../graphql/mutations";
@@ -31,6 +31,13 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 const { width, height } = Dimensions.get("window");
 
 let styles = {};
+
+Storage.configure({
+  AWSS3: {
+    bucket: "mobile1cf03fdb5f8214d64aaa06e794ebf3045", //Your bucket name;
+    region: "us-east-1" //Specify the region your bucket was created in;
+  }
+});
 
 class resource extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
@@ -58,6 +65,7 @@ class resource extends React.Component {
     selectedGenderIndex: null,
     isSelected: false,
     modalVisible: false,
+    key: "",
     input: {
       name: "",
       product: "",
@@ -97,45 +105,43 @@ class resource extends React.Component {
 
   AddResource = async e => {
     e.preventDefault();
-    this.setState({ showActivityIndicator: true });
+
+    // this.setState({ showActivityIndicator: true });
     // const { bucket, region } = this.props.navigation.state.params;
     const visibility = "public";
     const resources = this.state.input;
     const { identityId } = await Auth.currentCredentials();
-    const { payload } = this.props.navigation.state.params.idToken || "null";
-    const owner = payload["cognito:username"] || "null";
+    // const { payload } = this.props.navigation.state.params.idToken || "null";
+    // const owner = payload["cognito:username"] || "null";
     const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
     const region = "us-east-1";
-    resources.owner = owner;
+    //  resources.owner = owner;
     resources.content = "fowl";
     resources.id = `${uuid.v1()}`;
-    console.log(this.state.selectedImage.uri);
 
     let file;
-
-    if (this.state.selectedImage) {
-      const { fileName, type } = this.state.selectedImage;
-      const [, , , extension] = /([^.]+)(\.(\w+))?$/.exec(fileName);
-
-      const mimeType = type;
-      const key = `${visibility}/${identityId}/${uuid()}${extension &&
-        "."}${extension}`;
+    let location = "";
+    if (this.state.selectedImage.uri) {
+      await this.readImage(this.state.selectedImage).then(data =>
+        this.setState({ key: `${data.key}` })
+      );
 
       file = {
         __typename: "S3Object",
         bucket,
         region,
-        key,
-        mimeType,
-        localUri: this.state.selectedImage
+        key: this.state.key
       };
+    } else {
+      file = null;
     }
+    console.log(file);
 
     this.props
       .createCompany({
         id: "",
-        companyname: resources.owner,
-        email: payload.email,
+        companyname: "resources.owner",
+        email: "payload.email",
         phonenumber: "7704345548",
         visibility: "public",
         files: file
@@ -148,27 +154,8 @@ class resource extends React.Component {
         console.log("error saving resource...", err);
         this.setState({ showActivityIndicator: false });
       });
-    // console.log("****selectedImage*******", this.state.selectedImage);
-    //
-    // this.readImage(this.state.selectedImage)
-    //   .then(fileInfo => ({
-    //     ...items,
-    //     picKey: fileInfo && fileInfo.key
-    //   }))
-    //   .then(this.apiSaveResource)
-    //   .then(data => {
-    //     this.setState({ showActivityIndicator: false });
-    //     this.props.navigation.push("Search");
-    //   })
-    //   .catch(err => {
-    //     console.log("error saving resource...", err);
-    //     this.setState({ showActivityIndicator: false });
-    //   });
   };
 
-  async apiSaveResource(resource) {
-    return await API.post("freeApi", "/resource", { body: resource });
-  }
   updateInput = (key, value) => {
     this.setState(state => ({
       input: {
@@ -182,26 +169,29 @@ class resource extends React.Component {
     this.setState(() => ({ modalVisible: !this.state.modalVisible }));
   };
 
-  readImage(imageNode = null) {
+  async readImage(imageNode = null) {
     if (imageNode === null) {
       console.log("image null");
       return Promise.resolve();
     }
     const extension = mime.extension(imageNode.type);
     const imagePath = imageNode.uri;
-    const picName = `${uuid.v1()}.${extension}`;
+    const visibility = "public";
+    const { identityId } = await Auth.currentCredentials();
+    const picName = `${identityId}/${uuid.v1()}.${extension}`;
     const key = `${picName}`;
-    console.log(imagePath);
-    return files
-      .readFile(imagePath)
+    return await RNFetchBlob.fs
+      .readFile(imagePath, "base64")
+      .then(data => new Buffer(data, "base64"))
       .then(buffer =>
         Storage.put(key, buffer, {
           level: "public",
           contentType: imageNode.type
         })
-          .then(fileInfo => ({ key: fileInfo.key }))
-          .then(x => console.log("SAVED", x) || x)
       )
+      .then(fileInfo => ({ key: fileInfo.key }))
+      .then(x => console.log("SAVED", x) || x)
+
       .catch(err => console.log("********READIMAGE***********", err));
   }
 
@@ -236,7 +226,6 @@ class resource extends React.Component {
         this.setState({
           selectedImage: response
         });
-        console.log(this.state.selectedImage);
       }
     });
   };
