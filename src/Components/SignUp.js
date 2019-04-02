@@ -7,6 +7,9 @@ import LogoTitle from "./LogoTitle";
 import MyAppText from "./MyAppText";
 import Constants from "../Utils/constants";
 import { colors } from "../Utils/theme";
+import { createCompany } from "../graphql/mutations";
+import { listCompanys } from "../graphql/queries";
+import { graphql } from "react-apollo";
 
 class SignUp extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -28,7 +31,6 @@ class SignUp extends React.Component {
     };
   };
   state = {
-    showMFAPrompt: false,
     username: "",
     password: "",
     confirmpassword: "",
@@ -50,13 +52,23 @@ class SignUp extends React.Component {
         // other custom attributes
       }
     })
-      .then(data => console.log(data))
+      .then(data => {
+        this.props.createCompany({
+          id: "",
+          companyname: username,
+          email: email,
+          phonenumber: phoneNumber,
+          visibility: "public",
+          files: null
+        });
+      })
+      .then(mutationData => console.log(mutationData))
       .catch(err => console.log("Auth signup ", err));
   };
 
-  checkPhonePattern = phone => {
-    return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phone);
-  };
+  // checkPhonePattern = phone => {
+  //   return /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/.test(phone);
+  // };
 
   onPhoneSubmit(event) {
     const isValidPhone = this.checkPhonePattern(event.nativeEvent.text);
@@ -78,7 +90,7 @@ class SignUp extends React.Component {
           keyboardShouldPersistTaps="always"
         >
           <Input
-            label="Username"
+            label="Org. Name"
             labelStyle={{ color: "white", marginBottom: 5 }}
             autoCapitalize="none"
             autoCorrect={false}
@@ -202,8 +214,6 @@ class SignUp extends React.Component {
             }}
             inputStyle={{ marginLeft: 5, color: "white" }}
             value={this.state.phoneNumber}
-            onBlur={this.onPhoneSubmit}
-            onSubmitEditing={this.onPhoneSubmit}
             onChangeText={phoneNumber => this.setState({ phoneNumber })}
             leftIcon={{
               type: "font-awesome",
@@ -249,4 +259,35 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SignUp;
+export default graphql(createCompany, {
+  options: {
+    refetchQueries: [{ query: listCompanys }],
+    update: (dataProxy, { data: { createCompany } }) => {
+      const query = listCompanys;
+      const data = dataProxy.readQuery({ query });
+      data.listCompanys = {
+        ...data.listCompanys,
+        items: [...data.listCompanys.items, createCompany]
+      };
+      dataProxy.writeQuery({ query, data });
+    }
+  },
+  props: ({ ownProps, mutate }) => ({
+    createCompany: resource =>
+      mutate({
+        variables: { input: resource },
+        optimisticResponse: () => ({
+          createCompany: {
+            ...resource,
+            __typename: "Company",
+            file: { ...resource.file, __typename: "S3Object" },
+            resources: {
+              __typename: "ResourcePosts",
+              items: [],
+              nextToken: null
+            }
+          }
+        })
+      })
+  })
+})(SignUp);

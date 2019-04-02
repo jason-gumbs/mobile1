@@ -29,6 +29,8 @@ import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
 import SignLogo from "../../../src/Components/SignLogo";
 import SigninLogo from "../../../src/Components/SigninLogo";
+import { listCompanys } from "../../graphql/queries";
+import { graphql } from "react-apollo";
 import awsmobile from "../../aws-exports";
 import { colors } from "../../Utils/theme";
 
@@ -36,7 +38,6 @@ let styles = {};
 
 class search extends React.Component {
   static navigationOptions = ({ navigation }) => {
-    console.log(navigation.state.params);
     return {
       headerTitle: <LogoTitle />,
       headerRight:
@@ -99,12 +100,10 @@ class search extends React.Component {
           currentUser: err
         });
       });
-    Cache.getItem("resources").then(apiResponse => {
-      if (apiResponse) {
-        this.setState({ apiResponse });
-      }
-    });
-    this.loadResources();
+
+    console.log(this.props.companys.items);
+
+    // this.loadResources();
     this.props.navigation.setParams({
       handleSettingClick: this.handleSettingClick
     });
@@ -114,8 +113,8 @@ class search extends React.Component {
   }
 
   componentWillUnmount() {
-    Cache.removeItem("resources");
-    Cache.setItem("resources", this.state.apiResponse);
+    // Cache.removeItem("resources");
+    // Cache.setItem("resources", this.state.apiResponse);
   }
 
   async loadResources() {
@@ -276,4 +275,11 @@ styles = StyleSheet.create({
   }
 });
 
-export default search;
+export default graphql(listCompanys, {
+  options: {
+    fetchPolicy: "cache-and-network"
+  },
+  props: ({ data: { listCompanys: companys } }) => ({
+    companys
+  })
+})(search);

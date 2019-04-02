@@ -115,8 +115,6 @@ class resource extends React.Component {
     // const owner = payload["cognito:username"] || "null";
     const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
     const region = "us-east-1";
-    //  resources.owner = owner;
-    resources.content = "fowl";
     resources.id = `${uuid.v1()}`;
 
     let file;
