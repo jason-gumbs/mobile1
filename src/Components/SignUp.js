@@ -280,7 +280,10 @@ export default graphql(createCompany, {
           createCompany: {
             ...resource,
             __typename: "Company",
-            file: { ...resource.file, __typename: "S3Object" },
+            file:
+              resource.file == null
+                ? null
+                : { ...resource.file, __typename: "S3Object" },
             resources: {
               __typename: "ResourcePosts",
               items: [],

@@ -17,7 +17,7 @@ import {
 } from "react-native";
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
-import { graphql } from "react-apollo";
+import { graphql, compose } from "react-apollo";
 import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
@@ -25,8 +25,8 @@ import { colors } from "../../Utils/theme";
 import RNFetchBlob from "react-native-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
-import { createCompany } from "../../graphql/mutations";
-import { listCompanys } from "../../graphql/queries";
+import { createResource } from "../../graphql/mutations";
+import { listResources, listCompanys } from "../../graphql/queries";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 const { width, height } = Dimensions.get("window");
 
@@ -83,23 +83,36 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    // this.props
-    //   .createCompany({
-    //     id: "",
-    //     companyname: "create frelief blog",
-    //     email: "wilfred@knglegacyl.com",
-    //     phonenumber: "4045510080",
-    //     files: null,
-    //     visibility: "public"
-    //   })
-    //   .then(data => {
-    //     this.setState({ showActivityIndicator: false });
-    //     console.log("Congrats...", data);
-    //   })
-    //   .catch(err => {
-    //     console.log("error saving resource...", err);
-    //     this.setState({ showActivityIndicator: false });
-    //   });
+    console.log(this.props.companys.items[0].id);
+    this.props
+      .createResource({
+        id: "",
+        name: "create frelief blog",
+        file: null,
+        // files: null,
+        visibility: "public",
+        product: "String",
+        address: "String",
+        location: "String",
+        owner: "String",
+        offering: "String",
+        category: "String",
+        city: "String",
+        description: "String",
+        number: "String",
+        state: "String",
+        zip: "String",
+        content: "String",
+        resourceCompanyId: this.props.companys.items[0].id
+      })
+      .then(data => {
+        this.setState({ showActivityIndicator: false });
+        console.log("Congrats...", data);
+      })
+      .catch(err => {
+        console.log("error saving resource...", err);
+        this.setState({ showActivityIndicator: false });
+      });
   }
   componentWillUnmount() {}
 
@@ -136,7 +149,7 @@ class resource extends React.Component {
     console.log(file);
 
     this.props
-      .createCompany({
+      .createResource({
         id: "",
         companyname: "resources.owner",
         email: "payload.email",
@@ -549,35 +562,37 @@ styles = StyleSheet.create({
   }
 });
 
-export default graphql(createCompany, {
-  options: {
-    refetchQueries: [{ query: listCompanys }],
-    update: (dataProxy, { data: { createCompany } }) => {
-      const query = listCompanys;
-      const data = dataProxy.readQuery({ query });
-      data.listCompanys = {
-        ...data.listCompanys,
-        items: [...data.listCompanys.items, createCompany]
-      };
-      dataProxy.writeQuery({ query, data });
-    }
-  },
-  props: ({ ownProps, mutate }) => ({
-    createCompany: resource =>
-      mutate({
-        variables: { input: resource },
-        optimisticResponse: () => ({
-          createCompany: {
-            ...resource,
-            __typename: "Company",
-            file: { ...resource.file, __typename: "S3Object" },
-            resources: {
+export default compose(
+  graphql(listCompanys, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    props: ({ data: { listCompanys: companys } }) => ({
+      companys
+    })
+  }),
+  graphql(createResource, {
+    props: props => ({
+      createResource: resource =>
+        props.mutate({
+          variables: { input: resource },
+          optimisticResponse: () => ({
+            createResource: {
+              ...resource,
               __typename: "ResourcePosts",
-              items: [],
-              nextToken: null
+              file:
+                resource.file == null
+                  ? null
+                  : { ...resource.file, __typename: "S3Object" },
+              comment: {
+                __typename: "Comment",
+                items: [],
+                nextToken: null
+              },
+              company: null
             }
-          }
+          })
         })
-      })
+    })
   })
-})(resource);
+)(resource);

@@ -1,6 +1,8 @@
 // eslint-disable
 // this is an auto generated file. This will be overwritten
+
 import gql from "graphql-tag";
+
 export const getCompany = gql`
   query GetCompany($id: ID!) {
     getCompany(id: $id) {
@@ -36,6 +38,7 @@ export const getCompany = gql`
     }
   }
 `;
+
 export const listCompanys = gql`
   query ListCompanys(
     $filter: ModelCompanyFilterInput
