@@ -29,7 +29,7 @@ import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
 import SignLogo from "../../../src/Components/SignLogo";
 import SigninLogo from "../../../src/Components/SigninLogo";
-import { listCompanys } from "../../graphql/queries";
+import { listResources } from "../../graphql/queries";
 import { graphql } from "react-apollo";
 import awsmobile from "../../aws-exports";
 import { colors } from "../../Utils/theme";
@@ -101,7 +101,7 @@ class search extends React.Component {
         });
       });
 
-    console.log(this.props.companys.items);
+    console.log(this.props.resources.nextToken);
 
     // this.loadResources();
     this.props.navigation.setParams({
@@ -144,7 +144,7 @@ class search extends React.Component {
     this.props.navigation.navigate("Settings", this.state.currentUser);
   handleSigninClick = e => this.props.navigation.navigate("SignIn");
 
-  keyExtractor = (item, index) => item.resourceId;
+  keyExtractor = (item, index) => item.id;
 
   renderItem = ({ item }) => (
     <Card
@@ -206,7 +206,7 @@ class search extends React.Component {
           />
           <FlatList
             keyExtractor={this.keyExtractor}
-            data={this.state.apiResponse}
+            data={this.props.resources.items}
             renderItem={this.renderItem}
           />
         </ScrollView>
@@ -275,11 +275,11 @@ styles = StyleSheet.create({
   }
 });
 
-export default graphql(listCompanys, {
+export default graphql(listResources, {
   options: {
     fetchPolicy: "cache-and-network"
   },
-  props: ({ data: { listCompanys: companys } }) => ({
-    companys
+  props: props => ({
+    resources: props.data.listResources ? props.data.listResources : []
   })
 })(search);
