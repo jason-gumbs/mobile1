@@ -10,7 +10,6 @@ import resource from "./src/pages/resource";
 import viewResource from "./src/pages/viewResource";
 import search from "./src/pages/search";
 import home from "./src/pages/home";
-import map from "./src/pages/map";
 import SignIn from "./src/Components/LogIn";
 import UserConfirm from "./src/Components/UserConfirm";
 import SignUp from "./src/Components/SignUp";

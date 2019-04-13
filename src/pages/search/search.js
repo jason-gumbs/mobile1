@@ -54,6 +54,7 @@ class search extends React.Component {
       headerStyle: {
         backgroundColor: "#0D1E30",
         shadowColor: "transparent",
+        borderBottomWidth: 0,
         elevation: 0,
         shadowOpacity: 0
       }

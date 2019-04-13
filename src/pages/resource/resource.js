@@ -45,6 +45,7 @@ class resource extends React.Component {
       title: "List an item",
       headerStyle: {
         backgroundColor: "#0D1E30",
+        borderBottomWidth: 0,
         shadowColor: "transparent",
         elevation: 0,
         shadowOpacity: 0

@@ -24,6 +24,7 @@ class LogIn extends React.Component {
     headerStyle: {
       backgroundColor: "#0D1E30",
       shadowColor: "transparent",
+      borderBottomWidth: 0,
       elevation: 0,
       shadowOpacity: 0
     },
@@ -230,6 +231,7 @@ const styles = StyleSheet.create({
   image_view: {
     alignItems: "center"
   },
+  header:{},
   container: {
     paddingRight: 20,
     paddingLeft: 20,
