@@ -85,35 +85,35 @@ class resource extends React.Component {
 
   componentDidMount() {
     console.log(this.props.companys.items[0].id);
-    this.props
-      .createResource({
-        id: "",
-        name: "create frelief blog",
-        file: null,
-        // files: null,
-        visibility: "public",
-        product: "String",
-        address: "String",
-        location: "String",
-        owner: "String",
-        offering: "String",
-        category: "String",
-        city: "String",
-        description: "String",
-        number: "String",
-        state: "String",
-        zip: "String",
-        content: "String",
-        resourceCompanyId: this.props.companys.items[0].id
-      })
-      .then(data => {
-        this.setState({ showActivityIndicator: false });
-        console.log("Congrats...", data);
-      })
-      .catch(err => {
-        console.log("error saving resource...", err);
-        this.setState({ showActivityIndicator: false });
-      });
+    // this.props
+    //   .createResource({
+    //     id: "",
+    //     name: "create frelief blog",
+    //     file: null,
+    //     // files: null,
+    //     visibility: "public",
+    //     product: "String",
+    //     address: "String",
+    //     location: "String",
+    //     owner: "String",
+    //     offering: "String",
+    //     category: "String",
+    //     city: "String",
+    //     description: "String",
+    //     number: "String",
+    //     state: "String",
+    //     zip: "String",
+    //     content: "String",
+    //     resourceCompanyId: this.props.companys.items[0].id
+    //   })
+    //   .then(data => {
+    //     this.setState({ showActivityIndicator: false });
+    //     console.log("Congrats...", data);
+    //   })
+    //   .catch(err => {
+    //     console.log("error saving resource...", err);
+    //     this.setState({ showActivityIndicator: false });
+    //   });
   }
   componentWillUnmount() {}
 
@@ -407,16 +407,27 @@ class resource extends React.Component {
             textInputRef="descriptionInput"
             value={this.state.input.description}
           />
-
+          <Text
+            style={{
+              color: "white",
+              fontSize: 16,
+              fontWeight: "bold",
+              marginLeft: 11,
+              marginBottom: 3
+            }}
+          >
+            Category
+          </Text>
           <Picker
             selectedValue={this.state.input.category}
-            itemStyle={{ color: "white" }}
+            itemStyle={{ color: "white", height: 44 }}
             style={{
               marginLeft: 12,
               color: "white",
               borderWidth: 0.5,
               shadowColor: "white",
-              borderColor: "white"
+              borderColor: "white",
+              height: 44
             }}
             borderStyle="solid"
             onValueChange={(itemValue, itemIndex) =>

@@ -102,7 +102,7 @@ class search extends React.Component {
         });
       });
 
-    console.log(this.props.resources.nextToken);
+    console.log(this.props.resources);
 
     // this.loadResources();
     this.props.navigation.setParams({
