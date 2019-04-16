@@ -137,7 +137,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-maps')
     implementation project(':react-native-vector-icons')
     implementation project(':amazon-cognito-identity-js')
     implementation project(':react-native-splash-screen')
