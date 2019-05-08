@@ -19,19 +19,41 @@ import { createStackNavigator } from "react-navigation";
 import { Auth, API, Storage, Logger } from "aws-amplify";
 import ImagePicker from "react-native-image-picker";
 import { colors } from "../Utils/theme";
+import { updateCompany } from "../graphql/mutations";
+import { listCompanys } from "../graphql/queries";
+import { graphql, compose } from "react-apollo";
 import Constants from "../Utils/constants";
 import files from "../Utils/files";
 import uuid from "react-native-uuid";
+import LogoTitle from "./LogoTitle";
 import mime from "mime-types";
-// import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "react-native-fetch-blob";
 
 const { width } = Dimensions.get("window");
 const logger = new Logger("foo");
 
+Storage.configure({
+  AWSS3: {
+    bucket: "mobile1cf03fdb5f8214d64aaa06e794ebf3045", //Your bucket name;
+    region: "us-east-1" //Specify the region your bucket was created in;
+  }
+});
+
 class Settings extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(navigation.state.params.idToken.payload) || {
-      title: `hey`
+    console.log("") || {
+      title: "Settings",
+      headerStyle: {
+        backgroundColor: "#0D1E30",
+        borderBottomWidth: 0,
+        shadowColor: "transparent",
+        elevation: 0,
+        shadowOpacity: 0
+      },
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerTintColor: "white"
     };
   state = {
     showActivityIndicator: false,
@@ -40,7 +62,13 @@ class Settings extends React.Component {
     avatarSource: null,
     apiResponse: null,
     selectedImage: {},
-    user: { userId: "", usersid: "" }
+    user: { userId: "", usersid: "" },
+    key: "",
+    input: {
+      companyname: "",
+      email: "",
+      phonenumber: ""
+    }
   };
 
   async onLogIn() {
@@ -53,86 +81,85 @@ class Settings extends React.Component {
       .then(data => console.log(data))
       .catch(err => console.log(err));
   }
-  AddUser = async () => {
-    const resourceInfo = {};
-    resourceInfo.usersid = `${uuid.v1()}`;
-    console.log("###################", resourceInfo);
+  AddUser = async e => {
+    e.preventDefault();
 
-    const { node: imageNode } = this.state.selectedImage;
-    this.setState({ showActivityIndicator: true });
-    console.log("****selectedImage*******", this.state.selectedImage);
+    // this.setState({ showActivityIndicator: true });
+    // const { bucket, region } = this.props.navigation.state.params;
+    const visibility = "public";
+    const company = this.state.input;
+    const { identityId } = await Auth.currentCredentials();
+    // const { payload } = this.props.navigation.state.params.idToken || "null";
+    // const owner = payload["cognito:username"] || "null";
+    const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
+    const region = "us-east-1";
+    let file;
+    let location = "";
+    if (this.state.selectedImage.uri) {
+      await this.readImage(this.state.selectedImage).then(data =>
+        this.setState({ key: `${data.key}` })
+      );
 
-    this.readImage(this.state.selectedImage)
-      .then(fileInfo => ({
-        ...resourceInfo,
-        picKey: fileInfo && fileInfo.key
-      }))
-      .then(this.apiSaveUser)
+      file = {
+        __typename: "S3Object",
+        bucket,
+        region,
+        key: this.state.key
+      };
+    } else {
+      file = null;
+    }
+    console.log(file);
+
+    this.props
+      .updateCompany({
+        id: this.props.companys.items[0].id,
+        companyname:
+          company.companyname || this.props.companys.items[0].companyname,
+        email: company.email || this.props.companys.items[0].email,
+        phonenumber:
+          company.phoneNumber || this.props.companys.items[0].phoneNumber,
+        visibility: "public",
+        files: file
+      })
       .then(data => {
         this.setState({ showActivityIndicator: false });
+        console.log("Congrats...", data);
       })
       .catch(err => {
         console.log("error saving resource...", err);
         this.setState({ showActivityIndicator: false });
       });
   };
-  apiSaveUser = async resource => {
-    return await API.post("Users", "/Users", {
-      body: resource
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
-  };
-  readImage = (imageNode = null) => {
+
+  async readImage(imageNode = null) {
     if (imageNode === null) {
       console.log("image null");
       return Promise.resolve();
     }
     const extension = mime.extension(imageNode.type);
     const imagePath = imageNode.uri;
-    const picName = `${uuid.v1()}.${extension}`;
+    const visibility = "public";
+    const { identityId } = await Auth.currentCredentials();
+    const picName = `${identityId}/${uuid.v1()}.${extension}`;
     const key = `${picName}`;
-    console.log(imagePath);
-    return files
-      .readFile(imagePath)
+    return await RNFetchBlob.fs
+      .readFile(imagePath, "base64")
+      .then(data => new Buffer(data, "base64"))
       .then(buffer =>
         Storage.put(key, buffer, {
           level: "public",
           contentType: imageNode.type
         })
-          .then(fileInfo => ({ key: fileInfo.key }))
-          .then(x => console.log("SAVED", x) || x)
       )
+      .then(fileInfo => ({ key: fileInfo.key }))
+      .then(x => console.log("SAVED", x) || x)
+
       .catch(err => console.log("********READIMAGE***********", err));
-  };
-  async loadUser() {
-    this.setState({ showActivityIndicator: true });
-    return await API.get("Users", "/Users/123")
-      .then(apiResponse => {
-        return Promise.all(
-          apiResponse.map(async Resource => {
-            const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
-            const picUrl =
-              Resource.picKey && (await Storage.get(key, { level: "public" }));
-            return { ...Resource, picUrl };
-          })
-        );
-      })
-      .then(apiResponse => {
-        this.setState({ apiResponse, showActivityIndicator: false });
-      })
-      .catch(e => {
-        this.setState({ apiResponse: e.message, showActivityIndicator: false });
-        console.log(e.message);
-      });
   }
 
   componentDidMount() {
-    this.loadUser();
+    console.log(this.props.companys.items[0]);
   }
   componentWillUnmount() {}
   selectPhotoTapped = () => {
@@ -171,7 +198,7 @@ class Settings extends React.Component {
   };
 
   render() {
-    const { payload } = this.props.navigation.state.params.idToken;
+    const { payload } = this.props.companys.items[0];
     return (
       <View style={styles.bla}>
         <Modal
@@ -182,14 +209,14 @@ class Settings extends React.Component {
           <ActivityIndicator size="large" />
         </Modal>
         <View style={styles.image_view}>
-          {this.state.apiResponse !== null ||
+          {this.props.companys.items[0].files.key !== null ||
           this.state.avatarSource !== null ? (
             <Avatar
               size="xlarge"
               rounded
               source={
                 this.state.avatarSource === null
-                  ? { uri: this.state.apiResponse[0].picUrl }
+                  ? { uri: this.props.companys.items[0].files.key }
                   : this.state.avatarSource
               }
               onPress={this.selectPhotoTapped}
@@ -209,20 +236,22 @@ class Settings extends React.Component {
         </View>
         <View style={styles.formContainer}>
           <Text style={{ color: "white" }}>
-            Username: {payload["cognito:username"] || "hey"}
+            Username: {this.props.companys.items[0].companyname || "N/A"}
           </Text>
           <Text style={{ color: "white" }}>
-            Email: {payload.email || "hey"}
+            Email: {this.props.companys.items[0].email || "N/A"}
+          </Text>
+          <Text style={{ color: "white" }}>
+            Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
           </Text>
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{
               borderRadius: 30,
-              marginLeft: 0,
-              marginRight: 0,
-              marginBottom: 0,
-              height: 40
+              height: 40,
+              width: "75%"
             }}
+            containerStyle={{ marginLeft: 50 }}
             onPress={this.AddUser}
             title="Update Profile"
           />
@@ -244,7 +273,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#0D1E30"
   },
   formContainer: {
+    flex: 1,
     justifyContent: "space-around",
+
     height: 420
   },
   image_view: {
@@ -258,4 +289,48 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Settings;
+export default compose(
+  graphql(listCompanys, {
+    options: {
+      fetchPolicy: "cache-and-network"
+    },
+    props: ({ data: { listCompanys: companys } }) => ({
+      companys
+    })
+  }),
+  graphql(updateCompany, {
+    options: {
+      refetchQueries: [{ query: listCompanys }],
+      update: (dataProxy, { data: { updateCompany } }) => {
+        const query = listCompanys;
+        const data = dataProxy.readQuery({ query });
+        data.listCompanys = {
+          ...data.listCompanys,
+          items: [...data.listCompanys.items, updateCompany]
+        };
+        dataProxy.writeQuery({ query, data });
+      }
+    },
+    props: ({ ownProps, mutate }) => ({
+      updateCompany: resource =>
+        mutate({
+          variables: { input: resource },
+          optimisticResponse: () => ({
+            updateCompany: {
+              ...resource,
+              __typename: "Company",
+              file:
+                resource.file == null
+                  ? null
+                  : { ...resource.file, __typename: "S3Object" },
+              resources: {
+                __typename: "ResourcePosts",
+                items: [],
+                nextToken: null
+              }
+            }
+          })
+        })
+    })
+  })
+)(Settings);

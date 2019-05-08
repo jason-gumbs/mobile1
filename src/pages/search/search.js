@@ -281,6 +281,17 @@ export default graphql(listResources, {
     fetchPolicy: "cache-and-network"
   },
   props: props => ({
-    resources: props.data.listResources ? props.data.listResources : []
+    resources: props.data.listResources ? props.data.listResources : [],
+    onSearch: searchQuery => {
+      return props.data.fetchMore({
+        updateQuery: (previousResult, { fetchMoreResult }) => ({
+          ...previousResult,
+          listResources: {
+            ...previousResult.listResources,
+            items: fetchMoreResult.listResources.items
+          }
+        })
+      });
+    }
   })
 })(search);

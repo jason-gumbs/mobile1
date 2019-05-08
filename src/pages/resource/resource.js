@@ -88,23 +88,23 @@ class resource extends React.Component {
     // this.props
     //   .createResource({
     //     id: "",
-    //     name: "create frelief blog",
+    //     name: "create frelief blog1",
     //     file: null,
     //     // files: null,
     //     visibility: "public",
-    //     product: "String",
-    //     address: "String",
-    //     location: "String",
-    //     owner: "String",
-    //     offering: "String",
-    //     category: "String",
-    //     city: "String",
-    //     description: "String",
-    //     number: "String",
+    //     product: "String1",
+    //     address: "String1",
+    //     location: "String1",
+    //     owner: "Strin1g",
+    //     offering: "String1",
+    //     category: "String1",
+    //     city: "String1",
+    //     description: "String1",
+    //     number: "String1",
     //     state: "String",
     //     zip: "String",
     //     content: "String",
-    //     resourceCompanyId: this.props.companys.items[0].id
+    //     resourceCompanyId: this.props.companys.items[0].id || "null"
     //   })
     //   .then(data => {
     //     this.setState({ showActivityIndicator: false });
