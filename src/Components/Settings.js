@@ -62,6 +62,7 @@ class Settings extends React.Component {
     avatarSource: null,
     apiResponse: null,
     selectedImage: {},
+    picUrl: null,
     user: { userId: "", usersid: "" },
     key: "",
     input: {
@@ -99,12 +100,18 @@ class Settings extends React.Component {
       await this.readImage(this.state.selectedImage).then(data =>
         this.setState({ key: `${data.key}` })
       );
+      await Storage.get(this.state.key, { bucket, region })
+        .then(result => {
+          console.log("Success");
+          this.setState({ picUrl: result });
+        })
+        .catch(err => console.log("error", err));
 
       file = {
         __typename: "S3Object",
         bucket,
         region,
-        key: this.state.key
+        key: this.state.picUrl
       };
     } else {
       file = null;
@@ -118,7 +125,7 @@ class Settings extends React.Component {
           company.companyname || this.props.companys.items[0].companyname,
         email: company.email || this.props.companys.items[0].email,
         phonenumber:
-          company.phoneNumber || this.props.companys.items[0].phoneNumber,
+          company.phonenumber || this.props.companys.items[0].phonenumber,
         visibility: "public",
         files: file
       })
@@ -141,7 +148,8 @@ class Settings extends React.Component {
     const imagePath = imageNode.uri;
     const visibility = "public";
     const { identityId } = await Auth.currentCredentials();
-    const picName = `${identityId}/${uuid.v1()}.${extension}`;
+    const picName = `${visibility}/${identityId}/${uuid.v1()}${extension &&
+      "."}${extension}`;
     const key = `${picName}`;
     return await RNFetchBlob.fs
       .readFile(imagePath, "base64")
@@ -158,9 +166,7 @@ class Settings extends React.Component {
       .catch(err => console.log("********READIMAGE***********", err));
   }
 
-  componentDidMount() {
-    console.log(this.props.companys.items[0]);
-  }
+  componentDidMount() {}
   componentWillUnmount() {}
   selectPhotoTapped = () => {
     const options = {
@@ -199,6 +205,7 @@ class Settings extends React.Component {
 
   render() {
     const { payload } = this.props.companys.items[0];
+
     return (
       <View style={styles.bla}>
         <Modal
@@ -209,14 +216,14 @@ class Settings extends React.Component {
           <ActivityIndicator size="large" />
         </Modal>
         <View style={styles.image_view}>
-          {this.props.companys.items[0].files.key !== null ||
+          {this.props.companys.items[0].files !== null ||
           this.state.avatarSource !== null ? (
             <Avatar
               size="xlarge"
               rounded
               source={
                 this.state.avatarSource === null
-                  ? { uri: this.props.companys.items[0].files.key }
+                  ? { uri: this.props.companys.items[0].files[0].key }
                   : this.state.avatarSource
               }
               onPress={this.selectPhotoTapped}

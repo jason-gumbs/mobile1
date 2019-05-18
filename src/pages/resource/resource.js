@@ -67,6 +67,7 @@ class resource extends React.Component {
     isSelected: false,
     modalVisible: false,
     key: "",
+    picUrl: null,
     input: {
       name: "",
       product: "",
@@ -137,12 +138,18 @@ class resource extends React.Component {
       await this.readImage(this.state.selectedImage).then(data =>
         this.setState({ key: `${data.key}` })
       );
+      await Storage.get(this.state.key, { bucket, region })
+        .then(result => {
+          console.log("Success");
+          this.setState({ picUrl: result });
+        })
+        .catch(err => console.log("error", err));
 
       file = {
         __typename: "S3Object",
         bucket,
         region,
-        key: this.state.key
+        key: this.state.picUrl
       };
     } else {
       file = null;
