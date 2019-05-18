@@ -197,7 +197,8 @@ class resource extends React.Component {
     const imagePath = imageNode.uri;
     const visibility = "public";
     const { identityId } = await Auth.currentCredentials();
-    const picName = `${identityId}/${uuid.v1()}.${extension}`;
+    const picName = `${visibility}/${identityId}/${uuid.v1()}${extension &&
+      "."}${extension}`;
     const key = `${picName}`;
     return await RNFetchBlob.fs
       .readFile(imagePath, "base64")
