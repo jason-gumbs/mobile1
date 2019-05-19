@@ -28,6 +28,7 @@ import mime from "mime-types";
 import { createResource } from "../../graphql/mutations";
 import { listResources, listCompanys } from "../../graphql/queries";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { REACT_APP_GKEY } from "react-native-dotenv";
 const { width, height } = Dimensions.get("window");
 
 let styles = {};
@@ -159,11 +160,22 @@ class resource extends React.Component {
     this.props
       .createResource({
         id: "",
-        companyname: "resources.owner",
-        email: "payload.email",
-        phonenumber: "7704345548",
-        visibility: "public",
-        files: file
+        name: this.state.input.name || "",
+        files: file,
+        visibility: visibility,
+        product: this.state.input.product || "",
+        address: this.state.input.address || "",
+        location: this.state.input.location || "",
+        owner: identityId || "UNAUHTH",
+        offering: this.state.input.offering || "",
+        category: this.state.input.category || "",
+        city: this.state.input.city || "",
+        description: this.state.input.description || "",
+        number: this.state.input.number || "",
+        state: this.state.input.state || "",
+        zip: this.state.input.zip || "",
+        content: "String",
+        resourceCompanyId: this.props.companys.items[0].id || "null"
       })
       .then(data => {
         this.setState({ showActivityIndicator: false });
@@ -346,7 +358,7 @@ class resource extends React.Component {
             fetchDetails={true}
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
-              key: "",
+              key: process.env.REACT_APP_GKEY || "",
               language: "en", // language of the results
               types: "address" // default: 'geocode'
             }}
@@ -365,7 +377,6 @@ class resource extends React.Component {
               },
               textInput: {
                 width: "75%",
-
                 color: "white",
                 fontSize: 16,
                 backgroundColor: "#0D1E30"

@@ -26,6 +26,7 @@ android/app/build
 .gradle
 local.properties
 *.iml
+.env
 
 android/app/src/main/res/values/secrets.xml
 
