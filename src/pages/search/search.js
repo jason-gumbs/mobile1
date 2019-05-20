@@ -113,30 +113,7 @@ class search extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    // Cache.removeItem("resources");
-    // Cache.setItem("resources", this.state.apiResponse);
-  }
-
-  async loadResources() {
-    return await API.get("freeApi", "/resource")
-      .then(apiResponse => {
-        return Promise.all(
-          apiResponse.map(async Resource => {
-            const [, , , key] = /(([^\/]+\/){2})?(.+)$/.exec(Resource.picKey);
-            const picUrl =
-              Resource.picKey && (await Storage.get(key, { level: "public" }));
-            return { ...Resource, picUrl };
-          })
-        );
-      })
-      .then(apiResponse => {
-        this.setState({ apiResponse, loading: false });
-      })
-      .catch(e => {
-        this.setState({ apiResponse: e.message, loading: false });
-      });
-  }
+  componentWillUnmount() {}
 
   handleAddResource = e =>
     this.props.navigation.push("Resource", this.state.currentUser);
@@ -151,7 +128,7 @@ class search extends React.Component {
     <Card
       image={{
         uri:
-          item.picUrl ||
+          item.file.key ||
           "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
       }}
       containerStyle={{ borderWidth: 0, borderRadius: 10 }}

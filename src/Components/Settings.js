@@ -27,7 +27,7 @@ import files from "../Utils/files";
 import uuid from "react-native-uuid";
 import LogoTitle from "./LogoTitle";
 import mime from "mime-types";
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 
 const { width } = Dimensions.get("window");
 const logger = new Logger("foo");

@@ -22,13 +22,13 @@ import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
 import { colors } from "../../Utils/theme";
-import RNFetchBlob from "react-native-fetch-blob";
+import RNFetchBlob from "rn-fetch-blob";
 import uuid from "react-native-uuid";
 import mime from "mime-types";
 import { createResource } from "../../graphql/mutations";
 import { listResources, listCompanys } from "../../graphql/queries";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { REACT_APP_GKEY } from "react-native-dotenv";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 const { width, height } = Dimensions.get("window");
 
 let styles = {};
@@ -87,6 +87,7 @@ class resource extends React.Component {
 
   componentDidMount() {
     console.log(this.props.companys.items[0].id);
+    console.log(process.env);
     // this.props
     //   .createResource({
     //     id: "",
@@ -160,20 +161,20 @@ class resource extends React.Component {
     this.props
       .createResource({
         id: "",
-        name: this.state.input.name || "",
-        files: file,
+        name: this.state.input.name || " N/A",
+        file: file,
         visibility: visibility,
-        product: this.state.input.product || "",
-        address: this.state.input.address || "",
-        location: this.state.input.location || "",
+        product: this.state.input.product || "N/A",
+        address: this.state.input.address || "N/A",
+        location: this.state.input.location || "N/A",
         owner: identityId || "UNAUHTH",
-        offering: this.state.input.offering || "",
-        category: this.state.input.category || "",
-        city: this.state.input.city || "",
-        description: this.state.input.description || "",
-        number: this.state.input.number || "",
-        state: this.state.input.state || "",
-        zip: this.state.input.zip || "",
+        offering: this.state.input.offering || "N/A",
+        category: this.state.input.category || "N/A",
+        city: this.state.input.city || "N/A",
+        description: this.state.input.description || "N/A",
+        number: this.state.input.number || "N/A",
+        state: this.state.input.state || "N/A",
+        zip: this.state.input.zip || "N/A",
         content: "String",
         resourceCompanyId: this.props.companys.items[0].id || "null"
       })
@@ -280,9 +281,9 @@ class resource extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView
-          style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="always"
         >
           <View style={styles.image_view}>
@@ -338,6 +339,7 @@ class resource extends React.Component {
           >
             Address
           </Text>
+
           <GooglePlacesAutocomplete
             placeholder=""
             onPress={(data, details = null) => {
@@ -351,7 +353,7 @@ class resource extends React.Component {
               );
             }}
             getDefaultValue={() => ""}
-            listViewDisplayed="false"
+            listViewDisplayed="true"
             minLength={2}
             selectionColor={"white"}
             autoFocus={false}
@@ -374,6 +376,10 @@ class resource extends React.Component {
                 padding: 5,
                 width: "85%",
                 marginLeft: 20
+              },
+              description: {
+                fontWeight: "bold",
+                color: "white"
               },
               textInput: {
                 width: "75%",

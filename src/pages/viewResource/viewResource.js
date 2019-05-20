@@ -7,7 +7,7 @@ import { Popup } from "react-native-map-link";
 
 class viewResource extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(screenProps) || {
+    console.log(navigation.state.params.item) || {
       title: `${navigation.state.params.item.name}`
     };
   state = {
@@ -27,7 +27,7 @@ class viewResource extends React.Component {
         <Card
           image={{
             uri:
-              item.picUrl ||
+              item.file.key ||
               "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
           }}
           containerStyle={{ borderWidth: 0, borderRadius: 10 }}
