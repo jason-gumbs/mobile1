@@ -162,35 +162,43 @@ class search extends React.Component {
       }
     }));
   };
+  renderHeader = () => {
+    return (
+      <SearchBar
+        round
+        onChangeText={this.updateInput}
+        containerStyle={{
+          backgroundColor: "#0D1E30",
+          borderColor: "#0D1E30",
+          borderBottomWidth: 0,
+          borderTopWidth: 0
+        }}
+        inputStyle={{ backgroundColor: "white" }}
+        placeholder="Search"
+      />
+    );
+  };
+
+  renderFooter = () => {
+    return (
+      <Footer
+        handleAddResource={this.handleAddResource}
+        handleHome={this.handleHome}
+      />
+    );
+  };
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
-        <ScrollView
+        <FlatList
+          keyExtractor={this.keyExtractor}
+          data={this.props.resources.items}
+          renderItem={this.renderItem}
+          ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
-        >
-          <SearchBar
-            round
-            onChangeText={this.updateInput}
-            containerStyle={{
-              backgroundColor: "#0D1E30",
-              borderColor: "#0D1E30",
-              borderBottomWidth: 0,
-              borderTopWidth: 0
-            }}
-            inputStyle={{ backgroundColor: "white" }}
-            placeholder="Search"
-          />
-          <FlatList
-            keyExtractor={this.keyExtractor}
-            data={this.props.resources.items}
-            renderItem={this.renderItem}
-          />
-        </ScrollView>
-        <Footer
-          handleAddResource={this.handleAddResource}
-          handleHome={this.handleHome}
         />
       </View>
     );
@@ -259,16 +267,12 @@ export default graphql(listResources, {
   },
   props: props => ({
     resources: props.data.listResources ? props.data.listResources : [],
-    onSearch: searchQuery => {
-      return props.data.fetchMore({
-        updateQuery: (previousResult, { fetchMoreResult }) => ({
-          ...previousResult,
-          listResources: {
-            ...previousResult.listResources,
-            items: fetchMoreResult.listResources.items
-          }
-        })
-      });
-    }
+    updateQuery: (previousResult, { fetchMoreResult }) => ({
+      ...previousResult,
+      listResources: {
+        ...previousResult.listResources,
+        items: fetchMoreResult.listResources.items
+      }
+    })
   })
 })(search);

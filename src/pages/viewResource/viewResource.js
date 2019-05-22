@@ -4,12 +4,21 @@ import { Card, ListItem, Button } from "react-native-elements";
 import { colors } from "../../Utils/theme";
 import { Storage } from "aws-amplify";
 import { Popup } from "react-native-map-link";
+import LogoTitle from "../../../src/Components/LogoTitle";
 
 class viewResource extends React.Component {
-  static navigationOptions = ({ navigation, screenProps }) =>
-    console.log(navigation.state.params.item) || {
-      title: `${navigation.state.params.item.name}`
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: <LogoTitle />,
+      headerStyle: {
+        backgroundColor: "#0D1E30",
+        shadowColor: "transparent",
+        borderBottomWidth: 0,
+        elevation: 0,
+        shadowOpacity: 0
+      }
     };
+  };
   state = {
     isVisible: false,
     geoLoc: {}
@@ -37,8 +46,8 @@ class viewResource extends React.Component {
             {item.description || "No description"}
           </Text>
           <Text style={styles.info}>{item.address || "No breed"}</Text>
-          <Text style={styles.info}>{"birthDay"}</Text>
-          <Text style={styles.info}>{lat || "No gender"}</Text>
+          <Text style={styles.info}>{item.description || "birthDay"}</Text>
+          <Text style={styles.info}>{item.number || "No gender"}</Text>
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{
