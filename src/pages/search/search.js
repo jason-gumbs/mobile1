@@ -83,7 +83,7 @@ class search extends React.Component {
     },
     showActivityIndicator: false,
     apiResponse: null,
-    loading: true,
+    loading: false,
     modalVisible: false
   };
 
@@ -187,10 +187,24 @@ class search extends React.Component {
       />
     );
   };
+  getMorePost = () => {
+    this.setState({ loading: true });
+    this.props
+      .loadMorePosts()
+      .then(data => {
+        this.setState({ loading: false });
+        console.log("Congrats...", data);
+      })
+      .catch(err => {
+        console.log("error saving resource...", err);
+        this.setState({ loading: false });
+      });
+  };
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
         <FlatList
+          refreshing={this.state.loading}
           keyExtractor={this.keyExtractor}
           data={this.props.resources.items}
           renderItem={this.renderItem}
@@ -199,6 +213,7 @@ class search extends React.Component {
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
+          onRefresh={this.props.loadMorePosts}
         />
       </View>
     );
@@ -263,16 +278,30 @@ styles = StyleSheet.create({
 
 export default graphql(listResources, {
   options: {
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "network-only"
   },
   props: props => ({
     resources: props.data.listResources ? props.data.listResources : [],
-    updateQuery: (previousResult, { fetchMoreResult }) => ({
-      ...previousResult,
-      listResources: {
-        ...previousResult.listResources,
-        items: fetchMoreResult.listResources.items
-      }
-    })
+    loadMorePosts: () => {
+      props.data.fetchMore({
+        variables: {
+          skip: props.data.listResources.length
+        },
+        updateQuery: (prevState, { fetchMoreResult }) => {
+          if (!fetchMoreResult) return prevState;
+
+          return {
+            ...prevState,
+            listResources: {
+              ...prevState.listResources,
+              items: [
+                ...prevState.listResources.items,
+                ...fetchMoreResult.listResources.items
+              ]
+            }
+          };
+        }
+      });
+    }
   })
 })(search);
