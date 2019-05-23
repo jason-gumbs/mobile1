@@ -1,5 +1,5 @@
 import React from "react";
-import { Image } from "react-native";
+import { Image, Platform } from "react-native";
 
 class LogoTitle extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class LogoTitle extends React.Component {
           uri:
             "https://raw.githubusercontent.com/wilfredgumbs/React-Frelief/master/client/src/pages/Home/logo.png"
         }}
-        style={{ width: 30, height: 30 }}
+        style={{ width: 30, height: 30, marginRight: "auto" }}
       />
     );
   }

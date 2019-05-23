@@ -38,6 +38,8 @@ const client = new AWSAppSyncClient({
   complexObjectsCredentials: () => Auth.currentCredentials()
 });
 
+async () => client.resetStore();
+
 const RootStack = createStackNavigator(
   {
     Home: {
@@ -70,7 +72,9 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: "Home",
-    initialRouteParams: { bucket: S3_BUCKET_NAME, region: S3_BUCKET_REGION }
+    initialRouteParams: { bucket: S3_BUCKET_NAME, region: S3_BUCKET_REGION },
+    headerMode: "float",
+    headerTransitionPreset: "fade-in-place"
   }
 );
 

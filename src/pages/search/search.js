@@ -5,6 +5,7 @@ import {
   Text,
   Animated,
   StyleSheet,
+  Platform,
   Image,
   Easing,
   FlatList,
@@ -53,11 +54,16 @@ class search extends React.Component {
         ),
       headerStyle: {
         backgroundColor: "#0D1E30",
-        shadowColor: "transparent",
         borderBottomWidth: 0,
+        shadowColor: "transparent",
         elevation: 0,
         shadowOpacity: 0
-      }
+      },
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerTintColor: "white",
+      gesturesEnabled: false
     };
   };
 
@@ -278,18 +284,28 @@ styles = StyleSheet.create({
 
 export default graphql(listResources, {
   options: {
-    fetchPolicy: "network-only"
+    fetchPolicy: "cache-and-network"
   },
   props: props => ({
     resources: props.data.listResources ? props.data.listResources : [],
     loadMorePosts: () => {
       props.data.fetchMore({
         variables: {
-          skip: props.data.listResources.length
+          offset: 2
         },
         updateQuery: (prevState, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prevState;
-
+          if (
+            JSON.stringify(fetchMoreResult.listResources.items) ===
+            JSON.stringify(prevState.listResources.items)
+          ) {
+            console.log("working first");
+            return prevState;
+          }
+          if (!fetchMoreResult.listResources.items) {
+            console.log("working");
+            return prevState;
+          }
+          console.log("Nawwwwwww");
           return {
             ...prevState,
             listResources: {

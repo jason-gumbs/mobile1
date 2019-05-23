@@ -88,35 +88,6 @@ class resource extends React.Component {
   componentDidMount() {
     console.log(this.props.companys.items[0].id);
     console.log(process.env);
-    // this.props
-    //   .createResource({
-    //     id: "",
-    //     name: "create frelief blog1",
-    //     file: null,
-    //     // files: null,
-    //     visibility: "public",
-    //     product: "String1",
-    //     address: "String1",
-    //     location: "String1",
-    //     owner: "Strin1g",
-    //     offering: "String1",
-    //     category: "String1",
-    //     city: "String1",
-    //     description: "String1",
-    //     number: "String1",
-    //     state: "String",
-    //     zip: "String",
-    //     content: "String",
-    //     resourceCompanyId: this.props.companys.items[0].id || "null"
-    //   })
-    //   .then(data => {
-    //     this.setState({ showActivityIndicator: false });
-    //     console.log("Congrats...", data);
-    //   })
-    //   .catch(err => {
-    //     console.log("error saving resource...", err);
-    //     this.setState({ showActivityIndicator: false });
-    //   });
   }
   componentWillUnmount() {}
 
@@ -609,6 +580,18 @@ export default compose(
     })
   }),
   graphql(createResource, {
+    options: {
+      refetchQueries: [{ query: listResources }],
+      update: (dataProxy, { data: { createResource } }) => {
+        const query = listResources;
+        const data = dataProxy.readQuery({ query });
+        data.listResources = {
+          ...data.listResources,
+          items: [...data.listResources.items, createResource]
+        };
+        dataProxy.writeQuery({ query, data });
+      }
+    },
     props: props => ({
       createResource: resource =>
         props.mutate({
