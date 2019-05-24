@@ -291,7 +291,7 @@ export default graphql(listResources, {
     loadMorePosts: () => {
       props.data.fetchMore({
         variables: {
-          offset: 2
+          offset: props.data.listResources.items.length
         },
         updateQuery: (prevState, { fetchMoreResult }) => {
           if (
