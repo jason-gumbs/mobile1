@@ -132,6 +132,7 @@ class search extends React.Component {
 
   renderItem = ({ item }) => (
     <Card
+      title={this.renderOwner(item.company)}
       image={{
         uri:
           item.file.key ||
@@ -190,6 +191,17 @@ class search extends React.Component {
       <Footer
         handleAddResource={this.handleAddResource}
         handleHome={this.handleHome}
+      />
+    );
+  };
+
+  renderOwner = item => {
+    return (
+      <ListItem
+        title={item.companyname}
+        subtitle={item.subtitle || ""}
+        leftAvatar={{ source: { uri: item.files[0].key } }}
+        contentContainerStyle={{ marginRight: "auto" }}
       />
     );
   };
