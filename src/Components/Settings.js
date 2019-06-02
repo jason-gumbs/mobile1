@@ -76,6 +76,7 @@ class Settings extends React.Component {
   async onLogIn() {
     this.props.onLogIn();
   }
+
   async doLogout() {
     let session = null;
 
@@ -83,6 +84,7 @@ class Settings extends React.Component {
       .then(data => console.log(data))
       .catch(err => console.log(err));
   }
+
   AddUser = async e => {
     e.preventDefault();
 
@@ -168,7 +170,10 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {}
+  signout = e => Auth.signOut();
+
   componentWillUnmount() {}
+
   selectPhotoTapped = () => {
     const options = {
       quality: 1.0,
@@ -253,7 +258,7 @@ class Settings extends React.Component {
             Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
           </Text>
 
-          </SignOut>
+          <SignOut signout={this.signout} />
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{

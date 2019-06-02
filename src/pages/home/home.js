@@ -49,13 +49,8 @@ class home extends React.Component {
     SplashScreen.hide();
 
     console.log(this.props.navigation.state.params);
-
-    Auth.currentAuthenticatedUser({
-      bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    })
-      .then(user => console.log(user))
-      .catch(err => console.log(err));
   }
+
   componentWillUnmount() {}
   updateInput = (key, value) => {
     this.setState(state => ({

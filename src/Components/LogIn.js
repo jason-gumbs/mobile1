@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, NavigationActions } from "react-navigation";
 import { Auth } from "aws-amplify";
 import ForgotPassword from "./ForgotPassword";
 import { colors } from "../Utils/theme";
@@ -37,43 +37,28 @@ class LogIn extends React.Component {
     showActivityIndicator: false,
     username: "",
     password: "",
-    showMFAPrompt: false,
-    errorMessage: "",
-    cognitoUser: ""
+    showErrorMessage: false,
+    errorMessage: "Wrong password or user name please try again"
   };
 
-  onLogIn = async () => {
-    this.props.onLogIn();
-  };
-  doLogout = async () => {
-    let session = null;
-
-    session = Auth.signOut()
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  };
   doLogin = async () => {
     const { username, password } = this.state;
-    let errorMessage = "";
-    let showMFAPrompt = false;
-    let session = null;
-    session = await Auth.signIn(username, password)
-      .then(user => console.log(user))
-      .catch(err => console.log("ERRORSS", err));
-
-    this.setState(
-      {
-        showMFAPrompt,
-        errorMessage,
-        session,
-        showActivityIndicator: false
-      },
-      () => {
-        if (session) {
-          this.onLogIn();
-        }
-      }
-    );
+    let showErrorMessage = false;
+    await Auth.signIn(username, password)
+      .then(user =>
+        this.props.navigation.reset(
+          [NavigationActions.navigate({ routeName: "Search" })],
+          0
+        )
+      )
+      .catch(err => {
+        console.log("ERRORSS", err);
+        this.setState({
+          showErrorMessage: true,
+          showActivityIndicator: false,
+          errorMessage: err.message
+        });
+      });
   };
 
   handleLogInClick = () => {
@@ -81,21 +66,6 @@ class LogIn extends React.Component {
 
     this.doLogin();
   };
-
-  handleMFACancel() {
-    this.setState({ showMFAPrompt: false });
-  }
-
-  handleMFASuccess() {
-    this.setState(
-      {
-        showMFAPrompt: false
-      },
-      () => {
-        this.onLogIn();
-      }
-    );
-  }
 
   render() {
     return (
@@ -115,6 +85,9 @@ class LogIn extends React.Component {
               }}
             />
           </View>
+          {this.state.showErrorMessage && (
+            <Text style={{ color: "grey" }}>{this.state.errorMessage} </Text>
+          )}
 
           <Input
             label="username"
@@ -231,7 +204,7 @@ const styles = StyleSheet.create({
   image_view: {
     alignItems: "center"
   },
-  header:{},
+  header: {},
   container: {
     paddingRight: 20,
     paddingLeft: 20,

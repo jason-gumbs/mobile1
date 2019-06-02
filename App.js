@@ -40,30 +40,6 @@ const client = new AWSAppSyncClient({
 
 async () => client.resetStore();
 
-const logger = new Logger("My-Logger");
-
-const listener = data => {
-  switch (data.payload.event) {
-    case "signIn":
-      logger.error("user signed in"); //[ERROR] My-Logger - user signed in
-      break;
-    case "signUp":
-      logger.error("user signed up");
-      break;
-    case "signOut":
-      logger.error("user signed out");
-      this.props.rootNavigator.navigate("SignIn");
-      break;
-    case "signIn_failure":
-      logger.error("user sign in failed");
-      break;
-    case "configured":
-      logger.error("the Auth module is configured");
-  }
-};
-
-Hub.listen("auth", listener);
-
 const RootStack = createStackNavigator(
   {
     Home: {
@@ -95,7 +71,7 @@ const RootStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Search",
     initialRouteParams: { bucket: S3_BUCKET_NAME, region: S3_BUCKET_REGION },
     headerMode: "float",
     headerTransitionPreset: "fade-in-place"

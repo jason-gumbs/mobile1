@@ -24,7 +24,7 @@ import {
   NavigationActions,
   StackNavigator
 } from "react-navigation";
-import { API, Storage, Cache, Auth } from "aws-amplify";
+import { API, Storage, Hub, Auth, Logger } from "aws-amplify";
 import viewResource from "../viewResource";
 import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
@@ -71,6 +71,7 @@ class search extends React.Component {
     selectedImage: {},
     selectedImageIndex: null,
     images: [],
+    isSignedin: false,
     Resources: [],
     selectedGenderIndex: null,
     modalVisible: false,
@@ -94,19 +95,31 @@ class search extends React.Component {
   };
 
   componentDidMount() {
-    Auth.currentSession()
-      .then(data => {
-        this.setState({ currentUser: data });
-        this.props.navigation.setParams({
-          currentUser: data
-        });
-      })
-      .catch(err => {
-        this.setState({ currentUser: err });
-        this.props.navigation.setParams({
-          currentUser: err
-        });
-      });
+    // Auth.currentAuthenticatedUser({
+    //   bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    // })
+    //   .then(user => console.log("Helllo", user))
+    //   .catch(err => {
+    //     this.props.navigation.reset(
+    //       [NavigationActions.navigate({ routeName: "SignIn" })],
+    //       0
+    //     );
+    //     return;
+    //   });
+
+    // Auth.currentSession()
+    //   .then(data => {
+    //     this.setState({ currentUser: data });
+    //     this.props.navigation.setParams({
+    //       currentUser: data
+    //     });
+    //   })
+    //   .catch(err => {
+    //     this.setState({ currentUser: err });
+    //     this.props.navigation.setParams({
+    //       currentUser: err
+    //     });
+    //   });
 
     console.log(this.props.resources);
 
@@ -117,6 +130,32 @@ class search extends React.Component {
     this.props.navigation.setParams({
       handleSigninClick: this.handleSigninClick
     });
+    const logger = new Logger("My-Logger");
+
+    const listener = data => {
+      switch (data.payload.event) {
+        case "signIn":
+          logger.error("user signed in"); //[ERROR] My-Logger - user signed in
+          break;
+        case "signUp":
+          logger.error("user signed up");
+          break;
+        case "signOut":
+          logger.error("search jsuser signed out");
+          this.props.navigation.reset(
+            [NavigationActions.navigate({ routeName: "SignIn" })],
+            0
+          );
+          break;
+        case "signIn_failure":
+          logger.error("user sign in failed");
+          break;
+        case "configured":
+          logger.error("the Auth module is configured");
+      }
+    };
+
+    Hub.listen("auth", listener);
   }
 
   componentWillUnmount() {}
