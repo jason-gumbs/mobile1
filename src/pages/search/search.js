@@ -227,11 +227,14 @@ class search extends React.Component {
           data={this.props.resources.items}
           renderItem={this.renderItem}
           ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
           onRefresh={this.props.loadMorePosts}
+        />
+        <Footer
+          handleAddResource={this.handleAddResource}
+          handleHome={this.handleHome}
         />
       </View>
     );

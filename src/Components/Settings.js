@@ -26,6 +26,7 @@ import Constants from "../Utils/constants";
 import files from "../Utils/files";
 import uuid from "react-native-uuid";
 import LogoTitle from "./LogoTitle";
+import SignOut from "./SignOut";
 import mime from "mime-types";
 import RNFetchBlob from "rn-fetch-blob";
 
@@ -251,6 +252,8 @@ class Settings extends React.Component {
           <Text style={{ color: "white" }}>
             Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
           </Text>
+
+          </SignOut>
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{
