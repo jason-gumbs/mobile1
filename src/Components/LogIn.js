@@ -45,12 +45,7 @@ class LogIn extends React.Component {
     const { username, password } = this.state;
     let showErrorMessage = false;
     await Auth.signIn(username, password)
-      .then(user =>
-        this.props.navigation.reset(
-          [NavigationActions.navigate({ routeName: "Search" })],
-          0
-        )
-      )
+      .then(user => this.props.navigation.navigate("AuthLoading"))
       .catch(err => {
         console.log("ERRORSS", err);
         this.setState({

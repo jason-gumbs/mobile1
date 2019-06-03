@@ -27,11 +27,11 @@ class Footer extends React.Component {
       >
         <View style={{ width: 60, height: 50 }}>
           <Icon
-            name="home"
+            name="search"
             type="font-awesome"
             color="#00aced"
             size={40}
-            onPress={this.props.handleHome}
+            onPress={this.props.showSearch}
             containerStyle={{ marginTop: 2, marginLeft: 20 }}
           />
         </View>

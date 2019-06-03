@@ -1,6 +1,10 @@
 import React from "react";
 import SplashScreen from "react-native-splash-screen";
-import { createStackNavigator } from "react-navigation";
+import {
+  createSwitchNavigator,
+  createStackNavigator,
+  createAppContainer
+} from "react-navigation";
 import Amplify, { API, Storage, Auth, Hub, Logger } from "aws-amplify";
 import AWSAppSyncClient, { AUTH_TYPE } from "aws-appsync";
 import { Rehydrated } from "aws-appsync-react";
@@ -15,6 +19,7 @@ import UserConfirm from "./src/Components/UserConfirm";
 import SignUp from "./src/Components/SignUp";
 import Settings from "./src/Components/Settings";
 import ForgotPassword from "./src/Components/ForgotPassword";
+import AuthLoadingScreen from "./src/Components/AuthLoadingScreen";
 
 // Version can be specified in package.json
 Amplify.configure(awsmobile);
@@ -39,51 +44,61 @@ const client = new AWSAppSyncClient({
 });
 
 async () => client.resetStore();
+const AuthStack = createStackNavigator({
+  SignIn: { screen: SignIn },
+  SignUp: {
+    screen: SignUp
+  },
+  ForgotPassword: {
+    screen: ForgotPassword
+  }
+});
+const ConfirmStack = createStackNavigator({
+  UserConfirm: {
+    screen: UserConfirm
+  }
+});
 
-const RootStack = createStackNavigator(
+const AppStack = createStackNavigator({
+  Search: {
+    screen: search
+  },
+  Resource: {
+    screen: resource
+  },
+  UserConfirm: {
+    screen: UserConfirm
+  },
+  ViewResource: {
+    screen: viewResource
+  },
+  Settings: {
+    screen: Settings
+  }
+});
+const mainStack = createSwitchNavigator(
   {
-    Home: {
-      screen: home
-    },
-    Resource: {
-      screen: resource
-    },
-    Search: {
-      screen: search
-    },
-    UserConfirm: {
-      screen: UserConfirm
-    },
-    ViewResource: {
-      screen: viewResource
-    },
-    SignUp: {
-      screen: SignUp
-    },
-    SignIn: {
-      screen: SignIn
-    },
-    Settings: {
-      screen: Settings
-    },
-    ForgotPassword: {
-      screen: ForgotPassword
-    }
+    AuthLoading: { screen: AuthLoadingScreen },
+    App: AppStack,
+    Auth: AuthStack,
+    confirm: ConfirmStack
   },
   {
-    initialRouteName: "Search",
+    initialRouteName: "AuthLoading",
     initialRouteParams: { bucket: S3_BUCKET_NAME, region: S3_BUCKET_REGION },
     headerMode: "float",
     headerTransitionPreset: "fade-in-place"
   }
 );
 
+const AppContainer = createAppContainer(mainStack);
+
 export default class App extends React.Component {
   render() {
     return (
       <ApolloProvider client={client}>
         <Rehydrated>
-          <RootStack />
+          <AppContainer />
         </Rehydrated>
       </ApolloProvider>
     );

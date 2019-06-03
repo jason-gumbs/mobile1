@@ -14,9 +14,18 @@ class SignOut extends React.Component {
       >
         <Button
           icon={
-            <Icon name="exclamation" type="evilicon" color="white" size={40} />
+            <Icon
+              name="exclamation"
+              type="evilicon"
+              color="#00aced"
+              size={20}
+            />
           }
           onPress={this.props.signout}
+          title="Sign Out"
+          containerStyle={{ marginTop: 10, marginRight: 20 }}
+          titleStyle={{ fontSize: 13 }}
+          type="outline"
         />
       </View>
     );

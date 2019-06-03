@@ -44,6 +44,7 @@ class Settings extends React.Component {
   static navigationOptions = ({ navigation, screenProps }) =>
     console.log("") || {
       title: "Settings",
+      headerRight: <SignOut signout={navigation.getParam("signout")} />,
       headerStyle: {
         backgroundColor: "#0D1E30",
         borderBottomWidth: 0,
@@ -169,7 +170,12 @@ class Settings extends React.Component {
       .catch(err => console.log("********READIMAGE***********", err));
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    console.log(this.props.companys.items);
+    this.props.navigation.setParams({
+      signout: this.signout
+    });
+  }
   signout = e => Auth.signOut();
 
   componentWillUnmount() {}
@@ -211,7 +217,6 @@ class Settings extends React.Component {
 
   render() {
     const { payload } = this.props.companys.items[0];
-
     return (
       <View style={styles.bla}>
         <Modal
@@ -258,7 +263,6 @@ class Settings extends React.Component {
             Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
           </Text>
 
-          <SignOut signout={this.signout} />
           <Button
             backgroundColor="#00A3FF"
             buttonStyle={{

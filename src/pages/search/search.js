@@ -34,6 +34,7 @@ import { listResources } from "../../graphql/queries";
 import { graphql } from "react-apollo";
 import awsmobile from "../../aws-exports";
 import { colors } from "../../Utils/theme";
+import AsyncStorage from "@react-native-community/async-storage";
 
 let styles = {};
 
@@ -41,17 +42,11 @@ class search extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: <LogoTitle />,
-      headerRight:
-        navigation.getParam("currentUser", "No current user") ==
-        "No current user" ? (
-          <SigninLogo
-            handleSigninClick={navigation.getParam("handleSigninClick")}
-          />
-        ) : (
-          <SignLogo
-            handleSettingClick={navigation.getParam("handleSettingClick")}
-          />
-        ),
+      headerRight: (
+        <SignLogo
+          handleSettingClick={navigation.getParam("handleSettingClick")}
+        />
+      ),
       headerStyle: {
         backgroundColor: "#0D1E30",
         borderBottomWidth: 0,
@@ -71,7 +66,7 @@ class search extends React.Component {
     selectedImage: {},
     selectedImageIndex: null,
     images: [],
-    isSignedin: false,
+    showSearch: false,
     Resources: [],
     selectedGenderIndex: null,
     modalVisible: false,
@@ -95,33 +90,19 @@ class search extends React.Component {
   };
 
   componentDidMount() {
-    // Auth.currentAuthenticatedUser({
-    //   bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-    // })
-    //   .then(user => console.log("Helllo", user))
-    //   .catch(err => {
-    //     this.props.navigation.reset(
-    //       [NavigationActions.navigate({ routeName: "SignIn" })],
-    //       0
-    //     );
-    //     return;
-    //   });
-
-    // Auth.currentSession()
-    //   .then(data => {
-    //     this.setState({ currentUser: data });
-    //     this.props.navigation.setParams({
-    //       currentUser: data
-    //     });
-    //   })
-    //   .catch(err => {
-    //     this.setState({ currentUser: err });
-    //     this.props.navigation.setParams({
-    //       currentUser: err
-    //     });
-    //   });
-
-    console.log(this.props.resources);
+    Auth.currentSession()
+      .then(data => {
+        this.setState({ currentUser: data });
+        this.props.navigation.setParams({
+          currentUser: data
+        });
+      })
+      .catch(err => {
+        this.setState({ currentUser: err });
+        this.props.navigation.setParams({
+          currentUser: err
+        });
+      });
 
     // this.loadResources();
     this.props.navigation.setParams({
@@ -135,17 +116,14 @@ class search extends React.Component {
     const listener = data => {
       switch (data.payload.event) {
         case "signIn":
-          logger.error("user signed in"); //[ERROR] My-Logger - user signed in
+          logger.info("user signed in"); //[ERROR] My-Logger - user signed in
           break;
         case "signUp":
           logger.error("user signed up");
           break;
         case "signOut":
-          logger.error("search jsuser signed out");
-          this.props.navigation.reset(
-            [NavigationActions.navigate({ routeName: "SignIn" })],
-            0
-          );
+          logger.info("search user signed out");
+          this.props.navigation.navigate("AuthLoading");
           break;
         case "signIn_failure":
           logger.error("user sign in failed");
@@ -162,7 +140,7 @@ class search extends React.Component {
 
   handleAddResource = e =>
     this.props.navigation.push("Resource", this.state.currentUser);
-  handleHome = e => this.props.navigation.push("Search");
+  showSearch = e => this.setState({ showSearch: !this.state.showSearch });
   handleSettingClick = e =>
     this.props.navigation.navigate("Settings", this.state.currentUser);
   handleSigninClick = e => this.props.navigation.navigate("SignIn");
@@ -260,12 +238,28 @@ class search extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
+        {this.state.showSearch && (
+          <SearchBar
+            round
+            platform={Platform.OS === "ios" ? "ios" : "android"}
+            onChangeText={this.updateInput}
+            containerStyle={{
+              backgroundColor: "#0D1E30",
+              borderColor: "#0D1E30",
+              borderBottomWidth: 0,
+              borderTopWidth: 0
+            }}
+            inputStyle={{ backgroundColor: "white" }}
+            inputContainerStyle={{ backgroundColor: "white" }}
+            placeholder="Search"
+          />
+        )}
+
         <FlatList
           refreshing={this.state.loading}
           keyExtractor={this.keyExtractor}
           data={this.props.resources.items}
           renderItem={this.renderItem}
-          ListHeaderComponent={this.renderHeader}
           style={{ flex: 1 }}
           showsHorizontalScrollIndicator={false}
           showsVerticalScrollIndicator={false}
@@ -273,7 +267,7 @@ class search extends React.Component {
         />
         <Footer
           handleAddResource={this.handleAddResource}
-          handleHome={this.handleHome}
+          showSearch={this.showSearch}
         />
       </View>
     );
