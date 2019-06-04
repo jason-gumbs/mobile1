@@ -35,9 +35,9 @@ class viewResource extends React.Component {
       <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
         <Card
           image={{
-            uri:
-              item.file.key ||
-              "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
+            uri: item.file
+              ? item.file.key
+              : "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
           }}
           containerStyle={{ borderWidth: 0, borderRadius: 10 }}
           imageStyle={{ height: 350 }}

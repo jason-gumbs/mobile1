@@ -13,6 +13,8 @@ import {
   FormValidationMessage,
   Button,
   Avatar,
+  Card,
+  Icon,
   Text
 } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
@@ -52,6 +54,7 @@ class Settings extends React.Component {
         elevation: 0,
         shadowOpacity: 0
       },
+      headerBackTitle: null,
       headerTitleStyle: {
         color: "white"
       },
@@ -253,15 +256,19 @@ class Settings extends React.Component {
           )}
         </View>
         <View style={styles.formContainer}>
-          <Text style={{ color: "white" }}>
-            Username: {this.props.companys.items[0].companyname || "N/A"}
-          </Text>
-          <Text style={{ color: "white" }}>
-            Email: {this.props.companys.items[0].email || "N/A"}
-          </Text>
-          <Text style={{ color: "white" }}>
-            Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
-          </Text>
+          <Card>
+            <Text style={{ color: "black", padding: 20 }}>
+              Username: {this.props.companys.items[0].companyname || "N/A"}
+            </Text>
+
+            <Text style={{ color: "black", padding: 20 }}>
+              Email: {this.props.companys.items[0].email || "N/A"}
+            </Text>
+
+            <Text style={{ color: "black", padding: 20 }}>
+              Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
+            </Text>
+          </Card>
 
           <Button
             backgroundColor="#00A3FF"

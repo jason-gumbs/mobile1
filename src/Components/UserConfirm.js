@@ -11,8 +11,8 @@
  * and limitations under the License.
  */
 import React from "react";
-import { View, StyleSheet, Text, Image, Dimensions } from "react-native";
-import { Icon, Input, Button } from "react-native-elements";
+import { View, StyleSheet, Image, Dimensions } from "react-native";
+import { Icon, Input, Button, Text } from "react-native-elements";
 import { createStackNavigator } from "react-navigation";
 import { Auth } from "aws-amplify";
 import awsmobile from "../aws-exports";
@@ -34,7 +34,6 @@ class UserConfirm extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: <LogoTitle />,
-
       headerTitleStyle: {
         color: "white",
         alignSelf: "center",
@@ -43,6 +42,7 @@ class UserConfirm extends React.Component {
       headerStyle: {
         backgroundColor: "#0D1E30",
         shadowColor: "transparent",
+        borderBottomWidth: 0,
         elevation: 0,
         shadowOpacity: 0
       },
@@ -55,7 +55,9 @@ class UserConfirm extends React.Component {
     code: "",
     showMFAPrompt: false,
     errorMessage: "",
-    cognitoUser: ""
+    cognitoUser: "",
+    showErrorMessage: false,
+    errorMessage: ""
   };
 
   ConfirmEmail = e => {
@@ -65,14 +67,29 @@ class UserConfirm extends React.Component {
     let session = null;
     Auth.confirmSignUp(username, code)
       .then(data => {
-        console.log(data) || this.setState({ showActivityIndicator: false });
+        console.log(data);
+        this.setState({ showActivityIndicator: false });
+        this.props.navigation.navigate("Auth");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          showErrorMessage: true,
+          showActivityIndicator: false,
+          errorMessage: err
+        });
+      });
   };
 
   render() {
     return (
       <View style={styles.bla}>
+        <Text style={{ color: "grey", padding: 10 }}>
+          Enter username and conformation code.
+        </Text>
+        {this.state.showErrorMessage && (
+          <Text style={{ color: "grey" }}>{this.state.errorMessage} </Text>
+        )}
         <Input
           label="Username"
           selectionColor={colors.primary}
@@ -89,6 +106,7 @@ class UserConfirm extends React.Component {
             borderWidth: 1,
             borderColor: "#d6d7da"
           }}
+          labelStyle={{ padding: 10 }}
           inputStyle={{ marginLeft: 5, color: "white" }}
           onSubmitEditing={() => {
             this.refs.password.refs.passwordInput.focus();
@@ -113,6 +131,7 @@ class UserConfirm extends React.Component {
           returnKeyType="next"
           ref="code"
           textInputRef="codeInput"
+          labelStyle={{ padding: 10 }}
           onChangeText={code => this.setState({ code })}
           value={this.state.code}
         />

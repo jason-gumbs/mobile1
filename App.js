@@ -79,9 +79,9 @@ const AppStack = createStackNavigator({
 const mainStack = createSwitchNavigator(
   {
     AuthLoading: { screen: AuthLoadingScreen },
-    App: AppStack,
     Auth: AuthStack,
-    confirm: ConfirmStack
+    confirm: ConfirmStack,
+    App: AppStack
   },
   {
     initialRouteName: "AuthLoading",

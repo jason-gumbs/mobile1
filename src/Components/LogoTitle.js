@@ -1,5 +1,7 @@
 import React from "react";
-import { Image, Platform } from "react-native";
+import { Image, Platform, Dimensions } from "react-native";
+
+const screen = Dimensions.get("window");
 
 class LogoTitle extends React.Component {
   render() {

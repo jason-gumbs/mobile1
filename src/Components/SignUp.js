@@ -63,7 +63,7 @@ class SignUp extends React.Component {
           files: null
         });
       })
-      .then(mutationData => console.log(mutationData))
+      .then(mutationData => this.props.navigation.push("SignIn"))
       .catch(err => console.log("Auth signup ", err));
   };
 

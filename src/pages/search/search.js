@@ -55,10 +55,12 @@ class search extends React.Component {
         shadowOpacity: 0
       },
       headerTitleStyle: {
-        color: "white"
+        color: "white",
+        marginLeft: 100
       },
       headerTintColor: "white",
-      gesturesEnabled: false
+      gesturesEnabled: false,
+      headerBackTitle: null
     };
   };
 
@@ -151,9 +153,9 @@ class search extends React.Component {
     <Card
       title={this.renderOwner(item.company)}
       image={{
-        uri:
-          item.file.key ||
-          "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
+        uri: item.file
+          ? item.file.key
+          : "http://chittagongit.com//images/no-image-icon/no-image-icon-17.jpg"
       }}
       containerStyle={{ borderWidth: 0, borderRadius: 10 }}
       imageStyle={{ height: 350 }}
@@ -213,14 +215,35 @@ class search extends React.Component {
   };
 
   renderOwner = item => {
-    return (
-      <ListItem
-        title={item.companyname}
-        subtitle={item.subtitle || ""}
-        leftAvatar={{ source: { uri: item.files[0].key } }}
-        contentContainerStyle={{ marginRight: "auto" }}
-      />
-    );
+    if (!(item.files == null)) {
+      return (
+        <ListItem
+          title={item.companyname}
+          subtitle={item.subtitle || ""}
+          leftAvatar={{
+            source: {
+              uri: item.files[0].key
+            }
+          }}
+          contentContainerStyle={{ marginRight: "auto" }}
+        />
+      );
+    } else {
+      return (
+        <ListItem
+          title={item.companyname}
+          subtitle={item.subtitle || ""}
+          onPress={() => console.log("hey")}
+          leftIcon={{
+            name: "user-circle",
+            type: "font-awesome",
+            color: "grey",
+            size: 30
+          }}
+          contentContainerStyle={{ marginRight: "auto" }}
+        />
+      );
+    }
   };
   getMorePost = () => {
     this.setState({ loading: true });
