@@ -70,6 +70,9 @@ class Settings extends React.Component {
     picUrl: null,
     user: { userId: "", usersid: "" },
     key: "",
+    isImageRead: true,
+    showErrorMessage: false,
+    errorMessage: "",
     input: {
       companyname: "",
       email: "",
@@ -101,29 +104,38 @@ class Settings extends React.Component {
     // const owner = payload["cognito:username"] || "null";
     const bucket = "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
     const region = "us-east-1";
-    let file;
+    let file = null;
     let location = "";
     if (this.state.selectedImage.uri) {
-      await this.readImage(this.state.selectedImage).then(data =>
-        this.setState({ key: `${data.key}` })
-      );
-      await Storage.get(this.state.key, { bucket, region })
-        .then(result => {
-          console.log("Success");
-          this.setState({ picUrl: result });
-        })
-        .catch(err => console.log("error", err));
+      await this.readImage(this.state.selectedImage)
+        .then(data => this.setState({ key: `${data.key}` }))
+        .catch(err => {
+          this.setState({
+            isImageRead: false,
+            showErrorMessage: true,
+            errorMessage:
+              "there is a problem uploading your image please try agian later"
+          });
+        });
+      if (this.state.isImageRead) {
+        await Storage.get(this.state.key, { bucket, region })
+          .then(result => {
+            console.log("Success");
+            this.setState({ picUrl: result });
+          })
+          .catch(err => console.log("error", err));
 
-      file = {
-        __typename: "S3Object",
-        bucket,
-        region,
-        key: this.state.picUrl
-      };
+        file = {
+          __typename: "S3Object",
+          bucket,
+          region,
+          key: this.state.picUrl
+        };
+      }
     } else {
       file = null;
     }
-    console.log(file);
+    console.log("Files", file);
 
     this.props
       .updateCompany({
@@ -158,6 +170,7 @@ class Settings extends React.Component {
     const picName = `${visibility}/${identityId}/${uuid.v1()}${extension &&
       "."}${extension}`;
     const key = `${picName}`;
+    console.log(imagePath);
     return await RNFetchBlob.fs
       .readFile(imagePath, "base64")
       .then(data => new Buffer(data, "base64"))
@@ -253,6 +266,11 @@ class Settings extends React.Component {
               activeOpacity={0.7}
               showEditButton
             />
+          )}
+          {this.state.showErrorMessage && (
+            <Text style={{ color: "grey", fontSize: 10, padding: 30 }}>
+              {this.state.errorMessage}{" "}
+            </Text>
           )}
         </View>
         <View style={styles.formContainer}>

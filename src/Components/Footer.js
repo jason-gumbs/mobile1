@@ -30,9 +30,9 @@ class Footer extends React.Component {
             name="search"
             type="font-awesome"
             color="#00aced"
-            size={40}
+            size={35}
             onPress={this.props.showSearch}
-            containerStyle={{ marginTop: 2, marginLeft: 20 }}
+            containerStyle={{ marginTop: 5, marginLeft: 20 }}
           />
         </View>
         <View style={{ width: 100, height: 100 }}>
