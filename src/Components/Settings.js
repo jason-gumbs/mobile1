@@ -326,7 +326,6 @@ export default compose(
   }),
   graphql(updateCompany, {
     options: {
-      refetchQueries: [{ query: listCompanys }],
       update: (dataProxy, { data: { updateCompany } }) => {
         const query = listCompanys;
         const data = dataProxy.readQuery({ query });

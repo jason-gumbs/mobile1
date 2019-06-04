@@ -262,7 +262,6 @@ const styles = StyleSheet.create({
 
 export default graphql(createCompany, {
   options: {
-    refetchQueries: [{ query: listCompanys }],
     update: (dataProxy, { data: { createCompany } }) => {
       const query = listCompanys;
       const data = dataProxy.readQuery({ query });

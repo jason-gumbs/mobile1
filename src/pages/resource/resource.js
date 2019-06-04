@@ -581,7 +581,6 @@ export default compose(
   }),
   graphql(createResource, {
     options: {
-      refetchQueries: [{ query: listResources }],
       update: (dataProxy, { data: { createResource } }) => {
         const query = listResources;
         const data = dataProxy.readQuery({ query });
