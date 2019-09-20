@@ -25,6 +25,7 @@ import {
   StackNavigator
 } from "react-navigation";
 import { API, Storage, Hub, Auth, Logger } from "aws-amplify";
+import SplashScreen from "react-native-splash-screen";
 import viewResource from "../viewResource";
 import LogoTitle from "../../../src/Components/LogoTitle";
 import Footer from "../../../src/Components/Footer";
@@ -92,6 +93,7 @@ class search extends React.Component {
   };
 
   componentDidMount() {
+    SplashScreen.hide();
     Auth.currentSession()
       .then(data => {
         this.setState({ currentUser: data });
