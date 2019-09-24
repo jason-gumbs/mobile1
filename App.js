@@ -43,7 +43,6 @@ const client = new AWSAppSyncClient({
   complexObjectsCredentials: () => Auth.currentCredentials()
 });
 
-async () => client.resetStore();
 const AuthStack = createStackNavigator({
   SignIn: { screen: SignIn },
   SignUp: {

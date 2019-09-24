@@ -12,6 +12,7 @@ import {
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { createStackNavigator, NavigationActions } from "react-navigation";
+import SplashScreen from "react-native-splash-screen";
 import { Auth } from "aws-amplify";
 import ForgotPassword from "./ForgotPassword";
 import { colors } from "../Utils/theme";
@@ -55,7 +56,9 @@ class LogIn extends React.Component {
         });
       });
   };
-
+  componentDidMount() {
+    SplashScreen.hide();
+  }
   handleLogInClick = () => {
     this.setState({ showActivityIndicator: true });
 

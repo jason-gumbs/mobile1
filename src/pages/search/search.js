@@ -10,7 +10,8 @@ import {
   Easing,
   FlatList,
   TouchableHighlight,
-  Modal
+  Modal,
+  ActivityIndicator
 } from "react-native";
 import {
   Card,
@@ -35,7 +36,7 @@ import { listResources } from "../../graphql/queries";
 import { graphql } from "react-apollo";
 import awsmobile from "../../aws-exports";
 import { colors } from "../../Utils/theme";
-import AsyncStorage from "@react-native-community/async-storage";
+import { Query } from "react-apollo";
 
 let styles = {};
 
@@ -262,39 +263,49 @@ class search extends React.Component {
   };
   render() {
     return (
-      <View style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}>
-        {this.state.showSearch && (
-          <SearchBar
-            round
-            platform={Platform.OS === "ios" ? "ios" : "android"}
-            onChangeText={this.updateInput}
-            containerStyle={{
-              backgroundColor: "#0D1E30",
-              borderColor: "#0D1E30",
-              borderBottomWidth: 0,
-              borderTopWidth: 0
-            }}
-            inputStyle={{ backgroundColor: "white" }}
-            inputContainerStyle={{ backgroundColor: "white" }}
-            placeholder="Search"
-          />
-        )}
+      <Query query={listResources} fetchPolicy={"cache-and-network"}>
+        {({ loading, error, data, refetch }) => {
+          if (loading) return <ActivityIndicator color={"#287b97"} />;
+          if (error) return <Text>{`Error: ${error}`}</Text>;
 
-        <FlatList
-          refreshing={this.state.loading}
-          keyExtractor={this.keyExtractor}
-          data={this.props.resources.items}
-          renderItem={this.renderItem}
-          style={{ flex: 1 }}
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          onRefresh={this.props.loadMorePosts}
-        />
-        <Footer
-          handleAddResource={this.handleAddResource}
-          showSearch={this.showSearch}
-        />
-      </View>
+          return (
+            <View
+              style={{ flex: 1, paddingBottom: 0, backgroundColor: "#0D1E30" }}
+            >
+              {this.state.showSearch && (
+                <SearchBar
+                  round
+                  platform={Platform.OS === "ios" ? "ios" : "android"}
+                  onChangeText={this.updateInput}
+                  containerStyle={{
+                    backgroundColor: "#0D1E30",
+                    borderColor: "#0D1E30",
+                    borderBottomWidth: 0,
+                    borderTopWidth: 0
+                  }}
+                  inputStyle={{ backgroundColor: "white" }}
+                  inputContainerStyle={{ backgroundColor: "white" }}
+                  placeholder="Search"
+                />
+              )}
+              <FlatList
+                refreshing={this.state.loading}
+                keyExtractor={this.keyExtractor}
+                renderItem={this.renderItem}
+                style={{ flex: 1 }}
+                data={data.listResources.items}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                onRefresh={refetch}
+              />
+              <Footer
+                handleAddResource={this.handleAddResource}
+                showSearch={this.showSearch}
+              />
+            </View>
+          );
+        }}
+      </Query>
     );
   }
 }
@@ -355,42 +366,4 @@ styles = StyleSheet.create({
   }
 });
 
-export default graphql(listResources, {
-  options: {
-    fetchPolicy: "cache-and-network"
-  },
-  props: props => ({
-    resources: props.data.listResources ? props.data.listResources : [],
-    loadMorePosts: () => {
-      props.data.fetchMore({
-        variables: {
-          offset: props.data.listResources.items.length
-        },
-        updateQuery: (prevState, { fetchMoreResult }) => {
-          if (
-            JSON.stringify(fetchMoreResult.listResources.items) ===
-            JSON.stringify(prevState.listResources.items)
-          ) {
-            console.log("working first");
-            return prevState;
-          }
-          if (!fetchMoreResult.listResources.items) {
-            console.log("working");
-            return prevState;
-          }
-          console.log("Nawwwwwww");
-          return {
-            ...prevState,
-            listResources: {
-              ...prevState.listResources,
-              items: [
-                ...prevState.listResources.items,
-                ...fetchMoreResult.listResources.items
-              ]
-            }
-          };
-        }
-      });
-    }
-  })
-})(search);
+export default search;

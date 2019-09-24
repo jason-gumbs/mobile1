@@ -23,7 +23,7 @@ import ImagePicker from "react-native-image-picker";
 import { colors } from "../Utils/theme";
 import { updateCompany } from "../graphql/mutations";
 import { listCompanys } from "../graphql/queries";
-import { graphql, compose } from "react-apollo";
+import { graphql, compose, Query, Mutation } from "react-apollo";
 import Constants from "../Utils/constants";
 import files from "../Utils/files";
 import uuid from "react-native-uuid";
@@ -139,12 +139,12 @@ class Settings extends React.Component {
 
     this.props
       .updateCompany({
-        id: this.props.companys.items[0].id,
+        id: data.listCompanys.items[0].id,
         companyname:
-          company.companyname || this.props.companys.items[0].companyname,
-        email: company.email || this.props.companys.items[0].email,
+          company.companyname || data.listCompanys.items[0].companyname,
+        email: company.email || data.listCompanys.items[0].email,
         phonenumber:
-          company.phonenumber || this.props.companys.items[0].phonenumber,
+          company.phonenumber || data.listCompanys.items[0].phonenumber,
         visibility: "public",
         files: file
       })
@@ -187,7 +187,6 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.companys.items);
     this.props.navigation.setParams({
       signout: this.signout
     });
@@ -216,10 +215,6 @@ class Settings extends React.Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         let source = { uri: response.uri };
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-
         this.setState({
           avatarSource: source
         });
@@ -232,81 +227,124 @@ class Settings extends React.Component {
   };
 
   render() {
-    const { payload } = this.props.companys.items[0];
+    // const { payload } = data.listCompanys.items[0];
     return (
-      <View style={styles.bla}>
-        <Modal
-          visible={this.state.showActivityIndicator}
-          transparent={true}
-          onRequestClose={() => null}
-        >
-          <ActivityIndicator size="large" />
-        </Modal>
-        <View style={styles.image_view}>
-          {this.props.companys.items[0].files !== null ||
-          this.state.avatarSource !== null ? (
-            <Avatar
-              size="xlarge"
-              rounded
-              source={
-                this.state.avatarSource === null
-                  ? { uri: this.props.companys.items[0].files[0].key }
-                  : this.state.avatarSource
-              }
-              onPress={this.selectPhotoTapped}
-              activeOpacity={0.7}
-              showEditButton
-            />
-          ) : (
-            <Avatar
-              size="xlarge"
-              rounded
-              icon={{ name: "user", type: "font-awesome" }}
-              onPress={this.selectPhotoTapped}
-              activeOpacity={0.7}
-              showEditButton
-            />
-          )}
-          {this.state.showErrorMessage && (
-            <Text style={{ color: "grey", fontSize: 10, padding: 30 }}>
-              {this.state.errorMessage}{" "}
-            </Text>
-          )}
-        </View>
-        <View style={styles.formContainer}>
-          <Card>
-            <Text style={{ color: "black", padding: 20 }}>
-              Username: {this.props.companys.items[0].companyname || "N/A"}
-            </Text>
+      <Query query={listCompanys} fetchPolicy={"cache-and-network"}>
+        {({ loading, error, data, refetch }) => {
+          console.log(data.listCompanys.items[0]);
+          if (loading) return <ActivityIndicator color={"#287b97"} />;
+          if (error) return <Text>{`Error: ${error}`}</Text>;
+          return (
+            <View style={styles.bla}>
+              <Modal
+                visible={this.state.showActivityIndicator}
+                transparent={true}
+                onRequestClose={() => null}
+              >
+                <ActivityIndicator size="large" />
+              </Modal>
+              <View style={styles.image_view}>
+                {data.listCompanys.items[0].files !== null ||
+                this.state.avatarSource !== null ? (
+                  <Avatar
+                    size="xlarge"
+                    rounded
+                    source={
+                      this.state.avatarSource === null
+                        ? { uri: data.listCompanys.items[0].files[0].key }
+                        : this.state.avatarSource
+                    }
+                    onPress={this.selectPhotoTapped}
+                    activeOpacity={0.7}
+                    showEditButton
+                  />
+                ) : (
+                  <Avatar
+                    size="xlarge"
+                    rounded
+                    icon={{ name: "user", type: "font-awesome" }}
+                    onPress={this.selectPhotoTapped}
+                    activeOpacity={0.7}
+                    showEditButton
+                  />
+                )}
+                {this.state.showErrorMessage && (
+                  <Text style={{ color: "grey", fontSize: 10, padding: 30 }}>
+                    {this.state.errorMessage}
+                  </Text>
+                )}
+              </View>
+              <View style={styles.formContainer}>
+                <Card>
+                  <Text style={{ color: "black", padding: 20 }}>
+                    Username:
+                    {data.listCompanys.items[0].companyname || "N/A"}
+                  </Text>
 
-            <Text style={{ color: "black", padding: 20 }}>
-              Email: {this.props.companys.items[0].email || "N/A"}
-            </Text>
+                  <Text style={{ color: "black", padding: 20 }}>
+                    Email:
+                    {data.listCompanys.items[0].email || "N/A"}
+                  </Text>
 
-            <Text style={{ color: "black", padding: 20 }}>
-              Phone Number: {this.props.companys.items[0].phonenumber || "N/A"}
-            </Text>
-          </Card>
-
-          <Button
-            backgroundColor="#00A3FF"
-            buttonStyle={{
-              borderRadius: 30,
-              height: 40,
-              width: "75%"
-            }}
-            containerStyle={{ marginLeft: 50 }}
-            onPress={this.AddUser}
-            title="Update Profile"
-          />
-          <Modal
-            visible={this.state.showActivityIndicator}
-            onRequestClose={() => null}
-          >
-            <ActivityIndicator style={styles.activityIndicator} size="large" />
-          </Modal>
-        </View>
-      </View>
+                  <Text style={{ color: "black", padding: 20 }}>
+                    Phone Number:
+                    {data.listCompanys.items[0].phonenumber || "N/A"}
+                  </Text>
+                </Card>
+                <Mutation
+                  mutation={updateCompany}
+                  update={(cache, { data: { updateCompany } }) => {
+                    const dataq = cache.readQuery({
+                      query: listCompanys
+                    });
+                    dataq.listCompanys = {
+                      ...dataq.listCompanys,
+                      items: [...dataq.listCompanys.items, updateCompany]
+                    };
+                    cache.writeQuery({
+                      query: listCompanys,
+                      data: dataq
+                    });
+                  }}
+                >
+                  {updateCompany => (
+                    <Button
+                      backgroundColor="#00A3FF"
+                      buttonStyle={{
+                        borderRadius: 30,
+                        height: 40,
+                        width: "75%"
+                      }}
+                      containerStyle={{ marginLeft: 50 }}
+                      onPress={e => {
+                        e.preventDefault();
+                        updateCompany({
+                          variables: {
+                            input: {
+                              id: data.listCompanys.items[0].id,
+                              email: "input.valuesss"
+                            }
+                          }
+                        });
+                      }}
+                      title="Update Profile"
+                    />
+                  )}
+                </Mutation>
+                <Modal
+                  visible={this.state.showActivityIndicator}
+                  onRequestClose={() => null}
+                >
+                  <ActivityIndicator
+                    style={styles.activityIndicator}
+                    size="large"
+                  />
+                </Modal>
+              </View>
+            </View>
+          );
+        }}
+      </Query>
     );
   }
 }
@@ -333,47 +371,49 @@ const styles = StyleSheet.create({
   }
 });
 
-export default compose(
-  graphql(listCompanys, {
-    options: {
-      fetchPolicy: "cache-and-network"
-    },
-    props: ({ data: { listCompanys: companys } }) => ({
-      companys
-    })
-  }),
-  graphql(updateCompany, {
-    options: {
-      update: (dataProxy, { data: { updateCompany } }) => {
-        const query = listCompanys;
-        const data = dataProxy.readQuery({ query });
-        data.listCompanys = {
-          ...data.listCompanys,
-          items: [...data.listCompanys.items, updateCompany]
-        };
-        dataProxy.writeQuery({ query, data });
-      }
-    },
-    props: ({ ownProps, mutate }) => ({
-      updateCompany: resource =>
-        mutate({
-          variables: { input: resource },
-          optimisticResponse: () => ({
-            updateCompany: {
-              ...resource,
-              __typename: "Company",
-              file:
-                resource.file == null
-                  ? null
-                  : { ...resource.file, __typename: "S3Object" },
-              resources: {
-                __typename: "ResourcePosts",
-                items: [],
-                nextToken: null
-              }
-            }
-          })
-        })
-    })
-  })
-)(Settings);
+export default Settings;
+
+// export default compose(
+//   graphql(listCompanys, {
+//     options: {
+//       fetchPolicy: "cache-and-network"
+//     },
+//     props: ({ data: { listCompanys: companys } }) => ({
+//       companys
+//     })
+//   }),
+//   graphql(updateCompany, {
+//     options: {
+//       update: (dataProxy, { data: { updateCompany } }) => {
+//         const query = listCompanys;
+//         const data = dataProxy.readQuery({ query });
+//         data.listCompanys = {
+//           ...data.listCompanys,
+//           items: [...data.listCompanys.items, updateCompany]
+//         };
+//         dataProxy.writeQuery({ query, data });
+//       }
+//     },
+//     props: ({ ownProps, mutate }) => ({
+//       updateCompany: resource =>
+//         mutate({
+//           variables: { input: resource },
+//           optimisticResponse: () => ({
+//             updateCompany: {
+//               ...resource,
+//               __typename: "Company",
+//               file:
+//                 resource.file == null
+//                   ? null
+//                   : { ...resource.file, __typename: "S3Object" },
+//               resources: {
+//                 __typename: "ResourcePosts",
+//                 items: [],
+//                 nextToken: null
+//               }
+//             }
+//           })
+//         })
+//     })
+//   })
+// )(Settings);

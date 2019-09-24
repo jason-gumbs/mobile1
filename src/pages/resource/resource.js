@@ -18,6 +18,7 @@ import {
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { graphql, compose } from "react-apollo";
+import { Query } from "@apollo/react-components";
 import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
@@ -583,6 +584,7 @@ export default compose(
     options: {
       update: (dataProxy, { data: { createResource } }) => {
         const query = listResources;
+        window.cm = dataProxy;
         const data = dataProxy.readQuery({ query });
         data.listResources = {
           ...data.listResources,
