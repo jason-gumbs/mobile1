@@ -43,23 +43,22 @@ Storage.configure({
 });
 
 class Settings extends React.Component {
-  static navigationOptions = ({ navigation, screenProps }) =>
-    console.log("") || {
-      title: "Settings",
-      headerRight: <SignOut signout={navigation.getParam("signout")} />,
-      headerStyle: {
-        backgroundColor: "#0D1E30",
-        borderBottomWidth: 0,
-        shadowColor: "transparent",
-        elevation: 0,
-        shadowOpacity: 0
-      },
-      headerBackTitle: null,
-      headerTitleStyle: {
-        color: "white"
-      },
-      headerTintColor: "white"
-    };
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: "Settings",
+    headerRight: <SignOut signout={navigation.getParam("signout")} />,
+    headerStyle: {
+      backgroundColor: "#0D1E30",
+      borderBottomWidth: 0,
+      shadowColor: "transparent",
+      elevation: 0,
+      shadowOpacity: 0
+    },
+    headerBackTitle: null,
+    headerTitleStyle: {
+      color: "white"
+    },
+    headerTintColor: "white"
+  });
   state = {
     showActivityIndicator: false,
     errorMessage: "",
@@ -231,7 +230,6 @@ class Settings extends React.Component {
     return (
       <Query query={listCompanys} fetchPolicy={"cache-and-network"}>
         {({ loading, error, data, refetch }) => {
-          console.log(data.listCompanys.items[0]);
           if (loading) return <ActivityIndicator color={"#287b97"} />;
           if (error) return <Text>{`Error: ${error}`}</Text>;
           return (
@@ -322,7 +320,26 @@ class Settings extends React.Component {
                           variables: {
                             input: {
                               id: data.listCompanys.items[0].id,
-                              email: "input.valuesss"
+                              email: "input.value"
+                            }
+                          },
+                          optimisticResponse: {
+                            __typename: "Mutation",
+                            updateCompany: {
+                              ...data.listCompanys.items[0],
+                              __typename: "Company",
+                              file:
+                                data.listCompanys.items[0].files == null
+                                  ? null
+                                  : {
+                                      ...data.listCompanys.items[0].files,
+                                      __typename: "S3Object"
+                                    },
+                              resources: {
+                                __typename: "ResourcePosts",
+                                items: [],
+                                nextToken: null
+                              }
                             }
                           }
                         });

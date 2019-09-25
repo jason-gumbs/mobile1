@@ -17,8 +17,7 @@ import {
 } from "react-native";
 import { Input, Divider, Text, Button, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
-import { graphql, compose } from "react-apollo";
-import { Query } from "@apollo/react-components";
+import { graphql, compose, Query, Mutation } from "react-apollo";
 import { API, Storage, Auth } from "aws-amplify";
 import awsmobile from "../../aws-exports";
 import files from "../../Utils/files";
@@ -42,21 +41,20 @@ Storage.configure({
 });
 
 class resource extends React.Component {
-  static navigationOptions = ({ navigation, screenProps }) =>
-    console.log("") || {
-      title: "List an item",
-      headerStyle: {
-        backgroundColor: "#0D1E30",
-        borderBottomWidth: 0,
-        shadowColor: "transparent",
-        elevation: 0,
-        shadowOpacity: 0
-      },
-      headerTitleStyle: {
-        color: "white"
-      },
-      headerTintColor: "white"
-    };
+  static navigationOptions = ({ navigation, screenProps }) => ({
+    title: "List an item",
+    headerStyle: {
+      backgroundColor: "#0D1E30",
+      borderBottomWidth: 0,
+      shadowColor: "transparent",
+      elevation: 0,
+      shadowOpacity: 0
+    },
+    headerTitleStyle: {
+      color: "white"
+    },
+    headerTintColor: "white"
+  });
 
   state = {
     selectedImage: {},
@@ -87,7 +85,6 @@ class resource extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.companys.items[0].id);
     console.log(process.env);
   }
   componentWillUnmount() {}
@@ -332,7 +329,7 @@ class resource extends React.Component {
             fetchDetails={true}
             query={{
               // available options: https://developers.google.com/places/web-service/autocomplete
-              key: process.env.REACT_APP_GKEY || "",
+              key: "AIzaSyAbqRbp2uxog0Q2Ce41DLyOoQs8JMODsG4",
               language: "en", // language of the results
               types: "address" // default: 'geocode'
             }}
@@ -488,18 +485,119 @@ class resource extends React.Component {
               marginBottom: 20
             }}
           >
-            <Button
-              onPress={this.AddResource}
-              title="Add Resources"
-              backgroundColor="#00A3FF"
-              buttonStyle={{
-                borderRadius: 30,
-                marginLeft: 0,
-                marginRight: 0,
-                marginBottom: 0,
-                height: 40
+            <Query query={listCompanys} fetchPolicy={"cache-and-network"}>
+              {({ loading, error, data, refetch }) => {
+                if (loading) return <ActivityIndicator color={"#287b97"} />;
+                if (error) return <Text>{`Error: ${error}`}</Text>;
+                return (
+                  <Mutation
+                    mutation={createResource}
+                    update={(cache, { data: { createResource } }) => {
+                      const dataq = cache.readQuery({
+                        query: listResources
+                      });
+                      dataq.listResources = {
+                        ...dataq.listResources,
+                        items: [...dataq.listResources.items, createResource]
+                      };
+                      cache.writeQuery({
+                        query: listResources,
+                        data: dataq
+                      });
+                    }}
+                  >
+                    {(createResource, { loading, error }) => (
+                      <Button
+                        onPress={async e => {
+                          e.preventDefault();
+                          const visibility = "public";
+                          const resources = this.state.input;
+                          const {
+                            identityId
+                          } = await Auth.currentCredentials();
+                          // const { payload } = this.props.navigation.state.params.idToken || "null";
+                          // const owner = payload["cognito:username"] || "null";
+                          const bucket =
+                            "mobile1cf03fdb5f8214d64aaa06e794ebf3045";
+                          const region = "us-east-1";
+                          resources.id = `${uuid.v1()}`;
+
+                          let file;
+                          let location = "";
+                          if (this.state.selectedImage.uri) {
+                            await this.readImage(this.state.selectedImage).then(
+                              data => this.setState({ key: `${data.key}` })
+                            );
+                            await Storage.get(this.state.key, {
+                              bucket,
+                              region
+                            })
+                              .then(result => {
+                                console.log("Success");
+                                this.setState({ picUrl: result });
+                              })
+                              .catch(err => console.log("error", error));
+
+                            file = {
+                              __typename: "S3Object",
+                              bucket,
+                              region,
+                              key: this.state.picUrl
+                            };
+                          } else {
+                            file = null;
+                          }
+                          console.log(file);
+
+                          createResource({
+                            variables: {
+                              input: {
+                                id: "",
+                                name: this.state.input.name || " N/A",
+                                file: file,
+                                visibility: visibility,
+                                product: this.state.input.product || "N/A",
+                                address: this.state.input.address || "N/A",
+                                location: this.state.input.location || "N/A",
+                                owner: identityId || "UNAUHTH",
+                                offering: this.state.input.offering || "N/A",
+                                category: this.state.input.category || "N/A",
+                                city: this.state.input.city || "N/A",
+                                description:
+                                  this.state.input.description || "N/A",
+                                number: this.state.input.number || "N/A",
+                                state: this.state.input.state || "N/A",
+                                zip: this.state.input.zip || "N/A",
+                                content: "String",
+                                resourceCompanyId:
+                                  data.listCompanys.items[0].id || "null"
+                              }
+                            }
+                          })
+                            .then(data => {
+                              this.setState({ showActivityIndicator: false });
+                              console.log("Congrats...", data);
+                            })
+                            .catch(err => {
+                              console.log("error saving resource...", err);
+                              this.setState({ showActivityIndicator: false });
+                            });
+                        }}
+                        title="Add Resources"
+                        backgroundColor="#00A3FF"
+                        buttonStyle={{
+                          borderRadius: 30,
+                          marginLeft: 0,
+                          marginRight: 0,
+                          marginBottom: 0,
+                          height: 40
+                        }}
+                      />
+                    )}
+                  </Mutation>
+                );
               }}
-            />
+            </Query>
           </View>
         </ScrollView>
         <Modal
@@ -571,49 +669,51 @@ styles = StyleSheet.create({
   }
 });
 
-export default compose(
-  graphql(listCompanys, {
-    options: {
-      fetchPolicy: "cache-and-network"
-    },
-    props: ({ data: { listCompanys: companys } }) => ({
-      companys
-    })
-  }),
-  graphql(createResource, {
-    options: {
-      update: (dataProxy, { data: { createResource } }) => {
-        const query = listResources;
-        window.cm = dataProxy;
-        const data = dataProxy.readQuery({ query });
-        data.listResources = {
-          ...data.listResources,
-          items: [...data.listResources.items, createResource]
-        };
-        dataProxy.writeQuery({ query, data });
-      }
-    },
-    props: props => ({
-      createResource: resource =>
-        props.mutate({
-          variables: { input: resource },
-          optimisticResponse: () => ({
-            createResource: {
-              ...resource,
-              __typename: "ResourcePosts",
-              file:
-                resource.file == null
-                  ? null
-                  : { ...resource.file, __typename: "S3Object" },
-              comment: {
-                __typename: "Comment",
-                items: [],
-                nextToken: null
-              },
-              company: null
-            }
-          })
-        })
-    })
-  })
-)(resource);
+export default resource;
+
+//
+//   graphql(listCompanys, {
+//     options: {
+//       fetchPolicy: "cache-and-network"
+//     },
+//     props: ({ data: { listCompanys: companys } }) => ({
+//       companys
+//     })
+//   }),
+//   graphql(createResource, {
+//     options: {
+//       update: (dataProxy, { data: { createResource } }) => {
+//         const query = listResources;
+//         window.cm = dataProxy;
+//         const data = dataProxy.readQuery({ query });
+//         data.listResources = {
+//           ...data.listResources,
+//           items: [...data.listResources.items, createResource]
+//         };
+//         dataProxy.writeQuery({ query, data });
+//       }
+//     },
+//     props: props => ({
+//       createResource: resource =>
+//         props.mutate({
+//           variables: { input: resource },
+//           optimisticResponse: () => ({
+//             createResource: {
+//               ...resource,
+//               __typename: "ResourcePosts",
+//               file:
+//                 resource.file == null
+//                   ? null
+//                   : { ...resource.file, __typename: "S3Object" },
+//               comment: {
+//                 __typename: "Comment",
+//                 items: [],
+//                 nextToken: null
+//               },
+//               company: null
+//             }
+//           })
+//         })
+//     })
+//   })
+// )(resource);
