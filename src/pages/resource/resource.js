@@ -182,8 +182,14 @@ class resource extends React.Component {
     const picName = `${visibility}/${identityId}/${uuid.v1()}${extension &&
       "."}${extension}`;
     const key = `${picName}`;
+    let filePath;
+    if (Platform.OS === "ios") {
+      let arr = imagePath.split("/");
+      const dirs = RNFetchBlob.fs.dirs;
+      filePath = `${dirs.DocumentDir}/${arr[arr.length - 1]}`;
+    }
     return await RNFetchBlob.fs
-      .readFile(imagePath, "base64")
+      .readFile(filePath, "base64")
       .then(data => new Buffer(data, "base64"))
       .then(buffer =>
         Storage.put(key, buffer, {
@@ -194,7 +200,7 @@ class resource extends React.Component {
       .then(fileInfo => ({ key: fileInfo.key }))
       .then(x => console.log("SAVED", x) || x)
 
-      .catch(err => console.log("********READIMAGE***********", err));
+      .catch(err => console.log("********READIMAGE ERROR***********", err));
   }
 
   selectPhotoTapped = () => {
@@ -208,7 +214,7 @@ class resource extends React.Component {
     };
 
     ImagePicker.showImagePicker(options, response => {
-      console.log("Response = ", response.mimeType);
+      console.log("Response = ", response);
 
       if (response.didCancel) {
         console.log("User cancelled photo picker");
@@ -218,6 +224,10 @@ class resource extends React.Component {
         console.log("User tapped custom button: ", response.customButton);
       } else {
         let source = { uri: response.uri };
+        // if (Platform.OS === "ios") {
+        //   response.uri =
+        //     "~" + response.uri.substring(response.uri.indexOf("/Documents"));
+        // }
 
         // You can also display the image using data:
         //let source = { uri: "data:image/jpeg;base64," + response.data };
